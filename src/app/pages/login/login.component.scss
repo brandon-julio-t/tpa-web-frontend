@@ -1,0 +1,66 @@
+@use 'src/app/styles/breakpoints' as *;
+@use 'src/app/styles/sizes' as *;
+@use 'src/app/styles/spacings' as *;
+
+.grid {
+  display: grid;
+
+  @media (min-width: $screen-md) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: $screen-md) {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  &-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h1 {
+      margin: $space-lg 0;
+      text-transform: uppercase;
+    }
+
+    form {
+      width: 100%;
+
+      p {
+        text-align: center;
+      }
+    }
+  }
+
+  &-right {
+    @media (max-width: $screen-md) {
+      margin-top: $space-lg;
+    }
+
+    text-align: center;
+    margin: 0 auto;
+
+    a {
+      margin: $space-md 0;
+      display: inline-block;
+
+      &:hover {
+        color: #ffffff;
+      }
+    }
+
+    img {
+      width: 100%;
+    }
+
+    .join-steam {
+      border: 1px solid #d1d5db;
+      border-radius: $size-sm;
+      padding: $space-md;
+
+      &:hover {
+        border: 1px solid #ffffff;
+      }
+    }
+  }
+}

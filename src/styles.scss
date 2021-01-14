@@ -1,1 +1,75 @@
 /* You can add global styles to this file, and also import other style files */
+
+@use 'src/app/styles/breakpoints' as *;
+@use 'src/app/styles/sizes' as *;
+@use 'src/app/styles/spacings' as *;
+@use 'app/styles/utilities' as *;
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+
+  font-family: motiva-sans, sans-serif;
+  font-style: normal;
+  font-weight: 200;
+
+  color: #b8b6b4;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+body,
+html {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background-color: #1b2838;
+}
+
+button {
+  background: none;
+  border: none;
+  font-size: inherit;
+  color: inherit;
+  text-decoration: inherit;
+  text-transform: inherit;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+
+  &:hover {
+    color: #ffffff;
+  }
+}
+
+form {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+input,
+select {
+  padding: $space-sm;
+  display: block;
+  border-radius: $size-sm;
+  margin-bottom: $space-md;
+  width: 100%;
+  background-color: #324965;
+}
+
+hr {
+  margin: $space-md 0;
+}

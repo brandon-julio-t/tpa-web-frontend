@@ -1,0 +1,43 @@
+@use 'src/app/styles/breakpoints' as *;
+@use 'src/app/styles/breakpoints' as *;
+@use 'src/app/styles/spacings' as *;
+
+nav {
+  background-color: #171a21;
+  padding: $space-lg $space-md;
+  text-transform: uppercase;
+
+  div {
+    max-width: $screen-lg;
+    margin: 0 auto;
+    display: flex;
+
+    @media (max-width: $screen-md) {
+      flex-direction: column;
+    }
+
+    a {
+      text-align: center;
+
+      img {
+        max-height: 64px;
+        margin: $space-md auto;
+      }
+    }
+
+    .navigations {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      @media (max-width: $screen-md) {
+        flex-direction: column;
+
+        a {
+          margin: $space-md 0;
+        }
+      }
+    }
+  }
+}

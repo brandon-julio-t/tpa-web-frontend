@@ -1,0 +1,61 @@
+<form [formGroup]="registerPhaseTwoForm">
+  <label for="account-name">
+    Account Name
+    <small
+      *ngIf="
+        registerPhaseTwoForm.touched &&
+        registerPhaseTwoForm.hasError('required', 'accountName')
+      "
+      class="error"
+    >
+      This field is required
+    </small>
+    <input formControlName="accountName" id="account-name" type="text" />
+  </label>
+  <label for="password">
+    Password
+    <small
+      *ngIf="
+        registerPhaseTwoForm.touched &&
+        registerPhaseTwoForm.hasError('required', 'password')
+      "
+      class="error"
+    >
+      This field is required
+    </small>
+    <input formControlName="password" id="password" type="password" />
+  </label>
+  <label for="password-confirm">
+    Confirm Password
+    <small
+      *ngIf="
+        registerPhaseTwoForm.touched &&
+        registerPhaseTwoForm.hasError('required', 'confirmPassword')
+      "
+      class="error"
+    >
+      This field is required
+    </small>
+    <input
+      formControlName="confirmPassword"
+      id="password-confirm"
+      type="password"
+    />
+  </label>
+  <label for="otp">
+    OTP
+    <small
+      *ngIf="
+        registerPhaseTwoForm.touched &&
+        registerPhaseTwoForm.hasError('required', 'otp')
+      "
+      class="error"
+    >
+      This field is required
+    </small>
+    <input formControlName="otp" id="otp" type="text" />
+  </label>
+  <button (click)="onSubmit()" class="btn btn-blue" type="submit">
+    Submit
+  </button>
+</form>

@@ -1,0 +1,52 @@
+<div class="grid">
+  <div class="grid-left">
+    <h1>Sign In</h1>
+
+    <form [formGroup]="loginForm">
+      <label for="accountName">
+        Steam account name
+        <small
+          *ngIf="
+            loginForm.touched && loginForm.hasError('required', 'accountName')
+          "
+          class="error"
+        >
+          This field is required
+        </small>
+        <input
+          autofocus
+          formControlName="accountName"
+          id="accountName"
+          type="text"
+        />
+      </label>
+
+      <label for="password">
+        Password
+        <small
+          *ngIf="
+            loginForm.touched && loginForm.hasError('required', 'password')
+          "
+          class="error"
+        >
+          This field is required
+        </small>
+        <input formControlName="password" id="password" type="password" />
+      </label>
+
+      <button (click)="onSubmit()" class="btn btn-blue" type="button">
+        Sign In
+      </button>
+    </form>
+  </div>
+
+  <div class="grid-right">
+    <p>Join Steam and discover thousands of games to play.</p>
+
+    <a href="#">Learn More</a>
+    <img alt="Join Staem image" src="assets/join_pc.png" />
+
+    <p>It's free and easy to use.</p>
+    <a routerLink="/register" class="join-steam">Join Steam</a>
+  </div>
+</div>

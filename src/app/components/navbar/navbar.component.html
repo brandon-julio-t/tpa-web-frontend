@@ -1,0 +1,19 @@
+<nav>
+  <div>
+    <a routerLink="/">
+      <img alt="Logo Steam" src="assets/logo_steam.svg" />
+    </a>
+
+    <div class="navigations">
+      <a href="#">Store</a>
+      <a href="#">Community</a>
+      <a *ngIf="user" href="#">{{ user?.accountName }}</a>
+      <a *ngIf="user" href="#">Chat</a>
+      <a *ngIf="!user" href="#">About</a>
+      <a href="#">Support</a>
+
+      <a *ngIf="!user" routerLink="/login">Login</a>
+      <button (click)="onLogout()" *ngIf="user">Logout</button>
+    </div>
+  </div>
+</nav>

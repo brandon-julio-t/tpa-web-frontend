@@ -1,0 +1,55 @@
+<form [formGroup]="registerForm">
+  <label for="email">
+    Email Address
+    <small
+      *ngIf="registerForm.touched && registerForm.hasError('required', 'email')"
+      class="error"
+    >
+      This field is required
+    </small>
+    <input formControlName="email" id="email" type="email" />
+  </label>
+  <label for="email-confirm">
+    Confirm your Address
+    <small
+      *ngIf="
+        registerForm.touched &&
+        registerForm.hasError('required', 'emailConfirm')
+      "
+      class="error"
+    >
+      This field is required
+    </small>
+    <input formControlName="emailConfirm" id="email-confirm" type="email" />
+  </label>
+  <label for="country">
+    Country of Residence
+    <small
+      *ngIf="
+        registerForm.touched && registerForm.hasError('required', 'countryId')
+      "
+      class="error"
+    >
+      This field is required
+    </small>
+    <select formControlName="countryId">
+      <option
+        *ngFor="let country of countries"
+        [value]="country.id"
+        id="country"
+      >
+        {{ country.name }}
+      </option>
+    </select>
+  </label>
+  <re-captcha
+    (resolved)="isCaptchaPassed = true"
+    siteKey="6Le6GCwaAAAAAIEc9Iw9p8PgRHEj2sTzLdE_Exrp"
+  ></re-captcha>
+  <small *ngIf="registerForm.touched && !isCaptchaPassed" class="error">
+    Please pass this captcha first
+  </small>
+  <button class="btn btn-blue" (click)="onSubmit()" type="submit">
+    Submit
+  </button>
+</form>

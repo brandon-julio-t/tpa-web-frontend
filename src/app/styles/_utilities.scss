@@ -1,0 +1,38 @@
+@use 'src/app/styles/breakpoints' as *;
+@use 'src/app/styles/sizes' as *;
+@use 'src/app/styles/spacings' as *;
+
+.btn {
+  padding: $space-md;
+  border-radius: $size-sm;
+  width: 100%;
+  margin: $space-md 0;
+
+  &-blue {
+    background: linear-gradient(to right, #3b82f6 5%, #1d4ed8 60%);
+
+    &:hover {
+      background: linear-gradient(to right, #60a5fa 5%, #2563eb 60%);
+    }
+  }
+
+  &-green {
+    background: linear-gradient(to right, #10b981 5%, #047857 60%);
+
+    &:hover {
+      background: linear-gradient(to right, #34d399 5%, #059669 60%);
+    }
+  }
+}
+
+.error {
+  color: #dc2626;
+}
+
+.block {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}

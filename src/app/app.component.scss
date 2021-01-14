@@ -1,0 +1,36 @@
+@use 'styles/spacings' as *;
+@use 'styles/breakpoints' as *;
+
+main {
+  padding: $space-lg 0;
+  max-width: $screen-lg;
+  margin: 0 auto;
+
+  div {
+    padding: 0 $space-md;
+  }
+}
+
+footer {
+  background-color: #171a21;
+  padding: $space-lg $space-md;
+
+  div {
+    max-width: $screen-lg;
+    margin: 0 auto;
+
+    .useful-links {
+      text-align: center;
+      display: grid;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+
+      @media (min-width: $screen-sm) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      @media (min-width: $screen-md) {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+  }
+}
