@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  apiUrl: 'https://tpa-web-backend-br20-2.herokuapp.com/',
 };
