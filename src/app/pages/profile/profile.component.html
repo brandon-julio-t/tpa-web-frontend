@@ -1,0 +1,22 @@
+<section class="profile" [ngStyle]="{ backgroundColor: user?.profileTheme }">
+  <div class="profile-picture">
+    <img
+      [src]="profilePicture"
+      alt="Profile Picture"
+      class="profile-picture-image"
+      width="auto"
+    />
+
+    <h2 class="profile-picture-display-name">{{ profile?.displayName }}</h2>
+  </div>
+
+  <div class="profile-actions">
+    <a
+      *ngIf="profile?.id === user?.id"
+      class="btn btn-blue"
+      [routerLink]="['/profile', 'edit', profile?.customUrl]"
+    >
+      Edit Profile
+    </a>
+  </div>
+</section>

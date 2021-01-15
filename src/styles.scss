@@ -47,7 +47,8 @@ button {
   cursor: pointer;
 }
 
-a {
+a,
+button {
   color: inherit;
 
   &:hover {
@@ -61,7 +62,8 @@ form {
 }
 
 input,
-select {
+select,
+textarea {
   padding: $space-sm;
   display: block;
   border-radius: $size-sm;

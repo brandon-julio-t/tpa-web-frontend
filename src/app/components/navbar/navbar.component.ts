@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user';
 import { Apollo, gql } from 'apollo-angular';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-navbar',
@@ -11,7 +12,17 @@ import { Apollo, gql } from 'apollo-angular';
 export class NavbarComponent implements OnInit {
   user: User | null = null;
 
-  constructor(private apollo: Apollo, private authService: AuthService) {}
+  constructor(
+    private apollo: Apollo,
+    private sanitizer: DomSanitizer,
+    private authService: AuthService
+  ) {}
+
+  get base64ProfilePicture(): SafeUrl {
+    return this.sanitizer.bypassSecurityTrustUrl(
+      `data:image/png;base64, ${this.user?.profilePictureBase64}`
+    );
+  }
 
   ngOnInit(): void {
     this.authService.watch().valueChanges.subscribe((data) => {

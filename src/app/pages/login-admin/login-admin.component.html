@@ -1,0 +1,34 @@
+<h2>Admin Login</h2>
+
+<form [formGroup]="loginForm">
+  <label for="accountName">
+    Steam account name
+    <small
+      *ngIf="loginForm.touched && loginForm.hasError('required', 'accountName')"
+      class="error"
+    >
+      This field is required
+    </small>
+    <input
+      autofocus
+      formControlName="accountName"
+      id="accountName"
+      type="text"
+    />
+  </label>
+
+  <label for="password">
+    Password
+    <small
+      *ngIf="loginForm.touched && loginForm.hasError('required', 'password')"
+      class="error"
+    >
+      This field is required
+    </small>
+    <input formControlName="password" id="password" type="password" />
+  </label>
+
+  <app-submit-button (click)="onSubmit()" [loading]="isLoading">
+    Sign In
+  </app-submit-button>
+</form>

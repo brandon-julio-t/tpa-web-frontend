@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Apollo, gql } from 'apollo-angular';
 import { User } from '../../models/user';
-import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { Apollo, gql } from 'apollo-angular';
 import { catchError } from 'rxjs/operators';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  selector: 'app-login-admin',
+  templateUrl: './login-admin.component.html',
+  styleUrls: ['./login-admin.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginAdminComponent implements OnInit {
   loginForm: FormGroup;
   isLoading = false;
 
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.authService.watch().valueChanges.subscribe((data) => {
       if (data.data.auth) {
-        this.router.navigateByUrl('/').then();
+        this.router.navigateByUrl('/admin').then();
       }
     });
   }
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
     this.loginForm.markAllAsTouched();
     if (
       this.loginForm.invalid ||
-      this.loginForm.value.accountName === 'Admin'
+      this.loginForm.value.accountName !== 'Admin'
     ) {
       return;
     }

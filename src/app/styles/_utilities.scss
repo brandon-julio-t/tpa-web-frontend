@@ -3,9 +3,10 @@
 @use 'src/app/styles/spacings' as *;
 
 .btn {
+  display: block;
   padding: $space-md;
   border-radius: $size-sm;
-  width: 100%;
+  width: fit-content;
   margin: $space-md 0;
 
   &-blue {

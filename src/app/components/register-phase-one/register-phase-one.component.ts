@@ -2,6 +2,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Country } from '../../models/country';
 import { Apollo, gql } from 'apollo-angular';
+import { AllCountriesService } from '../../services/all-countries.service';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-register-phase-one',
@@ -14,30 +16,24 @@ export class RegisterPhaseOneComponent implements OnInit {
   registerForm: FormGroup;
   countries: Country[] = [];
   isCaptchaPassed = false;
+  isLoading = false;
 
-  constructor(private fb: FormBuilder, private apollo: Apollo) {
+  constructor(
+    private fb: FormBuilder,
+    private apollo: Apollo,
+    private allCountriesService: AllCountriesService
+  ) {
     this.registerForm = fb.group({
-      email: fb.control('', Validators.required),
-      emailConfirm: fb.control('', Validators.required),
+      email: fb.control('', [Validators.required, Validators.email]),
+      emailConfirm: fb.control('', [Validators.required, Validators.email]),
       countryId: fb.control('', Validators.required),
     });
   }
 
   ngOnInit(): void {
-    this.apollo
-      .watchQuery<{ allCountries: Country[] }>({
-        query: gql`
-          query allCountries {
-            allCountries {
-              id
-              name
-            }
-          }
-        `,
-      })
-      .valueChanges.subscribe((data) => {
-        this.countries = data.data.allCountries;
-      });
+    this.allCountriesService.watch().valueChanges.subscribe((data) => {
+      this.countries = data.data.allCountries;
+    });
   }
 
   onSubmit(): void {
@@ -52,6 +48,8 @@ export class RegisterPhaseOneComponent implements OnInit {
       return;
     }
 
+    this.isLoading = true;
+
     this.apollo
       .mutate<{ sendOTP: boolean }>({
         mutation: gql`
@@ -61,8 +59,16 @@ export class RegisterPhaseOneComponent implements OnInit {
         `,
         variables: { email },
       })
+      .pipe(
+        catchError((err) => {
+          this.isLoading = false;
+          alert(err);
+          throw err;
+        })
+      )
       .subscribe((data) => {
         if (data.data?.sendOTP) {
+          this.isLoading = false;
           this.done.emit({ email, countryId });
         }
       });

@@ -11,11 +11,18 @@ export class AuthService extends Query<Response> {
       auth {
         id
         accountName
-        email
         country {
           id
           name
         }
+        customUrl
+        displayName
+        email
+        profilePictureBase64
+        profileTheme
+        realName
+        summary
+        walletBalance
       }
     }
   `;

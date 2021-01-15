@@ -1,6 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Apollo, gql } from 'apollo-angular';
+import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-register-phase-two',
@@ -14,6 +16,9 @@ export class RegisterPhaseTwoComponent implements OnInit {
   }>();
 
   registerPhaseTwoForm: FormGroup;
+  isLoading = false;
+
+  faCircleNotch = faCircleNotch;
 
   constructor(private fb: FormBuilder, private apollo: Apollo) {
     this.registerPhaseTwoForm = fb.group({
@@ -39,6 +44,8 @@ export class RegisterPhaseTwoComponent implements OnInit {
       return;
     }
 
+    this.isLoading = true;
+
     this.apollo
       .mutate<{ verifyOTP: boolean }>({
         mutation: gql`
@@ -48,8 +55,16 @@ export class RegisterPhaseTwoComponent implements OnInit {
         `,
         variables: { otp },
       })
+      .pipe(
+        catchError((err) => {
+          this.isLoading = false;
+          alert(err);
+          throw err;
+        })
+      )
       .subscribe((data) => {
         if (data.data?.verifyOTP) {
+          this.isLoading = false;
           this.done.emit({ accountName, password });
         }
       });

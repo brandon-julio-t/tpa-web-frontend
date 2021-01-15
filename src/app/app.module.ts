@@ -14,6 +14,11 @@ import { RegisterComponent } from './pages/register/register.component';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { RegisterPhaseOneComponent } from './components/register-phase-one/register-phase-one.component';
 import { RegisterPhaseTwoComponent } from './components/register-phase-two/register-phase-two.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { ProfileEditComponent } from './pages/profile-edit/profile-edit.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SubmitButtonComponent } from './components/submit-button/submit-button.component';
+import { LoginAdminComponent } from './pages/login-admin/login-admin.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +28,10 @@ import { RegisterPhaseTwoComponent } from './components/register-phase-two/regis
     RegisterComponent,
     RegisterPhaseOneComponent,
     RegisterPhaseTwoComponent,
+    ProfileComponent,
+    ProfileEditComponent,
+    SubmitButtonComponent,
+    LoginAdminComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,6 +43,7 @@ import { RegisterPhaseTwoComponent } from './components/register-phase-two/regis
     }),
     ReactiveFormsModule,
     RecaptchaModule,
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

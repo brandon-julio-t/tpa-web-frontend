@@ -1,0 +1,86 @@
+<form [formGroup]="editProfileForm">
+  <label for="display-name">
+    Display Name
+    <small
+      *ngIf="
+        editProfileForm.touched &&
+        editProfileForm.controls.displayName.errors?.required
+      "
+      class="error"
+    >
+      This field is required
+    </small>
+    <input formControlName="displayName" id="display-name" type="text" />
+  </label>
+  <label for="real-name">
+    Real Name
+    <input formControlName="realName" id="real-name" type="text" />
+  </label>
+  <label for="custom-url">
+    Custom URL
+    <small
+      *ngIf="
+        editProfileForm.touched &&
+        editProfileForm.controls.customUrl.errors?.required
+      "
+      class="error"
+    >
+      This field is required
+    </small>
+    <input formControlName="customUrl" id="custom-url" type="text" />
+  </label>
+  <label for="country">
+    Country
+    <small
+      *ngIf="
+        editProfileForm.touched &&
+        editProfileForm.controls.countryId.errors?.required
+      "
+      class="error"
+    >
+      This field is required
+    </small>
+    <select formControlName="countryId" id="country">
+      <option *ngFor="let country of countries" [value]="country.id">
+        {{ country.name }}
+      </option>
+    </select>
+  </label>
+  <label for="summary">
+    Summary
+    <textarea formControlName="summary" id="summary" type="text"></textarea>
+  </label>
+  <label for="profile-theme">
+    Theme
+    <small
+      *ngIf="
+        editProfileForm.touched &&
+        editProfileForm.controls.profileTheme.errors?.required
+      "
+      class="error"
+    >
+      This field is required
+    </small>
+    <select formControlName="profileTheme" id="profile-theme">
+      <option style="background-color: #4b5563" value="#4B5563">
+        Cool Gray
+      </option>
+      <option style="background-color: #d97706" value="#D97706">Amber</option>
+      <option style="background-color: #075985" value="#075985">
+        Light Blue
+      </option>
+      <option style="background-color: #334155" value="#334155">
+        Blue Gray
+      </option>
+      <option style="background-color: #a21caf" value="#A21CAF">Fuchsia</option>
+      <option style="background-color: #000000" value="#000000">
+        Dark Mode
+      </option>
+    </select>
+  </label>
+  <label for="avatar">
+    Avatar
+    <input (change)="onAvatarChange($event.target)" id="avatar" type="file" />
+  </label>
+  <app-submit-button (click)="onSubmit()">Submit</app-submit-button>
+</form>

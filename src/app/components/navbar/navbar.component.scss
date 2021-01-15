@@ -38,6 +38,51 @@ nav {
           margin: $space-md 0;
         }
       }
+
+      .dropdown {
+        text-transform: none;
+        position: relative;
+        display: inline-block;
+        margin: 0;
+
+        &-header {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          span {
+            margin-right: $space-md;
+            display: flex;
+            flex-direction: column;
+
+            a {
+              text-align: right;
+            }
+          }
+        }
+
+        &:hover {
+          .dropdown-list {
+            display: flex;
+            flex-direction: column;
+          }
+        }
+
+        &-list {
+          background-color: #171a21;
+          box-shadow: 0 0 12px #000000;
+          padding: $space-md;
+          display: none;
+          position: absolute;
+          right: 0;
+          width: max-content;
+
+          &-item {
+            text-align: left;
+            margin: $space-sm 0;
+          }
+        }
+      }
     }
   }
 }

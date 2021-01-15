@@ -2,10 +2,18 @@
   <label for="email">
     Email Address
     <small
-      *ngIf="registerForm.touched && registerForm.hasError('required', 'email')"
+      *ngIf="
+        registerForm.touched && registerForm.controls.email.errors?.required
+      "
       class="error"
     >
       This field is required
+    </small>
+    <small
+      *ngIf="registerForm.touched && registerForm.controls.email.errors?.email"
+      class="error"
+    >
+      Wrong email format
     </small>
     <input formControlName="email" id="email" type="email" />
   </label>
@@ -14,11 +22,19 @@
     <small
       *ngIf="
         registerForm.touched &&
-        registerForm.hasError('required', 'emailConfirm')
+        registerForm.controls.emailConfirm.errors?.required
       "
       class="error"
     >
       This field is required
+    </small>
+    <small
+      *ngIf="
+        registerForm.touched && registerForm.controls.emailConfirm.errors?.email
+      "
+      class="error"
+    >
+      Wrong email format
     </small>
     <input formControlName="emailConfirm" id="email-confirm" type="email" />
   </label>
@@ -26,7 +42,7 @@
     Country of Residence
     <small
       *ngIf="
-        registerForm.touched && registerForm.hasError('required', 'countryId')
+        registerForm.touched && registerForm.controls.countryId.errors?.required
       "
       class="error"
     >
@@ -49,7 +65,7 @@
   <small *ngIf="registerForm.touched && !isCaptchaPassed" class="error">
     Please pass this captcha first
   </small>
-  <button class="btn btn-blue" (click)="onSubmit()" type="submit">
+  <app-submit-button [loading]="isLoading" (click)="onSubmit()">
     Submit
-  </button>
+  </app-submit-button>
 </form>

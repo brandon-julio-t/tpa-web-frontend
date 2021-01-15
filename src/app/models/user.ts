@@ -3,6 +3,13 @@ import { Country } from './country';
 export interface User {
   id: number;
   accountName: string;
-  email: string;
   country: Country;
+  customUrl: string;
+  displayName: string;
+  email: string;
+  profilePictureBase64: string;
+  profileTheme: string;
+  realName: string;
+  summary: string;
+  walletBalance: number;
 }

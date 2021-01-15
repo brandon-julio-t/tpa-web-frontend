@@ -1,0 +1,25 @@
+@use 'src/app/styles/spacings' as *;
+@use 'src/app/styles/sizes' as *;
+
+.profile {
+  padding: $space-md;
+  border-radius: $size-md;
+
+  &-picture {
+    display: flex;
+
+    &-image {
+      max-width: 164px;
+      padding-right: $space-md;
+    }
+
+    &-display-name {
+      padding-top: $space-md;
+    }
+  }
+
+  &-profile-actions {
+    justify-self: flex-end;
+    text-align: center;
+  }
+}

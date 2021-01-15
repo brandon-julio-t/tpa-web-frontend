@@ -7,13 +7,34 @@
     <div class="navigations">
       <a href="#">Store</a>
       <a href="#">Community</a>
-      <a *ngIf="user" href="#">{{ user?.accountName }}</a>
+      <a *ngIf="user" href="#">{{ user?.displayName }}</a>
       <a *ngIf="user" href="#">Chat</a>
       <a *ngIf="!user" href="#">About</a>
       <a href="#">Support</a>
 
+      <div *ngIf="user" class="dropdown">
+        <span class="dropdown-header">
+          <span>
+            <a href="#">{{ user?.displayName }}</a>
+            <a href="#">{{ user?.walletBalance | currency: "Rp" }}</a>
+          </span>
+          <img [src]="base64ProfilePicture" alt="Profile Picture" height="42" />
+        </span>
+
+        <div class="dropdown-list">
+          <a
+            [routerLink]="['/profile', user?.customUrl]"
+            class="dropdown-list-item"
+          >
+            View Profile
+          </a>
+          <button (click)="onLogout()" *ngIf="user" class="dropdown-list-item">
+            Logout
+          </button>
+        </div>
+      </div>
+
       <a *ngIf="!user" routerLink="/login">Login</a>
-      <button (click)="onLogout()" *ngIf="user">Logout</button>
     </div>
   </div>
 </nav>

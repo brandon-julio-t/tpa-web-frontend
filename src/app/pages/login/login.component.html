@@ -34,9 +34,9 @@
         <input formControlName="password" id="password" type="password" />
       </label>
 
-      <button (click)="onSubmit()" class="btn btn-blue" type="button">
+      <app-submit-button (click)="onSubmit()" [loading]="isLoading">
         Sign In
-      </button>
+      </app-submit-button>
     </form>
   </div>
 
@@ -47,6 +47,6 @@
     <img alt="Join Staem image" src="assets/join_pc.png" />
 
     <p>It's free and easy to use.</p>
-    <a routerLink="/register" class="join-steam">Join Steam</a>
+    <a class="join-steam" routerLink="/register">Join Steam</a>
   </div>
 </div>
