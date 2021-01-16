@@ -1,0 +1,31 @@
+<section>
+  <a class="btn btn-blue" routerLink="./unsuspend-requests">
+    Manage Unsuspend Requests
+  </a>
+
+  <div *ngFor="let user of users" class="card-user">
+    <h2 class="card-user-account-name">{{ user?.accountName }}</h2>
+    <p class="card-user-email">{{ user?.email }}</p>
+    <a
+      [routerLink]="['/admin', 'users', 'reports', user?.id]"
+      class="card-user-reports-count"
+    >
+      {{ user?.reportCounts }} reports
+    </a>
+
+    <div *ngIf="user?.summary" class="card-user-summary">
+      Summary:
+      <p>{{ user?.summary }}</p>
+    </div>
+
+    <div class="card-user-actions">
+      <button
+        *ngIf="!user.suspendedAt"
+        (click)="onSuspend(user?.id)"
+        class="btn btn-red"
+      >
+        Suspend
+      </button>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,22 @@
+@use 'src/app/styles/spacings' as *;
+@use 'src/app/styles/sizes' as *;
+
+section {
+  .card-user {
+    border: 1px solid #475569;
+    padding: $space-md;
+    border-radius: $size-md;
+
+    &-reports-count {
+      color: red;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    &:nth-child(even) {
+      margin: $space-lg auto;
+    }
+  }
+}

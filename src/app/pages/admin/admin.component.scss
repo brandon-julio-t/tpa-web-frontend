@@ -1,0 +1,15 @@
+@use 'src/app/styles/spacings' as *;
+
+section {
+  display: flex;
+  flex-wrap: wrap;
+
+  a {
+    flex-grow: 1;
+    text-align: center;
+
+    &:nth-child(even) {
+      margin: auto $space-lg;
+    }
+  }
+}

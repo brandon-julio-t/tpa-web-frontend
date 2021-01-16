@@ -19,6 +19,13 @@ import { ProfileEditComponent } from './pages/profile-edit/profile-edit.componen
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SubmitButtonComponent } from './components/submit-button/submit-button.component';
 import { LoginAdminComponent } from './pages/login-admin/login-admin.component';
+import { AdminComponent } from './pages/admin/admin.component';
+import { AdminManageGamesComponent } from './pages/admin-manage-games/admin-manage-games.component';
+import { AdminManagePromoAndDiscountComponent } from './pages/admin-manage-promo-and-discount/admin-manage-promo-and-discount.component';
+import { AdminManageUsersComponent } from './pages/admin-manage-users/admin-manage-users.component';
+import { AdminViewReportsComponent } from './pages/admin-view-reports/admin-view-reports.component';
+import { UnsuspendRequestComponent } from './pages/unsuspend-request/unsuspend-request.component';
+import { AdminManageUnsuspendRequestsComponent } from './pages/admin-manage-unsuspend-requests/admin-manage-unsuspend-requests.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +39,13 @@ import { LoginAdminComponent } from './pages/login-admin/login-admin.component';
     ProfileEditComponent,
     SubmitButtonComponent,
     LoginAdminComponent,
+    AdminComponent,
+    AdminManageGamesComponent,
+    AdminManagePromoAndDiscountComponent,
+    AdminManageUsersComponent,
+    AdminViewReportsComponent,
+    UnsuspendRequestComponent,
+    AdminManageUnsuspendRequestsComponent,
   ],
   imports: [
     BrowserModule,

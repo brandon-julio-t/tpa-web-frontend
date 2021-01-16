@@ -6,8 +6,10 @@ main {
   max-width: $screen-lg;
   margin: 0 auto;
 
-  div {
-    padding: 0 $space-md;
+  @media (max-width: $screen-md) {
+    div {
+      padding: 0 $space-md;
+    }
   }
 }
 

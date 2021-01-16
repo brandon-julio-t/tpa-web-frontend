@@ -1,0 +1,23 @@
+@use 'src/app/styles/spacings' as *;
+@use 'src/app/styles/sizes' as *;
+
+section {
+  .card-report {
+    border: 1px solid #475569;
+    padding: $space-md;
+    border-radius: $size-md;
+
+    &-reporter {
+    }
+
+    &-date {
+    }
+
+    &-description {
+    }
+
+    &:nth-child(even) {
+      margin: $space-md auto;
+    }
+  }
+}

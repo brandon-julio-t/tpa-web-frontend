@@ -23,6 +23,13 @@
 
         <div class="dropdown-list">
           <a
+            *ngIf="user?.accountName === 'Admin'"
+            routerLink="/admin"
+            class="dropdown-list-item"
+          >
+            Admin
+          </a>
+          <a
             [routerLink]="['/profile', user?.customUrl]"
             class="dropdown-list-item"
           >

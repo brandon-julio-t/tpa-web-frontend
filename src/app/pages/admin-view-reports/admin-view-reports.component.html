@@ -1,0 +1,11 @@
+<section>
+  <a routerLink="../.." class="btn btn-blue">Back</a>
+
+  <div *ngFor="let report of reports" class="card-report">
+    <h2 class="card-report-reporter">
+      By: {{ report?.reporter?.accountName }} ({{ report?.reporter?.email }})
+    </h2>
+    <p class="card-report-date">{{ report?.createdAt | date }}</p>
+    <p class="card-report-description">{{ report?.description }}</p>
+  </div>
+</section>

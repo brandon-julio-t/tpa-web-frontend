@@ -23,6 +23,7 @@ export class AuthService extends Query<Response> {
         realName
         summary
         walletBalance
+        suspendedAt
       }
     }
   `;

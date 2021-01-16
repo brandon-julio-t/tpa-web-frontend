@@ -12,4 +12,6 @@ export interface User {
   realName: string;
   summary: string;
   walletBalance: number;
+  suspendedAt: Date;
+  reportCounts: number;
 }
