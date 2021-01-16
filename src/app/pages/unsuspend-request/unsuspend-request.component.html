@@ -4,7 +4,7 @@
     <small
       *ngIf="
         unsuspendRequestForm.touched &&
-        unsuspendRequestForm.controls.accountName.errors.required
+        unsuspendRequestForm.controls.accountName.errors?.required
       "
       class="error"
     >
