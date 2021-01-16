@@ -55,7 +55,12 @@
     </small>
     <input formControlName="otp" id="otp" type="text" />
   </label>
-  <app-submit-button (click)="onSubmit()" [loading]="isLoading">
+  <app-submit-button
+    type="submit"
+    class="btn btn-blue"
+    (click)="onSubmit()"
+    [loading]="isLoading"
+  >
     Submit
   </app-submit-button>
 </form>

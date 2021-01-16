@@ -65,7 +65,12 @@
   <small *ngIf="registerForm.touched && !isCaptchaPassed" class="error">
     Please pass this captcha first
   </small>
-  <app-submit-button [loading]="isLoading" (click)="onSubmit()">
+  <app-submit-button
+    type="submit"
+    class="btn btn-blue"
+    [loading]="isLoading"
+    (click)="onSubmit()"
+  >
     Submit
   </app-submit-button>
 </form>

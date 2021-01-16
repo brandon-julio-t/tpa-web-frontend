@@ -13,7 +13,12 @@
     <input formControlName="accountName" id="account-name" type="text" />
   </label>
 
-  <app-submit-button (click)="onSubmit()" [loading]="isLoading">
+  <app-submit-button
+    type="submit"
+    class="btn btn-blue"
+    (click)="onSubmit()"
+    [loading]="isLoading"
+  >
     Submit Request
   </app-submit-button>
 </form>

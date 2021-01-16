@@ -1,4 +1,4 @@
-<button [disabled]="loading" class="btn btn-blue" type="submit">
+<button [disabled]="loading" [type]="type">
   <span *ngIf="!loading">
     <ng-content></ng-content>
   </span>

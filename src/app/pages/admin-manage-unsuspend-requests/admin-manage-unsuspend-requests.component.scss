@@ -10,7 +10,7 @@ section {
     &-actions {
       display: flex;
 
-      button:nth-child(odd) {
+      app-submit-button:nth-child(odd) {
         margin-right: $space-md;
       }
     }

@@ -8,6 +8,7 @@ import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 })
 export class SubmitButtonComponent implements OnInit {
   @Input() loading = false;
+  @Input() type = '';
 
   faCircleNotch = faCircleNotch;
 

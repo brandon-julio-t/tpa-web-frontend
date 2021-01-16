@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Apollo, gql, QueryRef } from 'apollo-angular';
 import { User } from '../../models/user';
+import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-admin-manage-user',
@@ -10,12 +11,14 @@ import { User } from '../../models/user';
 export class AdminManageUsersComponent implements OnInit {
   allUsersQuery: QueryRef<{ getAllUsers: User[] }>;
   users: User[] = [];
+  currentPage = 1;
+  faCircleNotch = faCircleNotch;
 
   constructor(private apollo: Apollo) {
     this.allUsersQuery = this.apollo.watchQuery<{ getAllUsers: User[] }>({
       query: gql`
-        query getAllUsers {
-          getAllUsers {
+        query getAllUsers($page: Int!) {
+          getAllUsers(page: $page) {
             id
             accountName
             email
@@ -25,10 +28,12 @@ export class AdminManageUsersComponent implements OnInit {
           }
         }
       `,
+      variables: { page: this.currentPage },
     });
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    // await this.allUsersQuery.setVariables({ page: this.currentPage });
     this.allUsersQuery.valueChanges.subscribe((data) => {
       this.users = data.data.getAllUsers;
     });
@@ -52,5 +57,17 @@ export class AdminManageUsersComponent implements OnInit {
         variables: { id },
       })
       .subscribe();
+  }
+
+  previousPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.allUsersQuery.refetch({ page: this.currentPage }).then();
+    }
+  }
+
+  nextPage(): void {
+    this.currentPage++;
+    this.allUsersQuery.refetch({ page: this.currentPage }).then();
   }
 }

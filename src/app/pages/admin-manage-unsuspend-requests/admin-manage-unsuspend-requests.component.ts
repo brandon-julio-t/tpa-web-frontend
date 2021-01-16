@@ -9,6 +9,7 @@ import { User } from '../../models/user';
 })
 export class AdminManageUnsuspendRequestsComponent implements OnInit {
   unsuspendRequests: User[] = [];
+  isLoading = false;
 
   constructor(private apollo: Apollo) {}
 
@@ -34,6 +35,8 @@ export class AdminManageUnsuspendRequestsComponent implements OnInit {
       return;
     }
 
+    this.isLoading = true;
+
     this.apollo
       .mutate<{ approveUnsuspendRequests: User }>({
         mutation: gql`
@@ -50,6 +53,7 @@ export class AdminManageUnsuspendRequestsComponent implements OnInit {
           this.unsuspendRequests = this.unsuspendRequests.filter(
             (req) => req.id !== id
           );
+          this.isLoading = false;
         }
       });
   }
@@ -58,6 +62,8 @@ export class AdminManageUnsuspendRequestsComponent implements OnInit {
     if (!id) {
       return;
     }
+
+    this.isLoading = true;
 
     this.apollo
       .mutate<{ approveUnsuspendRequests: User }>({
@@ -75,6 +81,7 @@ export class AdminManageUnsuspendRequestsComponent implements OnInit {
           this.unsuspendRequests = this.unsuspendRequests.filter(
             (req) => req.id !== id
           );
+          this.isLoading = false;
         }
       });
   }

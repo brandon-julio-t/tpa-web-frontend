@@ -34,7 +34,12 @@
         <input formControlName="password" id="password" type="password" />
       </label>
 
-      <app-submit-button (click)="onSubmit()" [loading]="isLoading">
+      <app-submit-button
+        type="submit"
+        class="btn btn-blue"
+        (click)="onSubmit()"
+        [loading]="isLoading"
+      >
         Sign In
       </app-submit-button>
 

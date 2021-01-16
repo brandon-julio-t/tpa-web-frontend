@@ -19,4 +19,12 @@ section {
       margin: $space-lg auto;
     }
   }
+
+  .pagination {
+    display: flex;
+
+    button:nth-child(odd) {
+      margin-right: $space-md;
+    }
+  }
 }

@@ -1,12 +1,23 @@
 <section>
+  <h2>Unsuspend Account Requests</h2>
   <div *ngIf="unsuspendRequests.length === 0">No unsuspend request.</div>
-  <div class="card-request" *ngFor="let request of unsuspendRequests">
+  <div *ngFor="let request of unsuspendRequests" class="card-request">
     <h2 class="card-request-header">{{ request?.accountName }}</h2>
     <div class="card-request-actions">
-      <button (click)="onApprove(request?.id)" class="btn btn-blue">
+      <app-submit-button
+        (click)="onApprove(request?.id)"
+        [loading]="isLoading"
+        class="btn btn-blue"
+      >
         Approve
-      </button>
-      <button (click)="onDeny(request?.id)" class="btn btn-red">Deny</button>
+      </app-submit-button>
+      <app-submit-button
+        (click)="onDeny(request?.id)"
+        [loading]="isLoading"
+        class="btn btn-red"
+      >
+        Deny
+      </app-submit-button>
     </div>
   </div>
 </section>

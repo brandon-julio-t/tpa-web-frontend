@@ -82,5 +82,7 @@
     Avatar
     <input (change)="onAvatarChange($event.target)" id="avatar" type="file" />
   </label>
-  <app-submit-button (click)="onSubmit()">Submit</app-submit-button>
+  <app-submit-button type="submit" class="btn btn-blue" (click)="onSubmit()">
+    Submit
+  </app-submit-button>
 </form>

@@ -3,6 +3,9 @@
     Manage Unsuspend Requests
   </a>
 
+  <div *ngIf="users.length === 0">
+    <fa-icon [icon]="faCircleNotch" [spin]="true"></fa-icon>
+  </div>
   <div *ngFor="let user of users" class="card-user">
     <h2 class="card-user-account-name">{{ user?.accountName }}</h2>
     <p class="card-user-email">{{ user?.email }}</p>
@@ -20,12 +23,17 @@
 
     <div class="card-user-actions">
       <button
-        *ngIf="!user.suspendedAt"
         (click)="onSuspend(user?.id)"
+        *ngIf="!user.suspendedAt"
         class="btn btn-red"
       >
         Suspend
       </button>
     </div>
+  </div>
+
+  <div *ngIf="users.length > 0" class="pagination">
+    <button (click)="previousPage()" class="btn btn-blue">Previous <</button>
+    <button (click)="nextPage()" class="btn btn-blue">Next ></button>
   </div>
 </section>
