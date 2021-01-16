@@ -1,0 +1,65 @@
+@use 'src/app/styles/spacings' as *;
+@use 'src/app/styles/sizes' as *;
+
+section {
+  img {
+    max-width: 100%;
+  }
+
+  .games-container {
+    .card-game {
+      border: 1px solid #475569;
+      padding: $space-md;
+      border-radius: $size-md;
+
+      &-banner {
+        margin: $space-md auto;
+      }
+
+      &-tags {
+        display: flex;
+        flex-wrap: wrap;
+        margin: $space-md auto;
+
+        &-item {
+          border: 1px solid #475569;
+          border-radius: $size-lg;
+          padding: $space-md;
+
+          &:nth-child(odd) {
+            margin-right: $space-md;
+          }
+        }
+      }
+
+      &-slideshow {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        margin: $space-md auto;
+
+        &-item {
+          max-height: 250px;
+        }
+      }
+
+      p {
+        margin-bottom: $space-md;
+      }
+
+      &:nth-child(even) {
+        margin: $space-lg auto;
+      }
+    }
+  }
+
+  .page-actions {
+    display: flex;
+    flex-wrap: wrap;
+
+    button:nth-child(odd) {
+      margin-right: $space-md;
+    }
+  }
+}

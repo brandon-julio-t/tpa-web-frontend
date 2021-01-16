@@ -1,0 +1,117 @@
+<form [formGroup]="createGameForm">
+  <label for="title">
+    Title
+    <small
+      *ngIf="
+        createGameForm.touched && createGameForm.controls.title.errors?.required
+      "
+      class="error"
+    >
+      This field is required
+    </small>
+    <input formControlName="title" id="title" type="text" />
+  </label>
+  <label for="description">
+    Description
+    <small
+      *ngIf="
+        createGameForm.touched &&
+        createGameForm.controls.description.errors?.required
+      "
+      class="error"
+    >
+      This field is required
+    </small>
+    <input formControlName="description" id="description" type="text" />
+  </label>
+  <label for="price">
+    Price
+    <small
+      *ngIf="
+        createGameForm.touched && createGameForm.controls.price.errors?.required
+      "
+      class="error"
+    >
+      This field is required
+    </small>
+    <input formControlName="price" id="price" type="number" />
+  </label>
+  <label for="banner">
+    Banner
+    <small
+      *ngIf="
+        createGameForm.touched &&
+        createGameForm.controls.banner.errors?.required
+      "
+      class="error"
+    >
+      This field is required
+    </small>
+    <input
+      (change)="onBannerChange($event.target)"
+      accept="image/*"
+      id="banner"
+      type="file"
+    />
+  </label>
+  <label for="slideshows">
+    Slideshows
+    <small
+      *ngIf="
+        createGameForm.touched &&
+        createGameForm.controls.slideshows.errors?.required
+      "
+      class="error"
+    >
+      This field is required
+    </small>
+    <input
+      (change)="onSlideshowsChange($event.target)"
+      [multiple]="true"
+      accept="video/mp4,video/x-m4v,video/*,image/*"
+      id="slideshows"
+      type="file"
+    />
+  </label>
+
+  Game Tags
+  <div class="game-tags">
+    <div
+      *ngFor="let _ of gameTagCheckboxes.controls; let i = index"
+      class="game-tags-item"
+      formArrayName="gameTags"
+    >
+      <label>
+        <input [formControlName]="i" [value]="gameTag[i].id" type="checkbox" />
+        <span>{{ gameTag[i].name }}</span>
+      </label>
+    </div>
+  </div>
+
+  <label for="systemRequirements">
+    System Requirements
+    <small
+      *ngIf="
+        createGameForm.touched &&
+        createGameForm.controls.systemRequirements.errors?.required
+      "
+      class="error"
+    >
+      This field is required
+    </small>
+    <textarea
+      formControlName="systemRequirements"
+      id="systemRequirements"
+      rows="7"
+    ></textarea>
+  </label>
+
+  <app-submit-button
+    (click)="onSubmit()"
+    [loading]="isLoading"
+    class="btn btn-blue"
+    type="submit"
+  >
+    Submit
+  </app-submit-button>
+</form>

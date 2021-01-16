@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Apollo, gql, QueryRef } from 'apollo-angular';
+import { Game } from '../../models/game';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-admin-manage-game',
@@ -6,7 +10,89 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-manage-games.component.scss'],
 })
 export class AdminManageGamesComponent implements OnInit {
-  constructor() {}
+  allGamesQuery: QueryRef<{ getAllGames: Game[] }>;
+  games: Game[] = [];
+  currentPage = 1;
+  isLoading = true;
 
-  ngOnInit(): void {}
+  faCircleNotch = faCircleNotch;
+
+  constructor(private apollo: Apollo, private sanitizer: DomSanitizer) {
+    this.allGamesQuery = this.apollo.watchQuery<{ getAllGames: Game[] }>({
+      query: gql`
+        query getAllGames($page: Int!) {
+          getAllGames(page: $page) {
+            id
+            createdAt
+            title
+            description
+            price
+            bannerBase64
+            slideshows {
+              fileBase64
+            }
+            tags {
+              id
+              name
+            }
+            systemRequirements
+          }
+        }
+      `,
+      variables: { page: this.currentPage },
+    });
+  }
+
+  ngOnInit(): void {
+    this.allGamesQuery.valueChanges.subscribe((data) => {
+      this.games = data.data.getAllGames;
+      this.isLoading = false;
+    });
+  }
+
+  getImageUrl(base64: string): SafeUrl {
+    return this.sanitizer.bypassSecurityTrustUrl(
+      `data:image/png;base64, ${base64}`
+    );
+  }
+
+  onPrevious(): void {
+    if (this.currentPage > 1) {
+      this.isLoading = true;
+      this.currentPage--;
+      this.allGamesQuery
+        .refetch({ page: this.currentPage })
+        .then(() => (this.isLoading = false));
+    }
+  }
+
+  onNext(): void {
+    this.isLoading = true;
+    this.currentPage++;
+    this.allGamesQuery
+      .refetch({ page: this.currentPage })
+      .then(() => (this.isLoading = false));
+  }
+
+  onDelete(id: number): void {
+    this.isLoading = true;
+
+    this.apollo
+      .mutate<{ deleteGame: Game }>({
+        mutation: gql`
+          mutation deleteGame($id: ID!) {
+            deleteGame(id: $id) {
+              id
+            }
+          }
+        `,
+        variables: { id },
+      })
+      .subscribe((resp) => {
+        if (resp.data?.deleteGame) {
+          this.games = this.games.filter((game) => game.id !== id);
+          this.isLoading = false;
+        }
+      });
+  }
 }

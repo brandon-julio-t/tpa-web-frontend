@@ -33,7 +33,6 @@ export class AdminManageUsersComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    // await this.allUsersQuery.setVariables({ page: this.currentPage });
     this.allUsersQuery.valueChanges.subscribe((data) => {
       this.users = data.data.getAllUsers;
     });

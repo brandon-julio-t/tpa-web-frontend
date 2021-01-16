@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './pages/login/login.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { RecaptchaModule } from 'ng-recaptcha';
@@ -26,6 +26,7 @@ import { AdminManageUsersComponent } from './pages/admin-manage-users/admin-mana
 import { AdminViewReportsComponent } from './pages/admin-view-reports/admin-view-reports.component';
 import { UnsuspendRequestComponent } from './pages/unsuspend-request/unsuspend-request.component';
 import { AdminManageUnsuspendRequestsComponent } from './pages/admin-manage-unsuspend-requests/admin-manage-unsuspend-requests.component';
+import { AdminGamesCreateComponent } from './pages/admin-games-create/admin-games-create.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { AdminManageUnsuspendRequestsComponent } from './pages/admin-manage-unsu
     AdminViewReportsComponent,
     UnsuspendRequestComponent,
     AdminManageUnsuspendRequestsComponent,
+    AdminGamesCreateComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,6 +60,7 @@ import { AdminManageUnsuspendRequestsComponent } from './pages/admin-manage-unsu
     ReactiveFormsModule,
     RecaptchaModule,
     FontAwesomeModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

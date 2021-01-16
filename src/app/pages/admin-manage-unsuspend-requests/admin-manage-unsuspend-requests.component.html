@@ -1,5 +1,6 @@
 <section>
   <h2>Unsuspend Account Requests</h2>
+  <a class="btn btn-blue" routerLink="../">Back</a>
   <div *ngIf="unsuspendRequests.length === 0">No unsuspend request.</div>
   <div *ngFor="let request of unsuspendRequests" class="card-request">
     <h2 class="card-request-header">{{ request?.accountName }}</h2>

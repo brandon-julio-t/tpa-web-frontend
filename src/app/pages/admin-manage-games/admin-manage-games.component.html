@@ -1,1 +1,71 @@
-<p>admin-manage-game works!</p>
+<section>
+  <a class="btn btn-blue" routerLink="./create">Create Game</a>
+
+  <fa-icon
+    *ngIf="games.length === 0 && isLoading"
+    [icon]="faCircleNotch"
+    [spin]="true"
+  ></fa-icon>
+  <div class="games-container">
+    <div *ngFor="let game of games" class="card-game">
+      <h2 class="card-game-title">{{ game.title | titlecase }}</h2>
+      <p class="card-game-release-date">{{ game.createdAt | date }}</p>
+      <p class="card-game-price">{{ game.price | currency: "Rp" }}</p>
+
+      <img
+        [src]="getImageUrl(game.bannerBase64)"
+        alt="Banner"
+        class="card-game-banner"
+      />
+
+      <ul class="card-game-tags">
+        <li *ngFor="let tag of game.tags" class="card-game-tags-item">
+          {{ tag.name }}
+        </li>
+      </ul>
+
+      <div class="card-game-slideshow">
+        <img
+          *ngFor="let slideshow of game.slideshows"
+          [src]="getImageUrl(slideshow.fileBase64)"
+          alt="Slideshow"
+          class="card-game-slideshow-item"
+        />
+      </div>
+
+      <h3>Description</h3>
+      <p class="card-game-description">{{ game.description }}</p>
+
+      <h3>System Requirements</h3>
+      <p class="card-game-system-requirements">{{ game.systemRequirements }}</p>
+
+      <div class="card-game-actions">
+        <app-submit-button
+          (click)="onDelete(game.id)"
+          [loading]="isLoading"
+          class="btn btn-red"
+        >
+          Delete
+        </app-submit-button>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-actions">
+    <app-submit-button
+      (click)="onPrevious()"
+      [loading]="isLoading"
+      class="btn btn-blue"
+    >
+      < Previous
+    </app-submit-button>
+    <app-submit-button
+      (click)="onNext()"
+      *ngIf="games.length > 0"
+      [loading]="isLoading"
+      class="btn btn-blue"
+    >
+      Next >
+    </app-submit-button>
+  </div>
+</section>

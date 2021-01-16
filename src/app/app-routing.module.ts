@@ -14,6 +14,7 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { AdminViewReportsComponent } from './pages/admin-view-reports/admin-view-reports.component';
 import { UnsuspendRequestComponent } from './pages/unsuspend-request/unsuspend-request.component';
 import { AdminManageUnsuspendRequestsComponent } from './pages/admin-manage-unsuspend-requests/admin-manage-unsuspend-requests.component';
+import { AdminGamesCreateComponent } from './pages/admin-games-create/admin-games-create.component';
 
 const routes: Routes = [
   {
@@ -41,7 +42,13 @@ const routes: Routes = [
         path: '',
         children: [
           { path: '', component: AdminComponent },
-          { path: 'games', component: AdminManageGamesComponent },
+          {
+            path: 'games',
+            children: [
+              { path: '', component: AdminManageGamesComponent },
+              { path: 'create', component: AdminGamesCreateComponent },
+            ],
+          },
           {
             path: 'promo-and-discount',
             component: AdminManagePromoAndDiscountComponent,
