@@ -8,6 +8,8 @@ import {
 import { HttpLink } from 'apollo-angular/http';
 import { environment } from '../environments/environment';
 import { onError } from '@apollo/client/link/error';
+import { createPersistedQueryLink } from 'apollo-angular/persisted-queries';
+import { sha256 } from 'crypto-hash';
 
 const uri = environment.apiUrl; // <-- add the URL of the GraphQL server here
 export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
@@ -26,6 +28,7 @@ export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
           console.error(`[Network error]: ${networkError.message}`);
         }
       }),
+      createPersistedQueryLink({ sha256 }),
       httpLink.create({ uri, withCredentials: true, useMultipart: true }),
     ]),
     cache: new InMemoryCache({
