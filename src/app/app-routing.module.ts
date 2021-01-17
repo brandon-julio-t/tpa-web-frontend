@@ -15,6 +15,7 @@ import { AdminViewReportsComponent } from './pages/admin-view-reports/admin-view
 import { UnsuspendRequestComponent } from './pages/unsuspend-request/unsuspend-request.component';
 import { AdminManageUnsuspendRequestsComponent } from './pages/admin-manage-unsuspend-requests/admin-manage-unsuspend-requests.component';
 import { AdminGamesCreateComponent } from './pages/admin-games-create/admin-games-create.component';
+import { AdminGamesUpdateComponent } from './pages/admin-games-update/admin-games-update.component';
 
 const routes: Routes = [
   {
@@ -47,6 +48,7 @@ const routes: Routes = [
             children: [
               { path: '', component: AdminManageGamesComponent },
               { path: 'create', component: AdminGamesCreateComponent },
+              { path: 'update/:id', component: AdminGamesUpdateComponent },
             ],
           },
           {
