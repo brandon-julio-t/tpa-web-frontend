@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Apollo, gql, QueryRef } from 'apollo-angular';
 import { Game } from '../../models/game';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
-import { Base64Service } from '../../services/base64.service';
+import { AssetService } from '../../services/asset.service';
+import { SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-admin-manage-game',
@@ -18,11 +18,7 @@ export class AdminManageGamesComponent implements OnInit {
 
   faCircleNotch = faCircleNotch;
 
-  constructor(
-    private apollo: Apollo,
-    private sanitizer: DomSanitizer,
-    private base64Service: Base64Service
-  ) {
+  constructor(private apollo: Apollo, private assetService: AssetService) {
     this.allGamesQuery = this.apollo.watchQuery<{ getAllGames: Game[] }>({
       query: gql`
         query getAllGames($page: Int!) {
@@ -32,10 +28,15 @@ export class AdminManageGamesComponent implements OnInit {
             title
             description
             price
-            bannerBase64
-            slideshows {
-              fileBase64
+            banner {
+              id
               contentType
+            }
+            slideshows {
+              file {
+                id
+                contentType
+              }
             }
             tags {
               id
@@ -49,19 +50,15 @@ export class AdminManageGamesComponent implements OnInit {
     });
   }
 
+  asset(id: number | undefined): SafeUrl {
+    return this.assetService.get(id);
+  }
+
   ngOnInit(): void {
     this.allGamesQuery.valueChanges.subscribe((data) => {
       this.games = data.data.getAllGames;
       this.isLoading = false;
     });
-  }
-
-  getImageUrl(base64: string): SafeUrl {
-    return this.base64Service.image(base64);
-  }
-
-  getVideoUrl(base64: string): SafeUrl {
-    return this.base64Service.video(base64);
   }
 
   onPrevious(): void {

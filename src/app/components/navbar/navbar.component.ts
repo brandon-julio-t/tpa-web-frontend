@@ -3,6 +3,7 @@ import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user';
 import { Apollo, gql } from 'apollo-angular';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { AssetService } from '../../services/asset.service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,13 +16,12 @@ export class NavbarComponent implements OnInit {
   constructor(
     private apollo: Apollo,
     private sanitizer: DomSanitizer,
-    private authService: AuthService
+    private authService: AuthService,
+    private assetService: AssetService
   ) {}
 
-  get base64ProfilePicture(): SafeUrl {
-    return this.sanitizer.bypassSecurityTrustUrl(
-      `data:image/png;base64, ${this.user?.profilePictureBase64}`
-    );
+  get profilePicture(): SafeUrl {
+    return this.assetService.get(this.user?.profilePicture.id);
   }
 
   ngOnInit(): void {

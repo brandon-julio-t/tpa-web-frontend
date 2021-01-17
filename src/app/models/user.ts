@@ -1,4 +1,5 @@
 import { Country } from './country';
+import { AssetFile } from './asset-file';
 
 export interface User {
   id: number;
@@ -7,7 +8,7 @@ export interface User {
   customUrl: string;
   displayName: string;
   email: string;
-  profilePictureBase64: string;
+  profilePicture: AssetFile;
   profileTheme: string;
   realName: string;
   summary: string;

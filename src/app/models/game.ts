@@ -1,5 +1,6 @@
 import { GameSlideshow } from './game-slideshow';
 import { GameTag } from './game-tag';
+import { AssetFile } from './asset-file';
 
 export interface Game {
   id: number;
@@ -7,7 +8,7 @@ export interface Game {
   title: string;
   description: string;
   price: number;
-  bannerBase64: string;
+  banner: AssetFile;
   slideshows: GameSlideshow[];
   tags: GameTag[];
   systemRequirements: string;

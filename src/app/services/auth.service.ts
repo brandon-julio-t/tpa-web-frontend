@@ -18,7 +18,10 @@ export class AuthService extends Query<Response> {
         customUrl
         displayName
         email
-        profilePictureBase64
+        profilePicture {
+          id
+          contentType
+        }
         profileTheme
         realName
         summary

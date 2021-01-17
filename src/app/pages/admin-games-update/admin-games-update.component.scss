@@ -1,0 +1,23 @@
+@use 'src/app/styles/breakpoints' as *;
+@use 'src/app/styles/spacings' as *;
+
+.game-tags {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  @media (max-width: $screen-sm) {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  &-item {
+    label {
+      display: flex;
+
+      input {
+        display: inline;
+        width: fit-content;
+        margin-right: $space-sm;
+      }
+    }
+  }
+}

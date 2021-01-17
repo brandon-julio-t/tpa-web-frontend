@@ -4,6 +4,7 @@ import { Apollo, gql } from 'apollo-angular';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { AssetService } from '../../services/asset.service';
 
 @Component({
   selector: 'app-profile',
@@ -18,13 +19,12 @@ export class ProfileComponent implements OnInit {
     private apollo: Apollo,
     private route: ActivatedRoute,
     private sanitizer: DomSanitizer,
-    private authService: AuthService
+    private authService: AuthService,
+    private assetService: AssetService
   ) {}
 
   get profilePicture(): SafeUrl {
-    return this.sanitizer.bypassSecurityTrustUrl(
-      `data:image/png;base64, ${this.profile?.profilePictureBase64}`
-    );
+    return this.assetService.get(this.profile?.profilePicture.id);
   }
 
   ngOnInit(): void {
@@ -51,7 +51,10 @@ export class ProfileComponent implements OnInit {
                 id
                 name
               }
-              profilePictureBase64
+              profilePicture {
+                id
+                contentType
+              }
             }
           }
         `,
@@ -59,6 +62,7 @@ export class ProfileComponent implements OnInit {
       })
       .valueChanges.subscribe((data) => {
         this.profile = data.data.getProfile;
+        console.log(this.profile);
       });
 
     this.authService.watch().valueChanges.subscribe((data) => {

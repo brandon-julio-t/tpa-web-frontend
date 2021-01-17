@@ -10,8 +10,6 @@ import { Game } from '../../models/game';
   styleUrls: ['./admin-games-create.component.scss'],
 })
 export class AdminGamesCreateComponent implements OnInit {
-  @Input() game: Game | null = null;
-
   createGameForm: FormGroup;
   isLoading = false;
   gameTag: GameTag[] = [];

@@ -1,4 +1,6 @@
+import { AssetFile } from './asset-file';
+
 export interface GameSlideshow {
-  fileBase64: string;
+  file: AssetFile;
   contentType: string;
 }

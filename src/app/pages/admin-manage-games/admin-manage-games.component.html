@@ -17,7 +17,7 @@
       <p class="card-game-price">{{ game.price | currency: "Rp" }}</p>
 
       <img
-        [src]="getImageUrl(game.bannerBase64)"
+        [src]="asset(game.banner.id)"
         alt="Banner"
         class="card-game-banner"
       />
@@ -31,14 +31,14 @@
       <div class="card-game-slideshow">
         <div *ngFor="let slideshow of game.slideshows">
           <img
-            *ngIf="slideshow.contentType.includes('image')"
-            [src]="getImageUrl(slideshow.fileBase64)"
+            *ngIf="slideshow.file.contentType.includes('image')"
+            [src]="asset(slideshow.file.id)"
             alt="Slideshow"
             class="card-game-slideshow-item"
           />
           <video
-            *ngIf="slideshow.contentType.includes('video')"
-            [src]="getVideoUrl(slideshow.fileBase64)"
+            *ngIf="slideshow.file.contentType.includes('video')"
+            [src]="asset(slideshow.file.id)"
             autoplay
             controls
           ></video>
