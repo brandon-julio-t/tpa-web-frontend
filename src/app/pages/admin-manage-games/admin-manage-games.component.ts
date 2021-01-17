@@ -3,6 +3,7 @@ import { Apollo, gql, QueryRef } from 'apollo-angular';
 import { Game } from '../../models/game';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
+import { Base64Service } from '../../services/base64.service';
 
 @Component({
   selector: 'app-admin-manage-game',
@@ -17,7 +18,11 @@ export class AdminManageGamesComponent implements OnInit {
 
   faCircleNotch = faCircleNotch;
 
-  constructor(private apollo: Apollo, private sanitizer: DomSanitizer) {
+  constructor(
+    private apollo: Apollo,
+    private sanitizer: DomSanitizer,
+    private base64Service: Base64Service
+  ) {
     this.allGamesQuery = this.apollo.watchQuery<{ getAllGames: Game[] }>({
       query: gql`
         query getAllGames($page: Int!) {
@@ -30,6 +35,7 @@ export class AdminManageGamesComponent implements OnInit {
             bannerBase64
             slideshows {
               fileBase64
+              contentType
             }
             tags {
               id
@@ -51,9 +57,11 @@ export class AdminManageGamesComponent implements OnInit {
   }
 
   getImageUrl(base64: string): SafeUrl {
-    return this.sanitizer.bypassSecurityTrustUrl(
-      `data:image/png;base64, ${base64}`
-    );
+    return this.base64Service.image(base64);
+  }
+
+  getVideoUrl(base64: string): SafeUrl {
+    return this.base64Service.video(base64);
   }
 
   onPrevious(): void {
@@ -94,5 +102,9 @@ export class AdminManageGamesComponent implements OnInit {
           this.isLoading = false;
         }
       });
+  }
+
+  onRefresh(): void {
+    this.allGamesQuery.refetch().then();
   }
 }

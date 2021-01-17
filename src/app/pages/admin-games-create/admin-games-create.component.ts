@@ -1,13 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Apollo, gql } from 'apollo-angular';
 import { GameTag } from '../../models/game-tag';
 import { Game } from '../../models/game';
-
-interface GameTagCheckbox {
-  gameTag: GameTag;
-  checked: boolean;
-}
 
 @Component({
   selector: 'app-admin-games-create',
@@ -15,6 +10,8 @@ interface GameTagCheckbox {
   styleUrls: ['./admin-games-create.component.scss'],
 })
 export class AdminGamesCreateComponent implements OnInit {
+  @Input() game: Game | null = null;
+
   createGameForm: FormGroup;
   isLoading = false;
   gameTag: GameTag[] = [];

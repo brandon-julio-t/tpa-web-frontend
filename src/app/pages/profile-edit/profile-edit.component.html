@@ -80,9 +80,14 @@
   </label>
   <label for="avatar">
     Avatar
-    <input (change)="onAvatarChange($event.target)" id="avatar" type="file" />
+    <input
+      (change)="onAvatarChange($event.target)"
+      accept="image/*"
+      id="avatar"
+      type="file"
+    />
   </label>
-  <app-submit-button type="submit" class="btn btn-blue" (click)="onSubmit()">
+  <app-submit-button (click)="onSubmit()" class="btn btn-blue" type="submit">
     Submit
   </app-submit-button>
 </form>

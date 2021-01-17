@@ -1,11 +1,15 @@
 <section>
-  <a class="btn btn-blue" routerLink="./create">Create Game</a>
+  <div class="actions">
+    <a class="btn btn-blue" routerLink="./create">Create Game</a>
+    <button (click)="onRefresh()" class="btn btn-blue">Refresh</button>
+  </div>
 
   <fa-icon
     *ngIf="games.length === 0 && isLoading"
     [icon]="faCircleNotch"
     [spin]="true"
   ></fa-icon>
+  <div *ngIf="games.length === 0 && !isLoading">No Games</div>
   <div class="games-container">
     <div *ngFor="let game of games" class="card-game">
       <h2 class="card-game-title">{{ game.title | titlecase }}</h2>
@@ -25,12 +29,20 @@
       </ul>
 
       <div class="card-game-slideshow">
-        <img
-          *ngFor="let slideshow of game.slideshows"
-          [src]="getImageUrl(slideshow.fileBase64)"
-          alt="Slideshow"
-          class="card-game-slideshow-item"
-        />
+        <div *ngFor="let slideshow of game.slideshows">
+          <img
+            *ngIf="slideshow.contentType.includes('image')"
+            [src]="getImageUrl(slideshow.fileBase64)"
+            alt="Slideshow"
+            class="card-game-slideshow-item"
+          />
+          <video
+            *ngIf="slideshow.contentType.includes('video')"
+            [src]="getVideoUrl(slideshow.fileBase64)"
+            autoplay
+            controls
+          ></video>
+        </div>
       </div>
 
       <h3>Description</h3>
@@ -40,6 +52,7 @@
       <p class="card-game-system-requirements">{{ game.systemRequirements }}</p>
 
       <div class="card-game-actions">
+        <a [routerLink]="['./update', game.id]" class="btn btn-blue">Update</a>
         <app-submit-button
           (click)="onDelete(game.id)"
           [loading]="isLoading"
