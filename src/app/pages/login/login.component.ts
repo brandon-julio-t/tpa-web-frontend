@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
       .subscribe((data) => {
         if (data.data?.login) {
           this.isLoading = false;
-          // window.location.reload();
+          window.location.reload();
         }
       });
   }
