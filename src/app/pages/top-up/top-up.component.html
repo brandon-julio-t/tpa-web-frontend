@@ -1,0 +1,14 @@
+<form [formGroup]="topUpForm">
+  <label for="code">
+    Redeem Code
+    <input formControlName="code" id="code" type="text" />
+  </label>
+  <app-submit-button
+    (click)="onSubmit()"
+    [loading]="isLoading"
+    class="btn btn-blue"
+    type="submit"
+  >
+    Submit
+  </app-submit-button>
+</form>
