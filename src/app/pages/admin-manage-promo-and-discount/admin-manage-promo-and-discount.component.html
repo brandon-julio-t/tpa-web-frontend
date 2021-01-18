@@ -1,1 +1,24 @@
-<p>admin-manage-promo-and-discount works!</p>
+<section>
+  <a class="btn btn-blue" routerLink="./create">Create Promo</a>
+
+  <div class="promos">
+    <div *ngFor="let promo of promos" class="promos-card">
+      <p class="promos-header">
+        Discount: {{ promo?.discount / 100 | percent }}
+      </p>
+      <p class="promos-end-at">End at: {{ promo?.endAt | date }}</p>
+      <div class="promos-actions">
+        <a [routerLink]="['./update', promo?.id]" class="btn btn-blue">
+          Update
+        </a>
+        <app-submit-button
+          (click)="onDelete(promo?.id)"
+          [loading]="isLoading"
+          class="btn btn-red"
+        >
+          Delete
+        </app-submit-button>
+      </div>
+    </div>
+  </div>
+</section>

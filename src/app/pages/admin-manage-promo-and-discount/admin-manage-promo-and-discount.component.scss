@@ -1,0 +1,18 @@
+@use 'src/app/styles/spacings' as *;
+@use 'src/app/styles/sizes' as *;
+
+section {
+  .promos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+
+    &-card {
+      border: 1px solid #475569;
+      padding: $space-md;
+      border-radius: $size-md;
+      margin: $space-md;
+    }
+  }
+}

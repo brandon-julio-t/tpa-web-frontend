@@ -1,0 +1,36 @@
+<form [formGroup]="updatePromoForm">
+  <label for="discount">
+    Discount
+    <small
+      *ngIf="
+        updatePromoForm.touched &&
+        updatePromoForm.controls.discount.errors?.required
+      "
+      class="error"
+    >
+      This field is required
+    </small>
+    <input formControlName="discount" id="discount" type="number" />
+  </label>
+  <label for="endAt">
+    End At
+    <small
+      *ngIf="
+        updatePromoForm.touched &&
+        updatePromoForm.controls.endAt.errors?.required
+      "
+      class="error"
+    >
+      This field is required
+    </small>
+    <input formControlName="endAt" id="endAt" type="datetime-local" />
+  </label>
+  <app-submit-button
+    (click)="onSubmit()"
+    [loading]="isLoading"
+    class="btn btn-blue"
+    type="submit"
+  >
+    Submit
+  </app-submit-button>
+</form>

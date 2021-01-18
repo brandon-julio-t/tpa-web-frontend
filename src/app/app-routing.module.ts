@@ -16,6 +16,8 @@ import { UnsuspendRequestComponent } from './pages/unsuspend-request/unsuspend-r
 import { AdminManageUnsuspendRequestsComponent } from './pages/admin-manage-unsuspend-requests/admin-manage-unsuspend-requests.component';
 import { AdminGamesCreateComponent } from './pages/admin-games-create/admin-games-create.component';
 import { AdminGamesUpdateComponent } from './pages/admin-games-update/admin-games-update.component';
+import { AdminPromosCreateComponent } from './pages/admin-promos-create/admin-promos-create.component';
+import { AdminPromosUpdateComponent } from './pages/admin-promos-update/admin-promos-update.component';
 
 const routes: Routes = [
   {
@@ -54,6 +56,14 @@ const routes: Routes = [
           {
             path: 'promo-and-discount',
             component: AdminManagePromoAndDiscountComponent,
+          },
+          {
+            path: 'promo-and-discount/create',
+            component: AdminPromosCreateComponent,
+          },
+          {
+            path: 'promo-and-discount/update/:id',
+            component: AdminPromosUpdateComponent,
           },
           {
             path: 'users',
