@@ -20,6 +20,7 @@ export class ProfileComponent implements OnInit {
   commentsQuery: QueryRef<{ profileComments: ProfileComment[] }>;
   profileCommentForm: FormGroup;
   isLoading = false;
+  friends: User[] = [];
 
   constructor(
     private apollo: Apollo,
@@ -59,6 +60,10 @@ export class ProfileComponent implements OnInit {
     return this.assetService.get(this.profile?.profilePicture.id);
   }
 
+  get isFriend(): boolean {
+    return this.friends.some((friend) => friend.id === this.profile?.id);
+  }
+
   ngOnInit(): void {
     const customUrl = this.route.snapshot.paramMap.get('customUrl');
     if (!customUrl) {
@@ -79,6 +84,7 @@ export class ProfileComponent implements OnInit {
               customUrl
               displayName
               customUrl
+              profileTheme
               country {
                 id
                 name
@@ -98,13 +104,24 @@ export class ProfileComponent implements OnInit {
           .refetch({ profileId: this.profile.id })
           .then((resp) => {
             this.comments = resp.data.profileComments;
-            console.log(this.comments);
           });
       });
 
-    this.authService.watch().valueChanges.subscribe((data) => {
-      this.user = data.data.auth;
-    });
+    this.authService
+      .watch()
+      .valueChanges.subscribe((data) => (this.user = data.data.auth));
+
+    this.apollo
+      .query<{ friends: User[] }>({
+        query: gql`
+          query friends {
+            friends {
+              id
+            }
+          }
+        `,
+      })
+      .subscribe((resp) => (this.friends = resp.data.friends));
   }
 
   getProfilePicture(id: number): SafeUrl {
@@ -172,6 +189,34 @@ export class ProfileComponent implements OnInit {
           this.comments = this.comments.filter(
             (comment) => comment.id !== deletedId
           );
+          this.isLoading = false;
+        }
+      });
+  }
+
+  onBefriend(id: number | undefined): void {
+    if (!id) {
+      return;
+    }
+
+    this.isLoading = true;
+
+    this.apollo
+      .mutate<{ befriend: User }>({
+        mutation: gql`
+          mutation befriend($userId: ID!) {
+            befriend(userId: $userId) {
+              id
+              accountName
+            }
+          }
+        `,
+        variables: { userId: id },
+      })
+      .subscribe((resp) => {
+        const friend = resp.data?.befriend;
+        if (friend) {
+          this.friends = [...this.friends, friend];
           this.isLoading = false;
         }
       });

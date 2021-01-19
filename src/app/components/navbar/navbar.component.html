@@ -5,12 +5,12 @@
     </a>
 
     <div class="navigations">
-      <a href="#">Store</a>
-      <a href="#">Community</a>
-      <a *ngIf="user" href="#">{{ user?.displayName }}</a>
-      <a *ngIf="user" href="#">Chat</a>
-      <a *ngIf="!user" href="#">About</a>
-      <a href="#">Support</a>
+      <a routerLink="/store">Store</a>
+      <a>Community</a>
+      <a *ngIf="user">{{ user?.displayName }}</a>
+      <a *ngIf="user" routerLink="/chat">Chat</a>
+      <a *ngIf="!user">About</a>
+      <a>Support</a>
 
       <div *ngIf="user" class="dropdown">
         <span class="dropdown-header">
@@ -26,8 +26,8 @@
         <div class="dropdown-list">
           <a
             *ngIf="user?.accountName === 'Admin'"
-            routerLink="/admin"
             class="dropdown-list-item"
+            routerLink="/admin"
           >
             Admin
           </a>

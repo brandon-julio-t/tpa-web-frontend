@@ -64,21 +64,10 @@
     </div>
   </div>
 
-  <div class="page-actions">
-    <app-submit-button
-      (click)="onPrevious()"
-      [loading]="isLoading"
-      class="btn btn-blue"
-    >
-      < Previous
-    </app-submit-button>
-    <app-submit-button
-      (click)="onNext()"
-      *ngIf="games.length > 0"
-      [loading]="isLoading"
-      class="btn btn-blue"
-    >
-      Next >
-    </app-submit-button>
-  </div>
+  <app-pagination
+    (next)="onNext()"
+    (prev)="onPrevious()"
+    [currentPage]="currentPage"
+    [totalPages]="totalPages"
+  ></app-pagination>
 </section>

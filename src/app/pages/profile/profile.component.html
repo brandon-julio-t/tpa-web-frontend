@@ -1,4 +1,4 @@
-<section [ngStyle]="{ backgroundColor: user?.profileTheme }" class="profile">
+<section [ngStyle]="{ backgroundColor: profile?.profileTheme }" class="profile">
   <div class="profile-picture">
     <img
       [src]="profilePicture"
@@ -11,10 +11,18 @@
   </div>
 
   <div class="profile-actions">
+    <app-submit-button
+      *ngIf="user?.id !== profile?.id && !isFriend"
+      (click)="onBefriend(profile?.id)"
+      [loading]="isLoading"
+      class="btn btn-blue"
+    >
+      Add Friend
+    </app-submit-button>
     <a
       *ngIf="profile?.id === user?.id"
       [routerLink]="['/profile', 'edit', profile?.customUrl]"
-      class="btn btn-blue"
+      class="btn btn-black"
     >
       Edit Profile
     </a>
@@ -39,8 +47,8 @@
         </p>
         <span class="profile-comments-item-comment">{{ comment.comment }}</span>
         <app-submit-button
-          *ngIf="user?.id === comment.user.id"
           (click)="onDelete(comment.id)"
+          *ngIf="user?.id === comment.user.id"
           [loading]="isLoading"
           class="btn btn-red"
         >

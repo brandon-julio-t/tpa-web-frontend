@@ -24,10 +24,22 @@
       background: linear-gradient(to right, #dc2626 5%, #991b1b 60%);
     }
   }
+
+  &-black {
+    background-color: #0f172a;
+
+    &:hover {
+      background-color: #1e293b;
+    }
+  }
 }
 
-.error {
+.text-red {
   color: #dc2626;
+}
+
+.text-blue {
+  color: #2563eb;
 }
 
 .block {

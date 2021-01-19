@@ -5,7 +5,7 @@
     Steam account name
     <small
       *ngIf="loginForm.touched && loginForm.hasError('required', 'accountName')"
-      class="error"
+      class="text-red"
     >
       This field is required
     </small>
@@ -21,7 +21,7 @@
     Password
     <small
       *ngIf="loginForm.touched && loginForm.hasError('required', 'password')"
-      class="error"
+      class="text-red"
     >
       This field is required
     </small>

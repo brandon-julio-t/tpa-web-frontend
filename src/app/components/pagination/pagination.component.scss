@@ -1,0 +1,12 @@
+@use 'src/app/styles/spacings' as *;
+
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  span {
+    margin: auto $space-md;
+  }
+}

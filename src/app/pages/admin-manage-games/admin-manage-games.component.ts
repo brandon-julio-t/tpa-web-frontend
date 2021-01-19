@@ -11,38 +11,52 @@ import { SafeUrl } from '@angular/platform-browser';
   styleUrls: ['./admin-manage-games.component.scss'],
 })
 export class AdminManageGamesComponent implements OnInit {
-  allGamesQuery: QueryRef<{ getAllGames: Game[] }>;
+  allGamesQuery: QueryRef<{
+    games: {
+      data: Game[];
+      totalPages: number;
+    };
+  }>;
   games: Game[] = [];
   currentPage = 1;
+  totalPages = 0;
   isLoading = true;
 
   faCircleNotch = faCircleNotch;
 
   constructor(private apollo: Apollo, private assetService: AssetService) {
-    this.allGamesQuery = this.apollo.watchQuery<{ getAllGames: Game[] }>({
+    this.allGamesQuery = this.apollo.watchQuery<{
+      games: {
+        data: Game[];
+        totalPages: number;
+      };
+    }>({
       query: gql`
-        query getAllGames($page: Int!) {
-          getAllGames(page: $page) {
-            id
-            createdAt
-            title
-            description
-            price
-            banner {
+        query games($page: Int!) {
+          games(page: $page) {
+            data {
               id
-              contentType
-            }
-            slideshows {
-              file {
+              createdAt
+              title
+              description
+              price
+              banner {
                 id
                 contentType
               }
+              slideshows {
+                file {
+                  id
+                  contentType
+                }
+              }
+              tags {
+                id
+                name
+              }
+              systemRequirements
             }
-            tags {
-              id
-              name
-            }
-            systemRequirements
+            totalPages
           }
         }
       `,
@@ -56,7 +70,9 @@ export class AdminManageGamesComponent implements OnInit {
 
   ngOnInit(): void {
     this.allGamesQuery.valueChanges.subscribe((data) => {
-      this.games = data.data.getAllGames;
+      console.log(data.data);
+      this.games = data.data.games.data;
+      this.totalPages = data.data.games.totalPages;
       this.isLoading = false;
     });
   }
@@ -65,18 +81,16 @@ export class AdminManageGamesComponent implements OnInit {
     if (this.currentPage > 1) {
       this.isLoading = true;
       this.currentPage--;
-      this.allGamesQuery
-        .refetch({ page: this.currentPage })
-        .then(() => (this.isLoading = false));
+      this.allGamesQuery.refetch({ page: this.currentPage }).then();
     }
   }
 
   onNext(): void {
-    this.isLoading = true;
-    this.currentPage++;
-    this.allGamesQuery
-      .refetch({ page: this.currentPage })
-      .then(() => (this.isLoading = false));
+    if (this.currentPage < this.totalPages) {
+      this.isLoading = true;
+      this.currentPage++;
+      this.allGamesQuery.refetch({ page: this.currentPage }).then();
+    }
   }
 
   onDelete(id: number): void {

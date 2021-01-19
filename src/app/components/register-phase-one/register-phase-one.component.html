@@ -5,13 +5,13 @@
       *ngIf="
         registerForm.touched && registerForm.controls.email.errors?.required
       "
-      class="error"
+      class="text-red"
     >
       This field is required
     </small>
     <small
       *ngIf="registerForm.touched && registerForm.controls.email.errors?.email"
-      class="error"
+      class="text-red"
     >
       Wrong email format
     </small>
@@ -24,7 +24,7 @@
         registerForm.touched &&
         registerForm.controls.emailConfirm.errors?.required
       "
-      class="error"
+      class="text-red"
     >
       This field is required
     </small>
@@ -32,7 +32,7 @@
       *ngIf="
         registerForm.touched && registerForm.controls.emailConfirm.errors?.email
       "
-      class="error"
+      class="text-red"
     >
       Wrong email format
     </small>
@@ -44,7 +44,7 @@
       *ngIf="
         registerForm.touched && registerForm.controls.countryId.errors?.required
       "
-      class="error"
+      class="text-red"
     >
       This field is required
     </small>
@@ -62,7 +62,7 @@
     (resolved)="isCaptchaPassed = true"
     siteKey="6Le6GCwaAAAAAIEc9Iw9p8PgRHEj2sTzLdE_Exrp"
   ></re-captcha>
-  <small *ngIf="registerForm.touched && !isCaptchaPassed" class="error">
+  <small *ngIf="registerForm.touched && !isCaptchaPassed" class="text-red">
     Please pass this captcha first
   </small>
   <app-submit-button

@@ -32,8 +32,10 @@
     </div>
   </div>
 
-  <div *ngIf="users.length > 0" class="pagination">
-    <button (click)="previousPage()" class="btn btn-blue">Previous <</button>
-    <button (click)="nextPage()" class="btn btn-blue">Next ></button>
-  </div>
+  <app-pagination
+    (next)="nextPage()"
+    (prev)="previousPage()"
+    [currentPage]="currentPage"
+    [totalPages]="totalPages"
+  ></app-pagination>
 </section>

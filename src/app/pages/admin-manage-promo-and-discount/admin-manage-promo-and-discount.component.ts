@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Apollo, gql } from 'apollo-angular';
+import { Apollo, gql, QueryRef } from 'apollo-angular';
 import { Promo } from '../../models/promo';
 
 @Component({
@@ -10,25 +10,44 @@ import { Promo } from '../../models/promo';
 export class AdminManagePromoAndDiscountComponent implements OnInit {
   promos: Promo[] = [];
   isLoading = false;
+  promosQuery: QueryRef<{
+    promos: {
+      data: Promo[];
+      totalPages: number;
+    };
+  }>;
+  currentPage = 1;
+  totalPages = 0;
 
-  constructor(private apollo: Apollo) {}
-
-  ngOnInit(): void {
-    this.apollo
-      .watchQuery<{ promos: Promo[] }>({
-        query: gql`
-          query promos {
-            promos {
+  constructor(private apollo: Apollo) {
+    this.promosQuery = this.apollo.watchQuery<{
+      promos: {
+        data: Promo[];
+        totalPages: number;
+      };
+    }>({
+      query: gql`
+        query promos($page: Int!) {
+          promos(page: $page) {
+            data {
               id
               discount
               endAt
             }
+            totalPages
           }
-        `,
-      })
-      .valueChanges.subscribe((resp) => {
-        this.promos = resp.data.promos;
-      });
+        }
+      `,
+      variables: { page: this.currentPage },
+    });
+  }
+
+  ngOnInit(): void {
+    this.promosQuery.valueChanges.subscribe((resp) => {
+      const { data, totalPages } = resp.data.promos;
+      this.promos = data;
+      this.totalPages = totalPages;
+    });
   }
 
   onDelete(id: number | undefined): void {
@@ -58,5 +77,19 @@ export class AdminManagePromoAndDiscountComponent implements OnInit {
           this.isLoading = false;
         }
       });
+  }
+
+  prevPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.promosQuery.refetch({ page: this.currentPage }).then();
+    }
+  }
+
+  nextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.promosQuery.refetch({ page: this.currentPage }).then();
+    }
   }
 }

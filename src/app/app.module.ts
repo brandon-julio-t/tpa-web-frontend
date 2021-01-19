@@ -31,6 +31,9 @@ import { AdminGamesUpdateComponent } from './pages/admin-games-update/admin-game
 import { AdminPromosCreateComponent } from './pages/admin-promos-create/admin-promos-create.component';
 import { AdminPromosUpdateComponent } from './pages/admin-promos-update/admin-promos-update.component';
 import { TopUpComponent } from './pages/top-up/top-up.component';
+import { ChatComponent } from './pages/chat/chat.component';
+import { StoreComponent } from './pages/store/store.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +59,9 @@ import { TopUpComponent } from './pages/top-up/top-up.component';
     AdminPromosCreateComponent,
     AdminPromosUpdateComponent,
     TopUpComponent,
+    ChatComponent,
+    StoreComponent,
+    PaginationComponent,
   ],
   imports: [
     BrowserModule,

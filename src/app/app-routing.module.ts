@@ -19,11 +19,17 @@ import { AdminGamesUpdateComponent } from './pages/admin-games-update/admin-game
 import { AdminPromosCreateComponent } from './pages/admin-promos-create/admin-promos-create.component';
 import { AdminPromosUpdateComponent } from './pages/admin-promos-update/admin-promos-update.component';
 import { TopUpComponent } from './pages/top-up/top-up.component';
+import { ChatComponent } from './pages/chat/chat.component';
+import { StoreComponent } from './pages/store/store.component';
 
 const routes: Routes = [
   {
     path: '',
-    children: [{ path: 'top-up', component: TopUpComponent }],
+    children: [
+      { path: 'top-up', component: TopUpComponent },
+      { path: 'chat', component: ChatComponent },
+      { path: 'store', component: StoreComponent },
+    ],
     canActivate: [AuthGuard],
   },
   {

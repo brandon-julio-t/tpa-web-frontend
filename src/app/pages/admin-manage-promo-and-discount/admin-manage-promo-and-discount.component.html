@@ -19,4 +19,10 @@
       </div>
     </div>
   </div>
+  <app-pagination
+    (next)="nextPage()"
+    (prev)="prevPage()"
+    [currentPage]="currentPage"
+    [totalPages]="totalPages"
+  ></app-pagination>
 </section>

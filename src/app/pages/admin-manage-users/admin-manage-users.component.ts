@@ -9,22 +9,36 @@ import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./admin-manage-users.component.scss'],
 })
 export class AdminManageUsersComponent implements OnInit {
-  allUsersQuery: QueryRef<{ getAllUsers: User[] }>;
+  allUsersQuery: QueryRef<{
+    users: {
+      data: User[];
+      totalPages: number;
+    };
+  }>;
   users: User[] = [];
   currentPage = 1;
+  totalPages = 0;
   faCircleNotch = faCircleNotch;
 
   constructor(private apollo: Apollo) {
-    this.allUsersQuery = this.apollo.watchQuery<{ getAllUsers: User[] }>({
+    this.allUsersQuery = this.apollo.watchQuery<{
+      users: {
+        data: User[];
+        totalPages: number;
+      };
+    }>({
       query: gql`
-        query getAllUsers($page: Int!) {
-          getAllUsers(page: $page) {
-            id
-            accountName
-            email
-            summary
-            suspendedAt
-            reportCounts
+        query users($page: Int!) {
+          users(page: $page) {
+            data {
+              id
+              accountName
+              email
+              summary
+              suspendedAt
+              reportCounts
+            }
+            totalPages
           }
         }
       `,
@@ -33,8 +47,10 @@ export class AdminManageUsersComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    this.allUsersQuery.valueChanges.subscribe((data) => {
-      this.users = data.data.getAllUsers;
+    this.allUsersQuery.valueChanges.subscribe((resp) => {
+      const { data, totalPages } = resp.data.users;
+      this.users = data;
+      this.totalPages = totalPages;
     });
   }
 
@@ -66,7 +82,9 @@ export class AdminManageUsersComponent implements OnInit {
   }
 
   nextPage(): void {
-    this.currentPage++;
-    this.allUsersQuery.refetch({ page: this.currentPage }).then();
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.allUsersQuery.refetch({ page: this.currentPage }).then();
+    }
   }
 }

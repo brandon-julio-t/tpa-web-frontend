@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { Base64Service } from './base64.service';
+import { FriendsService } from './friends.service';
 
-describe('Base64Service', () => {
-  let service: Base64Service;
+describe('FriendsService', () => {
+  let service: FriendsService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(Base64Service);
+    service = TestBed.inject(FriendsService);
   });
 
   it('should be created', () => {
