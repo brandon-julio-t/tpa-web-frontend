@@ -18,12 +18,12 @@ import { AdminGamesCreateComponent } from './pages/admin-games-create/admin-game
 import { AdminGamesUpdateComponent } from './pages/admin-games-update/admin-games-update.component';
 import { AdminPromosCreateComponent } from './pages/admin-promos-create/admin-promos-create.component';
 import { AdminPromosUpdateComponent } from './pages/admin-promos-update/admin-promos-update.component';
+import { TopUpComponent } from './pages/top-up/top-up.component';
 
 const routes: Routes = [
   {
     path: '',
-    children: [],
-    pathMatch: 'full',
+    children: [{ path: 'top-up', component: TopUpComponent }],
     canActivate: [AuthGuard],
   },
   {

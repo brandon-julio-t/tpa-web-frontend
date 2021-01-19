@@ -30,6 +30,7 @@ import { AdminGamesCreateComponent } from './pages/admin-games-create/admin-game
 import { AdminGamesUpdateComponent } from './pages/admin-games-update/admin-games-update.component';
 import { AdminPromosCreateComponent } from './pages/admin-promos-create/admin-promos-create.component';
 import { AdminPromosUpdateComponent } from './pages/admin-promos-update/admin-promos-update.component';
+import { TopUpComponent } from './pages/top-up/top-up.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { AdminPromosUpdateComponent } from './pages/admin-promos-update/admin-pr
     AdminGamesUpdateComponent,
     AdminPromosCreateComponent,
     AdminPromosUpdateComponent,
+    TopUpComponent,
   ],
   imports: [
     BrowserModule,

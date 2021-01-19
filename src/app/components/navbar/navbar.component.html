@@ -16,7 +16,9 @@
         <span class="dropdown-header">
           <span>
             <a href="#">{{ user?.displayName }}</a>
-            <a href="#">{{ user?.walletBalance | currency: "Rp" }}</a>
+            <a routerLink="/top-up">
+              {{ user?.walletBalance | currency: "Rp" }}
+            </a>
           </span>
           <img [src]="profilePicture" alt="Profile Picture" height="42" />
         </span>
