@@ -35,6 +35,7 @@ export class TopUpComponent implements OnInit {
         if (resp.data?.redeemWallet) {
           alert('Success');
           this.isLoading = false;
+          window.location.reload();
         }
       });
   }

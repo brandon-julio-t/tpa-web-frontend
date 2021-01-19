@@ -18,8 +18,21 @@
     }
   }
 
-  &-profile-actions {
+  &-actions {
     justify-self: flex-end;
     text-align: center;
+  }
+
+  &-comments {
+    margin: $space-lg auto;
+
+    &-item {
+      display: flex;
+
+      &-profile-picture {
+        max-height: 32px;
+        margin-right: $space-md;
+      }
+    }
   }
 }

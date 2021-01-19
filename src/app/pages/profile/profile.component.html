@@ -1,4 +1,4 @@
-<section class="profile" [ngStyle]="{ backgroundColor: user?.profileTheme }">
+<section [ngStyle]="{ backgroundColor: user?.profileTheme }" class="profile">
   <div class="profile-picture">
     <img
       [src]="profilePicture"
@@ -13,10 +13,60 @@
   <div class="profile-actions">
     <a
       *ngIf="profile?.id === user?.id"
-      class="btn btn-blue"
       [routerLink]="['/profile', 'edit', profile?.customUrl]"
+      class="btn btn-blue"
     >
       Edit Profile
     </a>
   </div>
+
+  <ul class="profile-comments">
+    <li *ngFor="let comment of comments" class="profile-comments-item">
+      <img
+        [src]="getProfilePicture(comment.user.profilePicture.id)"
+        alt="comment profile picture"
+        class="profile-comments-item-profile-picture"
+      />
+      <div>
+        <p>
+          <span class="profile-comments-item-display-name">
+            {{ comment.user.displayName }}
+          </span>
+          |
+          <span class="profile-comments-item-created-at">
+            {{ comment.createdAt | date }}
+          </span>
+        </p>
+        <span class="profile-comments-item-comment">{{ comment.comment }}</span>
+        <app-submit-button
+          *ngIf="user?.id === comment.user.id"
+          (click)="onDelete(comment.id)"
+          [loading]="isLoading"
+          class="btn btn-red"
+        >
+          Delete
+        </app-submit-button>
+      </div>
+    </li>
+  </ul>
+
+  <form [formGroup]="profileCommentForm" class="profile-comments-form">
+    <label for="comment">
+      Comment
+      <textarea
+        formControlName="comment"
+        id="comment"
+        rows="7"
+        type="text"
+      ></textarea>
+    </label>
+    <app-submit-button
+      (click)="onSubmit()"
+      [loading]="isLoading"
+      class="btn btn-blue"
+      type="submit"
+    >
+      Submit
+    </app-submit-button>
+  </form>
 </section>
