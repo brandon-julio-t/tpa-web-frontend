@@ -1,0 +1,42 @@
+<section class="chat-area">
+  <section class="chat-area-user">
+    <img
+      [src]="profilePicture(friend?.id)"
+      alt="Profile Picture"
+      class="chat-area-user-profile-picture"
+    />
+    {{ friend?.displayName }}
+  </section>
+
+  <ul class="chat-area-messages">
+    <li
+      *ngFor="let message of messages"
+      [ngClass]="{
+        me: message.sender.id === user.id,
+        'bg-blue': message.sender.id === user.id,
+        'bg-black': message.sender.id !== user.id
+      }"
+      class="chat-area-messages-item"
+    >
+      {{ message.text }}
+    </li>
+  </ul>
+
+  <section class="chat-area-actions">
+    <label for="message">
+      <textarea
+        [(ngModel)]="message"
+        id="message"
+        placeholder="Type your message"
+      ></textarea>
+    </label>
+    <app-submit-button
+      (click)="onSubmit()"
+      [loading]="isLoading"
+      class="btn btn-blue"
+      type="submit"
+    >
+      Submit
+    </app-submit-button>
+  </section>
+</section>

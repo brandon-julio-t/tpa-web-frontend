@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FriendsService } from '../../services/friends.service';
+import { User } from '../../models/user';
+import { AssetService } from '../../services/asset.service';
+import { SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-chat',
@@ -6,7 +10,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./chat.component.scss'],
 })
 export class ChatComponent implements OnInit {
-  constructor() {}
+  friends: User[] = [];
+  currentFriend: User | null = null;
 
-  ngOnInit(): void {}
+  constructor(
+    private assetService: AssetService,
+    private friendsService: FriendsService
+  ) {}
+
+  profilePicture(id: number): SafeUrl {
+    return this.assetService.get(id);
+  }
+
+  ngOnInit(): void {
+    this.friendsService
+      .fetch()
+      .subscribe((resp) => (this.friends = resp.data.friends));
+  }
 }

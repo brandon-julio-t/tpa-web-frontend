@@ -1,8 +1,10 @@
-<app-register-phase-one
-  (done)="changeStateToAcceptOTP($event)"
-  *ngIf="!isOTPSent"
-></app-register-phase-one>
-<app-register-phase-two
-  (done)="doRegistration($event)"
-  *ngIf="isOTPSent"
-></app-register-phase-two>
+<section class="container">
+  <app-register-phase-one
+    (done)="changeStateToAcceptOTP($event)"
+    *ngIf="!isOTPSent"
+  ></app-register-phase-one>
+  <app-register-phase-two
+    (done)="doRegistration($event)"
+    *ngIf="isOTPSent"
+  ></app-register-phase-two>
+</section>

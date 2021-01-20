@@ -2,6 +2,18 @@
 @use 'src/app/styles/sizes' as *;
 @use 'src/app/styles/spacings' as *;
 
+.container {
+  padding: $space-lg 0;
+  max-width: $screen-lg;
+  margin: 0 auto;
+
+  @media (max-width: $screen-md) {
+    div {
+      padding: 0 $space-md;
+    }
+  }
+}
+
 .btn {
   display: block;
   padding: $space-md;

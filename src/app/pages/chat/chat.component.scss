@@ -1,0 +1,35 @@
+@use 'src/app/styles/spacings' as *;
+
+.chat {
+  display: flex;
+
+  app-chat-area {
+    width: 100%;
+  }
+
+  &-friends {
+    display: flex;
+    flex-direction: column;
+    margin-right: $space-md;
+    padding: $space-md;
+
+    &-item {
+      display: flex;
+      align-items: center;
+
+      &:hover {
+        color: white;
+        cursor: pointer;
+      }
+
+      &-profile-picture {
+        height: 32px;
+        margin-right: $space-md;
+      }
+
+      &:nth-child(even) {
+        margin: $space-md 0;
+      }
+    }
+  }
+}

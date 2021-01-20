@@ -1,0 +1,73 @@
+@use 'src/app/styles/spacings' as *;
+@use 'src/app/styles/sizes' as *;
+
+.chat-area {
+  background: radial-gradient(
+    ellipse farthest-corner at 50% 30%,
+    #212329 0%,
+    #1e2025 50%,
+    #1c1d22 100%
+  );
+
+  width: 100%;
+  height: calc(100vh - 164px);
+  padding: $space-md;
+  position: relative;
+
+  &-user {
+    display: flex;
+    align-items: center;
+
+    &-profile-picture {
+      height: 32px;
+      margin-right: $space-md;
+    }
+  }
+
+  &-messages {
+    display: flex;
+    flex-direction: column-reverse;
+    padding-bottom: calc(50px + 16px + 16px);
+    height: 100%;
+
+    &-item {
+      padding: $space-md;
+      border-radius: $size-md;
+      width: 42%;
+    }
+
+    .me {
+      align-self: flex-end;
+    }
+
+    .bg-blue {
+      background: linear-gradient(to right, #3b82f6 5%, #1d4ed8 60%);
+    }
+
+    .bg-black {
+      background-color: #1e293b;
+    }
+  }
+
+  &-actions {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+
+    label {
+      flex-grow: 1;
+      margin-right: $space-md;
+
+      #message {
+        margin: 0;
+      }
+    }
+
+    app-submit-button {
+      margin: 0;
+    }
+  }
+}

@@ -34,6 +34,7 @@ import { TopUpComponent } from './pages/top-up/top-up.component';
 import { ChatComponent } from './pages/chat/chat.component';
 import { StoreComponent } from './pages/store/store.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
+import { ChatAreaComponent } from './components/chat-area/chat-area.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     ChatComponent,
     StoreComponent,
     PaginationComponent,
+    ChatAreaComponent,
   ],
   imports: [
     BrowserModule,

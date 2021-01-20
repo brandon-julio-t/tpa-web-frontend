@@ -1,1 +1,18 @@
-<p>chat works!</p>
+<section class="chat">
+  <ul class="chat-friends">
+    <li
+      *ngFor="let friend of friends"
+      class="chat-friends-item"
+      (click)="currentFriend = friend"
+    >
+      <img
+        [src]="profilePicture(friend.profilePicture.id)"
+        alt="Profile Picture"
+        class="chat-friends-item-profile-picture"
+      />
+      {{ friend.displayName }}
+    </li>
+  </ul>
+
+  <app-chat-area *ngIf="currentFriend" [friend]="currentFriend"></app-chat-area>
+</section>

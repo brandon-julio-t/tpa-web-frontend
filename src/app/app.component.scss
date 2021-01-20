@@ -1,18 +1,6 @@
 @use 'styles/spacings' as *;
 @use 'styles/breakpoints' as *;
 
-main {
-  padding: $space-lg 0;
-  max-width: $screen-lg;
-  margin: 0 auto;
-
-  @media (max-width: $screen-md) {
-    div {
-      padding: 0 $space-md;
-    }
-  }
-}
-
 footer {
   background-color: #171a21;
   padding: $space-lg $space-md;
