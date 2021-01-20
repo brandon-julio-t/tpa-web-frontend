@@ -18,7 +18,9 @@
       }"
       class="chat-area-messages-item"
     >
-      {{ message.text }}
+      <span>{{ message.text }}</span>
+      <br />
+      <small>{{ message.createdAt | date }}</small>
     </li>
   </ul>
 

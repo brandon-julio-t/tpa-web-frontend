@@ -29,11 +29,13 @@
     flex-direction: column-reverse;
     padding-bottom: calc(50px + 16px + 16px);
     height: 100%;
+    overflow: auto;
 
     &-item {
       padding: $space-md;
       border-radius: $size-md;
       width: 42%;
+      margin: $space-md 0;
     }
 
     .me {
@@ -41,7 +43,7 @@
     }
 
     .bg-blue {
-      background: linear-gradient(to right, #3b82f6 5%, #1d4ed8 60%);
+      background-color: #2563eb;
     }
 
     .bg-black {
