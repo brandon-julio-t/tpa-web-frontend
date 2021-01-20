@@ -12,9 +12,9 @@
     <li
       *ngFor="let message of messages"
       [ngClass]="{
-        me: message.sender.id === user.id,
-        'bg-blue': message.sender.id === user.id,
-        'bg-black': message.sender.id !== user.id
+        me: message.sender.id === user?.id,
+        'bg-blue': message.sender.id === user?.id,
+        'bg-black': message.sender.id !== user?.id
       }"
       class="chat-area-messages-item"
     >
