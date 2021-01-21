@@ -27,6 +27,31 @@ export class AuthService extends Query<Response> {
         summary
         walletBalance
         suspendedAt
+        wishlist {
+          id
+          banner {
+            id
+            contentType
+          }
+          createdAt
+          price
+          title
+          tags {
+            name
+          }
+        }
+        wishlistCount
+        cart {
+          id
+          banner {
+            id
+            contentType
+          }
+          createdAt
+          price
+          title
+        }
+        cartCount
       }
     }
   `;

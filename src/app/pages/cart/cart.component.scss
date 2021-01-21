@@ -1,0 +1,45 @@
+@use 'src/app/styles/spacings' as *;
+
+.cart {
+  &-list {
+    &-item {
+      display: flex;
+      justify-content: space-between;
+      text-align: right;
+      padding: $space-md;
+      background-color: rgba(0, 0, 0, 0.2);
+      margin: $space-md 0;
+
+      img {
+        width: auto;
+        height: 45px;
+        margin-right: $space-md;
+      }
+
+      &-info {
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    &-estimated-total {
+      padding: $space-md;
+      background-color: rgba(0, 0, 0, 0.2);
+
+      &-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      &-actions {
+        display: flex;
+        flex-direction: row-reverse;
+
+        app-submit-button {
+          margin-left: $space-md;
+        }
+      }
+    }
+  }
+}

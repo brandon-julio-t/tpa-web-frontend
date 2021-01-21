@@ -1,0 +1,104 @@
+@use 'src/app/styles/spacings' as *;
+@use 'src/app/styles/sizes' as *;
+
+.detail {
+  section {
+    margin: $space-lg 0;
+  }
+
+  &-inappropriate {
+    border: 1px solid #475569;
+    padding: $space-md;
+    border-radius: $size-md;
+
+    img {
+      width: 50%;
+      display: block;
+      margin: $space-lg auto;
+    }
+  }
+
+  &-carousel {
+    display: flex;
+
+    &-left {
+      width: 50%;
+
+      &-playing {
+        img,
+        video {
+          width: 100%;
+        }
+      }
+
+      &-slideshows {
+        display: flex;
+        overflow: auto;
+
+        &-item {
+          height: 65px;
+          cursor: pointer;
+
+          img,
+          video {
+            height: 100%;
+          }
+        }
+      }
+    }
+
+    &-right {
+      width: 50%;
+
+      img {
+        width: 100%;
+      }
+
+      &-tags {
+        span {
+          display: inline-block;
+          padding: 8px;
+          border-radius: 4px;
+          background: rgba(255, 255, 255, 0.2);
+          margin-right: 8px;
+          margin-top: 8px;
+        }
+      }
+    }
+  }
+
+  &-body {
+    background: linear-gradient(
+      -60deg,
+      rgba(226, 244, 255, 0.3) 5%,
+      rgba(84, 107, 115, 0.3) 95%
+    );
+    border-radius: $size-md;
+    padding: $space-lg;
+    margin: $space-lg 0;
+
+    &-buy {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      &-pricing {
+        display: flex;
+        align-items: center;
+        background-color: black;
+        padding: 0 $space-sm;
+        border-radius: $size-sm;
+
+        app-submit-button {
+          margin-left: $space-md;
+        }
+      }
+    }
+  }
+
+  &-system-requirements {
+    &-container {
+      white-space: pre-line;
+    }
+  }
+}

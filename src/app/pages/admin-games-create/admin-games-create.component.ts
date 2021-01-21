@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Apollo, gql } from 'apollo-angular';
 import { GameTag } from '../../models/game-tag';
 import { Game } from '../../models/game';
+import { GameGenre } from '../../models/game-genre';
 
 @Component({
   selector: 'app-admin-games-create',
@@ -13,12 +14,15 @@ export class AdminGamesCreateComponent implements OnInit {
   createGameForm: FormGroup;
   isLoading = false;
   gameTag: GameTag[] = [];
+  genres: GameGenre[] = [];
 
   constructor(private fb: FormBuilder, private apollo: Apollo) {
     this.createGameForm = fb.group({
       title: fb.control('', Validators.required),
       description: fb.control('', Validators.required),
       price: fb.control('', Validators.required),
+      genreId: fb.control('', Validators.required),
+      isInappropriate: fb.control(false, Validators.required),
       banner: fb.control('', Validators.required),
       slideshows: fb.control('', Validators.required),
       gameTags: fb.array([]),
@@ -49,7 +53,20 @@ export class AdminGamesCreateComponent implements OnInit {
     return this.createGameForm.get('gameTags') as FormArray;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.apollo
+      .query<{ genres: GameGenre[] }>({
+        query: gql`
+          query genres {
+            genres {
+              id
+              name
+            }
+          }
+        `,
+      })
+      .subscribe((resp) => (this.genres = resp.data.genres));
+  }
 
   onSubmit(): void {
     this.createGameForm.markAllAsTouched();
@@ -63,6 +80,8 @@ export class AdminGamesCreateComponent implements OnInit {
       title,
       description,
       price,
+      genreId,
+      isInappropriate,
       banner,
       slideshows,
       gameTags,
@@ -84,6 +103,8 @@ export class AdminGamesCreateComponent implements OnInit {
             $title: String!
             $description: String!
             $price: Float!
+            $genreId: ID!
+            $isInappropriate: Boolean!
             $banner: Upload!
             $slideshows: [Upload!]!
             $gameTags: [ID!]!
@@ -94,6 +115,8 @@ export class AdminGamesCreateComponent implements OnInit {
                 title: $title
                 description: $description
                 price: $price
+                genreId: $genreId
+                isInappropriate: $isInappropriate
                 banner: $banner
                 slideshows: $slideshows
                 gameTags: $gameTags
@@ -108,6 +131,8 @@ export class AdminGamesCreateComponent implements OnInit {
           title,
           description,
           price,
+          genreId,
+          isInappropriate,
           banner,
           slideshows,
           gameTags: gameTagValues,

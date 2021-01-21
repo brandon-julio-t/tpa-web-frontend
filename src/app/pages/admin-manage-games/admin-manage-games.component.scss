@@ -33,10 +33,7 @@ section {
           border: 1px solid #475569;
           border-radius: $size-lg;
           padding: $space-md;
-
-          &:nth-child(odd) {
-            margin-right: $space-md;
-          }
+          margin-right: $space-md;
         }
       }
 

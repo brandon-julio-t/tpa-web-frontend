@@ -40,6 +40,7 @@ export class AdminManageGamesComponent implements OnInit {
               title
               description
               price
+              isInappropriate
               banner {
                 id
                 contentType
@@ -70,7 +71,6 @@ export class AdminManageGamesComponent implements OnInit {
 
   ngOnInit(): void {
     this.allGamesQuery.valueChanges.subscribe((data) => {
-      console.log(data.data);
       this.games = data.data.games.data;
       this.totalPages = data.data.games.totalPages;
       this.isLoading = false;

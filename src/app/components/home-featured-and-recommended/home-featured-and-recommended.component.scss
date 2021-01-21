@@ -1,0 +1,63 @@
+@use 'src/app/styles/spacings' as *;
+@use 'src/app/styles/sizes' as *;
+
+section {
+  .carousel {
+    &-item {
+      box-shadow: 0 0 7px 0 #000;
+      display: flex;
+
+      &-banner {
+        width: 50%;
+        object-fit: cover;
+      }
+
+      &-detail {
+        background-color: #171a21;
+        flex-grow: 1;
+
+        h3,
+        p,
+        .carousel-item-detail-tags {
+          margin: $space-md;
+        }
+
+        .carousel-item-detail-tags {
+          div {
+            display: inline-block;
+            padding: $space-sm;
+            border-radius: $size-sm;
+            background: rgba(255, 255, 255, 0.2);
+            margin-right: $space-sm;
+            margin-top: $space-sm;
+          }
+        }
+
+        &-slideshows {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-items: center;
+
+          div {
+            width: 50%;
+          }
+
+          &-item {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  .carousel-control {
+    display: flex;
+    justify-content: space-around;
+    margin: $space-md 0;
+
+    fa-icon {
+      cursor: pointer;
+    }
+  }
+}

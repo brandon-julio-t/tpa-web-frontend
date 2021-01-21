@@ -36,6 +36,41 @@
     </small>
     <input formControlName="price" id="price" type="number" />
   </label>
+  <label for="isInappropriate">
+    <input
+      formControlName="isInappropriate"
+      id="isInappropriate"
+      type="checkbox"
+    />
+    Inappropriate
+    <small
+      *ngIf="
+        updateGameForm.touched &&
+        updateGameForm.controls.isInappropriate.errors?.required
+      "
+      class="text-red"
+    >
+      This field is required
+    </small>
+  </label>
+  <br />
+  <label for="genre">
+    Genre
+    <small
+      *ngIf="
+        updateGameForm.touched &&
+        updateGameForm.controls.genreId.errors?.required
+      "
+      class="text-red"
+    >
+      This field is required
+    </small>
+    <select formControlName="genreId" id="genre">
+      <option *ngFor="let genre of genres" [value]="genre.id">
+        {{ genre.name }}
+      </option>
+    </select>
+  </label>
   <label for="banner">
     Banner
     <small

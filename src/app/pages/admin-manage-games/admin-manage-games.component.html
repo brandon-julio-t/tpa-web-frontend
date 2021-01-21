@@ -12,9 +12,12 @@
   <div *ngIf="games.length === 0 && !isLoading">No Games</div>
   <div class="games-container">
     <div *ngFor="let game of games" class="card-game">
-      <h2 class="card-game-title">{{ game.title | titlecase }}</h2>
+      <h2 class="card-game-title">
+        {{ game.title | titlecase }}
+        {{ game.isInappropriate ? "[Inappropriate]" : "" }}
+      </h2>
       <p class="card-game-release-date">{{ game.createdAt | date }}</p>
-      <p class="card-game-price">{{ game.price | currency: "Rp" }}</p>
+      <p class="card-game-price">{{ game.price | currency: "$" }}</p>
 
       <img
         [src]="asset(game.banner.id)"

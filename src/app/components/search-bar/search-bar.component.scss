@@ -1,0 +1,44 @@
+@use 'src/app/styles/spacings' as *;
+
+.wishlist-cart {
+  display: flex;
+  flex-direction: row-reverse;
+
+  .btn {
+    &-cart {
+      background-color: rgba(164, 208, 7, 0.4);
+      padding: $space-sm;
+      width: 100px;
+      text-align: center;
+    }
+
+    &-wishlist {
+      background-color: rgba(255, 255, 255, 0.4);
+      padding: $space-sm;
+      width: 100px;
+      text-align: center;
+    }
+  }
+}
+
+.search-bar {
+  background: rgba(62, 126, 167, 0.8);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: row-reverse;
+  margin: $space-lg 0;
+
+  label[for="search-input"] {
+    display: flex;
+    align-items: center;
+    max-width: 200px;
+
+    input {
+      margin: 0;
+    }
+
+    fa-icon {
+      height: 100%;
+    }
+  }
+}

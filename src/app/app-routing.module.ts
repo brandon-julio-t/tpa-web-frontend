@@ -21,16 +21,36 @@ import { AdminPromosUpdateComponent } from './pages/admin-promos-update/admin-pr
 import { TopUpComponent } from './pages/top-up/top-up.component';
 import { ChatComponent } from './pages/chat/chat.component';
 import { StoreComponent } from './pages/store/store.component';
+import { HomeComponent } from './pages/home/home.component';
+import { GameDetailComponent } from './pages/game-detail/game-detail.component';
+import { GameSearchComponent } from './pages/game-search/game-search.component';
+import { CartComponent } from './pages/cart/cart.component';
+import { WishlistComponent } from './pages/wishlist/wishlist.component';
 
 const routes: Routes = [
   {
     path: '',
     children: [
-      { path: 'top-up', component: TopUpComponent },
-      { path: 'chat', component: ChatComponent },
-      { path: 'store', component: StoreComponent },
+      { path: '', component: HomeComponent, pathMatch: 'full' },
+      {
+        path: '',
+        children: [
+          { path: 'top-up', component: TopUpComponent },
+          { path: 'chat', component: ChatComponent },
+          { path: 'store', component: StoreComponent },
+          { path: 'cart', component: CartComponent },
+          { path: 'wishlist', component: WishlistComponent },
+        ],
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'game',
+        children: [
+          { path: ':id', component: GameDetailComponent },
+          { path: 'search', component: GameSearchComponent },
+        ],
+      },
     ],
-    canActivate: [AuthGuard],
   },
   {
     path: 'profile',

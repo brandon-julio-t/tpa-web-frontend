@@ -1,0 +1,44 @@
+@use 'src/app/styles/spacings' as *;
+
+.wishlist {
+  &-list {
+    &-item {
+      display: flex;
+      justify-content: space-between;
+      padding: $space-md;
+      background-color: rgba(0, 0, 0, 0.2);
+      margin: $space-md 0;
+
+      &-info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+          width: auto;
+          height: 100px;
+          margin-right: $space-md;
+        }
+
+        &-detail {
+          &-tags {
+            span {
+              display: inline-block;
+              padding: 8px;
+              border-radius: 4px;
+              background: rgba(255, 255, 255, 0.2);
+              margin-right: 8px;
+              margin-top: 8px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &-actions {
+    app-submit-button {
+      margin-left: $space-md;
+    }
+  }
+}

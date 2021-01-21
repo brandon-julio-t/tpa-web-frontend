@@ -17,7 +17,7 @@
           <span>
             <a href="#">{{ user?.displayName }}</a>
             <a routerLink="/top-up">
-              {{ user?.walletBalance | currency: "Rp" }}
+              {{ user?.walletBalance | currency: "$" }}
             </a>
           </span>
           <img [src]="profilePicture" alt="Profile Picture" height="42" />

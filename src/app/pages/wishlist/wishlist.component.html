@@ -1,0 +1,35 @@
+<section class="wishlist container">
+  <section class="wishlist-list">
+    <div *ngIf="wishlist.length === 0">
+      <p>OOPS, THERE'S NOTHING TO SHOW HERE</p>
+      <p>
+        There are 0 items on your wishlist, but none of them match the filters
+        you have applied above
+      </p>
+    </div>
+    <div *ngFor="let game of wishlist" class="wishlist-list-item">
+      <div class="wishlist-list-item-info">
+        <img [src]="asset(game?.banner?.id)" alt="banner" />
+
+        <div class="wishlist-list-item-info-detail">
+          <h2>{{ game.title }}</h2>
+          <p>RELEASE DATE: {{ game.createdAt | date }}</p>
+          <div class="wishlist-list-item-info-detail-tags">
+            <span *ngFor="let tag of game.tags">{{ tag.name }}</span>
+          </div>
+        </div>
+
+        <div class="wishlist-list-item-info-actions">
+          <span>{{ game.price | currency: "$" }}</span>
+          <app-submit-button
+            (click)="onRemove(game.id)"
+            [loading]="isLoading"
+            class="btn btn-black"
+          >
+            Remove
+          </app-submit-button>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>

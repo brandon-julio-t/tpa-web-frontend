@@ -1,0 +1,207 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
+
+type AssetFile {
+  contentType: String!
+  id: ID!
+}
+
+type Country {
+  id: ID!
+  name: String!
+}
+
+type Game {
+  banner: AssetFile!
+  createdAt: Time!
+  description: String!
+  discount: Float!
+  genre: GameGenre!
+  id: ID!
+  isInCart: Boolean!
+  isInWishlist: Boolean!
+  isInappropriate: Boolean!
+  price: Float!
+  slideshows: [GameSlideshow!]!
+  systemRequirements: String!
+  tags: [GameTag!]!
+  title: String!
+}
+
+type GameGenre {
+  id: ID!
+  name: String!
+}
+
+type GamePagination {
+  data: [Game!]!
+  totalPages: Int!
+}
+
+type GameSlideshow {
+  file: AssetFile!
+  game: Game!
+}
+
+type GameTag {
+  id: ID!
+  name: String!
+}
+
+type Mutation {
+  addPrivateMessage(friendId: ID!, text: String!): PrivateMessage!
+  addToCart(gameId: ID!): Game!
+  addToWishlist(gameId: ID!): Game!
+  approveUnsuspendRequests(id: ID!): User!
+  befriend(userId: ID!): User!
+  createGame(input: CreateGame!): Game!
+  createProfileComment(comment: String!, profileId: ID!): ProfileComment!
+  createPromo(discount: Float!, endAt: Time!): Promo!
+  deleteGame(id: ID!): Game!
+  deleteProfileComment(id: ID!): ProfileComment!
+  deletePromo(id: ID!): Promo!
+  denyUnsuspendRequests(id: ID!): User!
+  login(accountName: String!, password: String!): User!
+  logout: User!
+  redeemWallet(code: String!): Boolean!
+  refreshToken: Boolean!
+  register(accountName: String!, countryId: ID!, email: String!, password: String!): User!
+  removeFromCart(gameId: ID!): Game!
+  removeFromWishlist(gameId: ID!): Game!
+  sendOTP(email: String!): Boolean!
+  submitReport(description: String!, userId: ID!): Report!
+  suspendAccount(id: ID!): User!
+  unfriend(userId: ID!): User!
+  unsuspendRequest(accountName: String!): String!
+  updateGame(input: UpdateGame!): Game!
+  updateProfile(input: UpdateUser): User!
+  updatePromo(discount: Float!, endAt: Time!, id: ID!): Promo!
+  verifyOTP(otp: String!): Boolean!
+}
+
+type PrivateMessage {
+  createdAt: Time!
+  id: ID!
+  sender: User!
+  text: String!
+}
+
+type ProfileComment {
+  comment: String!
+  createdAt: Time!
+  id: ID!
+  profile: User!
+  user: User!
+}
+
+type Promo {
+  discount: Float!
+  endAt: Time!
+  id: ID!
+}
+
+type PromoPagination {
+  data: [Promo!]!
+  totalPages: Int!
+}
+
+type Query {
+  allCountries: [Country!]!
+  auth: User
+  featuredAndRecommendedGames: [Game!]!
+  friends: [User!]!
+  games(page: Int!): GamePagination!
+  genres: [GameGenre!]!
+  getAllGameTags: [GameTag!]!
+  getAllUnsuspendRequests: [User!]!
+  getGameById(id: ID!): Game!
+  getProfile(customUrl: String!): User!
+  getReportsByUser(id: ID!): [Report!]!
+  privateMessage(friendId: ID!): [PrivateMessage!]!
+  profileComments(profileId: ID!): [ProfileComment!]!
+  promo(id: ID!): Promo!
+  promos(page: Int!): PromoPagination!
+  users(page: Int!): UserPagination!
+}
+
+type Report {
+  createdAt: Time!
+  description: String!
+  id: ID!
+  reported: User!
+  reporter: User!
+}
+
+type Subscription {
+  privateMessageAdded: PrivateMessage!
+}
+
+type User {
+  accountName: String!
+  cart: [Game!]!
+  cartCount: Int!
+  country: Country!
+  customUrl: String!
+  displayName: String!
+  email: String!
+  id: ID!
+  profilePicture: AssetFile!
+  profileTheme: String!
+  realName: String!
+  reportCounts: Int!
+  summary: String!
+  suspendedAt: Time
+  walletBalance: Float!
+  wishlist: [Game!]!
+  wishlistCount: Int!
+}
+
+type UserPagination {
+  data: [User!]!
+  totalPages: Int!
+}
+
+input CreateGame {
+  banner: Upload!
+  description: String!
+  gameTags: [ID!]!
+  genreId: ID!
+  isInappropriate: Boolean!
+  price: Float!
+  slideshows: [Upload!]!
+  systemRequirements: String!
+  title: String!
+}
+
+input UpdateGame {
+  banner: Upload
+  description: String!
+  gameTags: [ID!]!
+  genreId: ID!
+  id: ID!
+  isInappropriate: Boolean!
+  price: Float!
+  slideshows: [Upload]
+  systemRequirements: String!
+  title: String!
+}
+
+input UpdateUser {
+  avatar: Upload
+  countryId: ID!
+  customUrl: String!
+  displayName: String!
+  profileTheme: String!
+  realName: String!
+  summary: String!
+}
+
+
+scalar Time
+
+scalar Upload

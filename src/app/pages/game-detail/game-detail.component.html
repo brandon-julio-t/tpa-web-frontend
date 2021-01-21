@@ -1,0 +1,124 @@
+<section class="detail container">
+  <app-search-bar></app-search-bar>
+
+  <section *ngIf="!hasInputAge" class="detail-inappropriate">
+    <img [src]="asset(game?.banner?.id)" alt="" />
+
+    <p class="text-center">
+      THIS GAME MAY CONTAIN CONTENT NOT APPROPRIATE FOR ALL AGES, OR MAY NOT BE
+      APPROPRIATE FOR VIEWING AT WORK.
+    </p>
+
+    <label for="birthdate">
+      <span class="text-center">Please enter your birth date to continue:</span>
+      <input [(ngModel)]="birthdate" id="birthdate" type="date" />
+    </label>
+
+    <button (click)="onViewPage()" class="btn btn-blue">View Page</button>
+  </section>
+
+  <section *ngIf="hasInputAge">
+    <small>
+      <a>All Games</a>
+      >
+      <a>{{ game?.genre?.name }}</a>
+      >
+      <a>{{ game?.title }}</a>
+    </small>
+    <h2>{{ game?.title }}</h2>
+
+    <section class="detail-carousel">
+      <div class="detail-carousel-left">
+        <div class="detail-carousel-left-playing">
+          <img
+            *ngIf="isImage(currentAssetFile)"
+            [src]="asset(currentAssetFile?.id)"
+            alt="slideshow image"
+          />
+          <video
+            *ngIf="isVideo(currentAssetFile)"
+            [src]="asset(currentAssetFile?.id)"
+            autoplay
+            controls
+          ></video>
+        </div>
+        <div class="detail-carousel-left-slideshows">
+          <div
+            (click)="currentAssetFile = slideshow.file"
+            *ngFor="let slideshow of slideshows"
+            class="detail-carousel-left-slideshows-item"
+          >
+            <img
+              *ngIf="isImage(slideshow.file)"
+              [src]="asset(slideshow.file.id)"
+              alt="slideshow image"
+            />
+            <video
+              *ngIf="isVideo(slideshow.file)"
+              [src]="asset(slideshow.file.id)"
+            ></video>
+          </div>
+        </div>
+      </div>
+      <div class="detail-carousel-right">
+        <img [src]="asset(game?.banner?.id)" alt="game banner" />
+        <p>{{ game?.description }}</p>
+        <p>All reviews: [TBD]</p>
+        <p>Release Date: {{ game?.createdAt | date }}</p>
+        <p>Developer: DVD PROJEKT GREEN</p>
+        <p>Publisher: DVD PROJEKT GREEN</p>
+        <p>Popular user-defined tags for this product:</p>
+        <div class="detail-carousel-right-tags">
+          <span *ngFor="let tag of game?.tags">
+            {{ tag?.name }}
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <section class="detail-body">
+      <div class="detail-body-buy">
+        <h2>Buy {{ game?.title }}</h2>
+        <div class="detail-body-buy-pricing">
+          <span>{{ game?.price | currency: "$" }}</span>
+          <app-submit-button
+            *ngIf="!user"
+            class="btn btn-blue"
+            routerLink="/login"
+          >
+            Login
+          </app-submit-button>
+          <app-submit-button
+            (click)="onAddToCart()"
+            *ngIf="user"
+            [loading]="isLoading"
+            class="btn btn-blue"
+          >
+            <span *ngIf="game?.isInCart">In Cart</span>
+            <span *ngIf="!game?.isInCart">Add to Cart</span>
+          </app-submit-button>
+          <app-submit-button
+            (click)="onAddToWishlist()"
+            *ngIf="user"
+            [loading]="isLoading"
+            class="btn btn-blue"
+          >
+            <span *ngIf="game?.isInWishlist">In Wishlist</span>
+            <span *ngIf="!game?.isInWishlist">Add to Wishlist</span>
+          </app-submit-button>
+        </div>
+      </div>
+    </section>
+
+    <section class="detail-system-requirements">
+      <h2>System Requirements</h2>
+      <p class="detail-system-requirements-container">
+        {{ game?.systemRequirements }}
+      </p>
+    </section>
+
+    <section class="detail-review">
+      <h2>Review</h2>
+    </section>
+  </section>
+</section>

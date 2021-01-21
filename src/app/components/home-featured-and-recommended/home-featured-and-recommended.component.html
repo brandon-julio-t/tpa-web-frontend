@@ -1,0 +1,66 @@
+<section>
+  <h2 class="letter-space">FEATURED & RECOMMENDED</h2>
+
+  <div class="carousel">
+    <div
+      *ngFor="let game of games; index as i"
+      [class.block]="selectedIndex === i"
+      [class.hidden]="selectedIndex !== i"
+    >
+      <a [routerLink]="['game', game.id]">
+        <div class="carousel-item">
+          <img
+            [src]="asset(game.banner.id)"
+            alt="Game Banner"
+            class="carousel-item-banner"
+          />
+
+          <div class="carousel-item-detail">
+            <h3>{{ game.title }}</h3>
+
+            <div class="carousel-item-detail-slideshows">
+              <div *ngFor="let slideshow of game.slideshows">
+                <img
+                  *ngIf="slideshow.file.contentType.includes('image')"
+                  [src]="asset(slideshow.file.id)"
+                  alt="Game Banner"
+                  class="carousel-item-detail-slideshows-item"
+                />
+                <video
+                  *ngIf="slideshow.file.contentType.includes('video')"
+                  [src]="asset(slideshow.file.id)"
+                  autoplay
+                  class="carousel-item-detail-slideshows-item"
+                  controls
+                  loop
+                ></video>
+              </div>
+            </div>
+
+            <div class="carousel-item-detail-tags">
+              <div *ngFor="let tag of game.tags">
+                {{ tag.name }}
+              </div>
+            </div>
+
+            <p>{{ game.price | currency: "$" }}</p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="carousel-control">
+    <fa-icon
+      (click)="prevCarousel()"
+      [icon]="faChevronCircleLeft"
+      size="2x"
+    ></fa-icon>
+    {{ selectedIndex + 1 }} / {{ games.length }}
+    <fa-icon
+      (click)="nextCarousel()"
+      [icon]="faChevronCircleRight"
+      size="2x"
+    ></fa-icon>
+  </div>
+</section>

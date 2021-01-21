@@ -1,0 +1,49 @@
+<section class="cart container">
+  <small>
+    <a routerLink="/">All Products</a>
+    > Your Shopping Cart
+  </small>
+
+  <h2 class="letter-space">YOUR SHOPPING CART</h2>
+
+  <section class="cart-list">
+    <div *ngFor="let game of cart" class="cart-list-item">
+      <div class="cart-list-item-info">
+        <img [src]="asset(game?.banner?.id)" alt="banner" />
+        <span>{{ game.title }}</span>
+      </div>
+
+      <div>
+        <span>{{ game.price | currency: "$" }}</span>
+        <app-submit-button
+          (click)="onRemove(game.id)"
+          [loading]="isLoading"
+          class="btn btn-black"
+        >
+          Remove
+        </app-submit-button>
+      </div>
+    </div>
+  </section>
+
+  <section class="cart-list-estimated-total">
+    <div class="cart-list-estimated-total-info">
+      <span>Estimated Total</span>
+      <span>{{ estimatedTotal | currency: "$" }}</span>
+    </div>
+
+    <p>
+      Is this a purchase for yourself or is it a gift? Select one to continue to
+      checkout.
+    </p>
+
+    <div class="cart-list-estimated-total-actions">
+      <app-submit-button [loading]="isLoading" class="btn btn-blue">
+        Purchase as a gift
+      </app-submit-button>
+      <app-submit-button [loading]="isLoading" class="btn btn-blue">
+        Purchase for myself
+      </app-submit-button>
+    </div>
+  </section>
+</section>

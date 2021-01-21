@@ -72,6 +72,11 @@ textarea {
   background-color: #324965;
 }
 
+input[type="checkbox"] {
+  display: inline;
+  width: auto;
+}
+
 hr {
   margin: $space-md 0;
 }

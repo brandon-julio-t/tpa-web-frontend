@@ -35,6 +35,13 @@ import { ChatComponent } from './pages/chat/chat.component';
 import { StoreComponent } from './pages/store/store.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { ChatAreaComponent } from './components/chat-area/chat-area.component';
+import { HomeComponent } from './pages/home/home.component';
+import { HomeFeaturedAndRecommendedComponent } from './components/home-featured-and-recommended/home-featured-and-recommended.component';
+import { GameDetailComponent } from './pages/game-detail/game-detail.component';
+import { GameSearchComponent } from './pages/game-search/game-search.component';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { CartComponent } from './pages/cart/cart.component';
+import { WishlistComponent } from './pages/wishlist/wishlist.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +71,13 @@ import { ChatAreaComponent } from './components/chat-area/chat-area.component';
     StoreComponent,
     PaginationComponent,
     ChatAreaComponent,
+    HomeComponent,
+    HomeFeaturedAndRecommendedComponent,
+    GameDetailComponent,
+    GameSearchComponent,
+    SearchBarComponent,
+    CartComponent,
+    WishlistComponent,
   ],
   imports: [
     BrowserModule,

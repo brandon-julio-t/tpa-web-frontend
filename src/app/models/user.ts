@@ -1,5 +1,6 @@
 import { Country } from './country';
 import { AssetFile } from './asset-file';
+import { Game } from './game';
 
 export interface User {
   id: number;
@@ -11,8 +12,12 @@ export interface User {
   profilePicture: AssetFile;
   profileTheme: string;
   realName: string;
-  summary: string;
-  walletBalance: number;
-  suspendedAt: Date;
   reportCounts: number;
+  summary: string;
+  suspendedAt: Date;
+  walletBalance: number;
+  wishlist: Game[];
+  wishlistCount: number;
+  cart: Game[];
+  cartCount: number;
 }
