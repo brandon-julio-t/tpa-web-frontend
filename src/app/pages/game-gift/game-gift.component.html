@@ -1,0 +1,242 @@
+<form [formGroup]="giftForm" class="gift container">
+  <p class="gift-breadcrumbs">
+    <span
+      (click)="backToPhase(1)"
+      [class.pointer]="phase > 1"
+      [class.text-blue]="phase === 1"
+      [class.text-gray]="phase < 1"
+    >
+      Gift Delivery
+    </span>
+    <span>></span>
+    <span
+      (click)="backToPhase(2)"
+      [class.pointer]="phase > 2"
+      [class.text-blue]="phase === 2"
+      [class.text-gray]="phase < 2"
+    >
+      Gift Note
+    </span>
+    <span>></span>
+    <span
+      (click)="backToPhase(3)"
+      [class.pointer]="phase > 3"
+      [class.text-blue]="phase === 3"
+      [class.text-gray]="phase < 3"
+    >
+      Payment Info
+    </span>
+    <span>></span>
+    <span
+      (click)="backToPhase(4)"
+      [class.pointer]="phase > 4"
+      [class.text-blue]="phase === 4"
+      [class.text-gray]="phase < 4"
+    >
+      Review + Purchase
+    </span>
+  </p>
+
+  <section *ngIf="phase === 1" class="gift-phase-one">
+    <label *ngFor="let friend of friends" [for]="friend.id">
+      <input
+        (change)="setFriendId(friend.id)"
+        [checked]="giftForm.controls.friendId.value === friend.id"
+        name="friend"
+        type="radio"
+      />
+      <img [src]="asset(friend.profilePicture.id)" alt="profile picture" />
+      {{ friend.displayName }}
+    </label>
+    <button (click)="nextPhase()" class="btn btn-blue">Continue</button>
+    <small
+      *ngIf="giftForm.controls.friendId.errors?.required && giftForm.touched"
+      class="text-red"
+    >
+      Please choose a friend
+    </small>
+  </section>
+  <section *ngIf="phase === 2" class="gift-phase-two">
+    <label for="recipient-first-name">
+      Recipient's first name
+      <small
+        *ngIf="giftForm.touched && giftForm.controls.firstName.errors?.required"
+        class="text-red"
+      >
+        This field is required
+      </small>
+      <input
+        formControlName="firstName"
+        id="recipient-first-name"
+        type="text"
+      />
+    </label>
+
+    <label for="message">
+      Gift message
+      <small
+        *ngIf="giftForm.touched && giftForm.controls.message.errors?.required"
+        class="text-red"
+      >
+        This field is required
+      </small>
+      <textarea formControlName="message" id="message" rows="10"></textarea>
+    </label>
+
+    <div class="row">
+      <label for="sentiment">
+        Your sentiment
+        <small
+          *ngIf="
+            giftForm.touched && giftForm.controls.sentiment.errors?.required
+          "
+          class="text-red"
+        >
+          This field is required
+        </small>
+        <select formControlName="sentiment" id="sentiment">
+          <option>Best Wishes</option>
+          <option>Buckle Up</option>
+          <option>Enjoy</option>
+          <option>Game On</option>
+          <option>Have Fun</option>
+          <option>Ker Blam</option>
+          <option>Over n' Out</option>
+          <option>You Owe Me</option>
+          <option>Your Turn</option>
+          <option>XOXOXO</option>
+        </select>
+      </label>
+
+      <label for="signature">
+        Your signature
+        <small
+          *ngIf="
+            giftForm.touched && giftForm.controls.signature.errors?.required
+          "
+          class="text-red"
+        >
+          This field is required
+        </small>
+        <input formControlName="signature" id="signature" type="text" />
+      </label>
+    </div>
+
+    <button (click)="nextPhase()" class="btn btn-blue">Continue</button>
+  </section>
+  <section *ngIf="phase === 3" class="gift-phase-three">
+    <section *ngIf="!isUsingCard" class="gift-phase-three-choose-payment">
+      <h2>Choose Payment Method</h2>
+
+      <button (click)="nextPhase()" class="btn btn-blue">Continue</button>
+      <button (click)="isUsingCard = true" class="btn btn-blue">
+        Use Card
+      </button>
+    </section>
+
+    <section *ngIf="isUsingCard" class="gift-phase-three-payment-form">
+      <h2>Payment Method</h2>
+
+      <label for="payment-method">
+        Please select a payment method
+        <select id="payment-method">
+          <option>Visa</option>
+          <option>MasterCard</option>
+          <option>eClub Points</option>
+        </select>
+      </label>
+      <div class="row">
+        <label for="card-number">
+          Card number
+          <input id="card-number" type="text" />
+        </label>
+        <label>
+          Expiration date and security code
+          <span class="row">
+            <select>
+              <option>--</option>
+              <option>01</option>
+              <option>02</option>
+              <option>03</option>
+              <option>04</option>
+              <option>05</option>
+              <option>06</option>
+              <option>07</option>
+              <option>08</option>
+              <option>09</option>
+              <option>10</option>
+              <option>11</option>
+              <option>12</option>
+            </select>
+            <select>
+              <option>----</option>
+              <option *ngFor="let year of expirationYear">
+                {{ year }}
+              </option>
+            </select>
+            <input type="text" />
+          </span>
+        </label>
+      </div>
+
+      <h2>Billing Information</h2>
+      <div class="row">
+        <div class="row">
+          <label for="first-name">
+            First name
+            <input id="first-name" type="text" />
+          </label>
+          <label for="last-name">
+            Last name
+            <input id="last-name" type="text" />
+          </label>
+        </div>
+        <label for="city">
+          City
+          <input id="city" type="text" />
+        </label>
+      </div>
+
+      <div class="row">
+        <label for="billing-address">
+          Billing address
+          <input id="billing-address" type="text" />
+        </label>
+        <label for="zip-or-postal-code">
+          Zip or postal code
+          <input id="zip-or-postal-code" type="text" />
+        </label>
+      </div>
+
+      <label for="billing-address-2">
+        Billing address, line 2
+        <input id="billing-address-2" type="text" />
+      </label>
+
+      <div class="row">
+        <label for="country">
+          Country
+          <input [value]="country.name" disabled id="country" type="text" />
+        </label>
+        <label for="phone-number">
+          Phone number
+          <input id="phone-number" type="text" />
+        </label>
+      </div>
+
+      <app-submit-button (click)="nextPhase()" class="btn btn-blue">
+        Continue
+      </app-submit-button>
+    </section>
+  </section>
+
+  <section *ngIf="phase === 4" class="gift-phase-four">
+    <app-submit-button
+      (click)="onCheckout()"
+      [loading]="isLoading"
+      class="btn btn-blue"
+    >
+      Checkout
+    </app-submit-button>
+  </section>
+</form>

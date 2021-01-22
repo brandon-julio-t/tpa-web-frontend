@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Apollo, gql } from 'apollo-angular';
+import { Apollo, gql, QueryRef } from 'apollo-angular';
 import { Game } from '../../models/game';
 import { AssetService } from '../../services/asset.service';
 import { SafeUrl } from '@angular/platform-browser';
@@ -21,13 +21,51 @@ export class GameDetailComponent implements OnInit {
   currentAssetFile: AssetFile | null = null;
   user: User | null = null;
   isLoading = false;
+  gameQuery: QueryRef<{ getGameById: Game }>;
 
   constructor(
     private apollo: Apollo,
     private route: ActivatedRoute,
     private assetService: AssetService,
     private authService: AuthService
-  ) {}
+  ) {
+    this.gameQuery = this.apollo.watchQuery<{ getGameById: Game }>({
+      query: gql`
+        query getGameById($id: ID!) {
+          getGameById(id: $id) {
+            id
+            banner {
+              id
+              contentType
+            }
+            createdAt
+            description
+            discount
+            genre {
+              id
+              name
+            }
+            isInappropriate
+            price
+            slideshows {
+              file {
+                id
+                contentType
+              }
+            }
+            systemRequirements
+            tags {
+              id
+              name
+            }
+            title
+            isInCart
+            isInWishlist
+          }
+        }
+      `,
+    });
+  }
 
   get slideshows(): GameSlideshow[] {
     const source = this.game?.slideshows ?? [];
@@ -59,7 +97,7 @@ export class GameDetailComponent implements OnInit {
     return this.assetService.get(id);
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     const id = this.route.snapshot.paramMap.get('id');
     if (!id) {
       return;
@@ -67,50 +105,13 @@ export class GameDetailComponent implements OnInit {
 
     this.authService.fetch().subscribe((resp) => (this.user = resp.data.auth));
 
-    this.apollo
-      .query<{ getGameById: Game }>({
-        query: gql`
-          query getGameById($id: ID!) {
-            getGameById(id: $id) {
-              id
-              banner {
-                id
-                contentType
-              }
-              createdAt
-              description
-              discount
-              genre {
-                id
-                name
-              }
-              isInappropriate
-              price
-              slideshows {
-                file {
-                  id
-                  contentType
-                }
-              }
-              systemRequirements
-              tags {
-                id
-                name
-              }
-              title
-              isInCart
-              isInWishlist
-            }
-          }
-        `,
-        variables: { id },
-      })
-      .subscribe((resp) => {
-        this.game = resp.data.getGameById;
-        this.hasInputAge = !this.game.isInappropriate;
+    await this.gameQuery.setVariables({ id });
+    this.gameQuery.valueChanges.subscribe((resp) => {
+      this.game = resp.data.getGameById;
+      this.hasInputAge = !this.game.isInappropriate && !this.birthdate;
 
-        this.currentAssetFile = this.slideshows[0].file;
-      });
+      this.currentAssetFile = this.slideshows[0]?.file;
+    });
   }
 
   onViewPage(): void {
@@ -144,6 +145,8 @@ export class GameDetailComponent implements OnInit {
         if (resp.data?.addToCart) {
           alert('Game added to cart');
           this.isLoading = false;
+          this.gameQuery.refetch().then();
+          this.authService.watch().refetch().then();
         }
       });
   }
@@ -169,6 +172,8 @@ export class GameDetailComponent implements OnInit {
         if (resp.data?.addToWishlist) {
           alert('Game added to wishlist');
           this.isLoading = false;
+          this.gameQuery.refetch().then();
+          this.authService.watch().refetch().then();
         }
       });
   }

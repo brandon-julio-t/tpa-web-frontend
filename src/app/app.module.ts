@@ -42,6 +42,8 @@ import { GameSearchComponent } from './pages/game-search/game-search.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { WishlistComponent } from './pages/wishlist/wishlist.component';
+import { GamePurchaseComponent } from './pages/game-purchase/game-purchase.component';
+import { GameGiftComponent } from './pages/game-gift/game-gift.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +80,8 @@ import { WishlistComponent } from './pages/wishlist/wishlist.component';
     SearchBarComponent,
     CartComponent,
     WishlistComponent,
+    GamePurchaseComponent,
+    GameGiftComponent,
   ],
   imports: [
     BrowserModule,

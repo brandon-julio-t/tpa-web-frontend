@@ -7,7 +7,6 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { AssetService } from '../../services/asset.service';
 import { ProfileComment } from '../../models/profile-comment';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FriendsService } from '../../services/friends.service';
 
 @Component({
   selector: 'app-profile',
@@ -29,8 +28,7 @@ export class ProfileComponent implements OnInit {
     private route: ActivatedRoute,
     private sanitizer: DomSanitizer,
     private authService: AuthService,
-    private assetService: AssetService,
-    private friendsService: FriendsService
+    private assetService: AssetService
   ) {
     this.commentsQuery = this.apollo.watchQuery<{
       profileComments: ProfileComment[];
@@ -109,13 +107,10 @@ export class ProfileComponent implements OnInit {
           });
       });
 
-    this.authService
-      .watch()
-      .valueChanges.subscribe((data) => (this.user = data.data.auth));
-
-    this.friendsService
-      .watch()
-      .valueChanges.subscribe((resp) => (this.friends = resp.data.friends));
+    this.authService.watch().valueChanges.subscribe((data) => {
+      this.user = data.data.auth;
+      this.friends = this.user.friends;
+    });
   }
 
   getProfilePicture(id: number): SafeUrl {
@@ -164,7 +159,6 @@ export class ProfileComponent implements OnInit {
   }
 
   onDelete(id: number): void {
-    console.log(id);
     this.isLoading = true;
     this.apollo
       .mutate<{ deleteProfileComment: ProfileComment }>({

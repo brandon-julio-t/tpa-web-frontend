@@ -22,6 +22,16 @@ export class AuthService extends Query<Response> {
           id
           contentType
         }
+        friends {
+          id
+          accountName
+          customUrl
+          displayName
+          profilePicture {
+            id
+            contentType
+          }
+        }
         profileTheme
         realName
         summary

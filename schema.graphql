@@ -59,6 +59,9 @@ type Mutation {
   addToWishlist(gameId: ID!): Game!
   approveUnsuspendRequests(id: ID!): User!
   befriend(userId: ID!): User!
+  checkoutWithCard: Float!
+  checkoutWithWallet: Float!
+  clearCart: Boolean!
   createGame(input: CreateGame!): Game!
   createProfileComment(comment: String!, profileId: ID!): ProfileComment!
   createPromo(discount: Float!, endAt: Time!): Promo!
@@ -66,10 +69,11 @@ type Mutation {
   deleteProfileComment(id: ID!): ProfileComment!
   deletePromo(id: ID!): Promo!
   denyUnsuspendRequests(id: ID!): User!
+  giftWithCard(input: Gift!): Float!
+  giftWithWallet(input: Gift!): Float!
   login(accountName: String!, password: String!): User!
   logout: User!
   redeemWallet(code: String!): Boolean!
-  refreshToken: Boolean!
   register(accountName: String!, countryId: ID!, email: String!, password: String!): User!
   removeFromCart(gameId: ID!): Game!
   removeFromWishlist(gameId: ID!): Game!
@@ -114,7 +118,6 @@ type Query {
   allCountries: [Country!]!
   auth: User
   featuredAndRecommendedGames: [Game!]!
-  friends: [User!]!
   games(page: Int!): GamePagination!
   genres: [GameGenre!]!
   getAllGameTags: [GameTag!]!
@@ -126,6 +129,7 @@ type Query {
   profileComments(profileId: ID!): [ProfileComment!]!
   promo(id: ID!): Promo!
   promos(page: Int!): PromoPagination!
+  refreshToken: Boolean!
   users(page: Int!): UserPagination!
 }
 
@@ -149,6 +153,7 @@ type User {
   customUrl: String!
   displayName: String!
   email: String!
+  friends: [User!]!
   id: ID!
   profilePicture: AssetFile!
   profileTheme: String!
@@ -176,6 +181,14 @@ input CreateGame {
   slideshows: [Upload!]!
   systemRequirements: String!
   title: String!
+}
+
+input Gift {
+  firstName: String!
+  message: String!
+  sentiment: String!
+  signature: String!
+  userId: ID!
 }
 
 input UpdateGame {

@@ -1,0 +1,117 @@
+<section class="purchase container">
+  <section *ngIf="!showPaymentMethod" class="purchase-confirm">
+    <h2>Confirm Checkout</h2>
+
+    <div class="purchase-confirm-actions">
+      <app-submit-button
+        [loading]="isLoading"
+        (click)="onCheckoutWithWallet()"
+        class="btn btn-blue"
+      >
+        Confirm
+      </app-submit-button>
+      <button (click)="showPaymentMethod = true" class="btn btn-blue">
+        Select Payment Method
+      </button>
+    </div>
+  </section>
+  <section *ngIf="showPaymentMethod" class="purchase-form">
+    <h2>Payment Method</h2>
+
+    <label for="payment-method">
+      Please select a payment method
+      <select id="payment-method">
+        <option>Visa</option>
+        <option>MasterCard</option>
+        <option>eClub Points</option>
+      </select>
+    </label>
+    <div>
+      <label for="card-number">
+        Card number
+        <input id="card-number" type="text" />
+      </label>
+      <label>
+        Expiration date and security code
+        <select>
+          <option>--</option>
+          <option>01</option>
+          <option>02</option>
+          <option>03</option>
+          <option>04</option>
+          <option>05</option>
+          <option>06</option>
+          <option>07</option>
+          <option>08</option>
+          <option>09</option>
+          <option>10</option>
+          <option>11</option>
+          <option>12</option>
+        </select>
+        <select>
+          <option>----</option>
+          <option *ngFor="let year of expirationYear">
+            {{ year }}
+          </option>
+        </select>
+        <input type="text" />
+      </label>
+    </div>
+
+    <h2>Billing Information</h2>
+    <div>
+      <div>
+        <label for="first-name">
+          First name
+          <input id="first-name" type="text" />
+        </label>
+        <label for="last-name">
+          Last name
+          <input id="last-name" type="text" />
+        </label>
+      </div>
+      <label for="city">
+        City
+        <input id="city" type="text" />
+      </label>
+    </div>
+
+    <div>
+      <label for="billing-address">
+        Billing address
+        <input id="billing-address" type="text" />
+      </label>
+      <label for="zip-or-postal-code">
+        Zip or postal code
+        <input id="zip-or-postal-code" type="text" />
+      </label>
+    </div>
+
+    <label for="billing-address-2">
+      Billing address, line 2
+      <input id="billing-address-2" type="text" />
+    </label>
+
+    <div>
+      <label for="country">
+        Country
+        <input [value]="country" disabled id="country" type="text" />
+      </label>
+      <label for="phone-number">
+        Phone number
+        <input id="phone-number" type="text" />
+      </label>
+    </div>
+
+    <div class="actions">
+      <a class="btn btn-black" routerLink="../">Back</a>
+      <app-submit-button
+        [loading]="isLoading"
+        (click)="onCheckoutWithCard()"
+        class="btn btn-blue"
+      >
+        Continue
+      </app-submit-button>
+    </div>
+  </section>
+</section>

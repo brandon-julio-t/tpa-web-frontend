@@ -26,8 +26,8 @@
     </div>
   </section>
 
-  <section class="cart-list-estimated-total">
-    <div class="cart-list-estimated-total-info">
+  <section class="cart-estimated-total">
+    <div class="cart-estimated-total-info">
       <span>Estimated Total</span>
       <span>{{ estimatedTotal | currency: "$" }}</span>
     </div>
@@ -37,13 +37,33 @@
       checkout.
     </p>
 
-    <div class="cart-list-estimated-total-actions">
-      <app-submit-button [loading]="isLoading" class="btn btn-blue">
+    <div class="cart-estimated-total-actions">
+      <app-submit-button
+        [loading]="isLoading"
+        class="btn btn-blue"
+        routerLink="./gift"
+      >
         Purchase as a gift
       </app-submit-button>
-      <app-submit-button [loading]="isLoading" class="btn btn-blue">
+      <app-submit-button
+        [loading]="isLoading"
+        class="btn btn-blue"
+        routerLink="./purchase"
+      >
         Purchase for myself
       </app-submit-button>
     </div>
+  </section>
+
+  <section class="cart-other-actions">
+    <a class="btn btn-black" routerLink="/">Continue Shopping</a>
+    <app-submit-button
+      (click)="onClearCart()"
+      *ngIf="cart.length > 0"
+      [loading]="isLoading"
+      class="btn btn-red"
+    >
+      Clear Cart
+    </app-submit-button>
   </section>
 </section>

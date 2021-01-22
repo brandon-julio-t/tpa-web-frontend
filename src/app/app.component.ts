@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 
 @Component({
@@ -6,18 +6,19 @@ import { Apollo, gql } from 'apollo-angular';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-  constructor(private apollo: Apollo) {
-    setInterval(() => {
-      apollo
-        .mutate({
-          mutation: gql`
-            mutation refreshToken {
-              refreshToken
-            }
-          `,
-        })
-        .subscribe();
-    }, 300000); // 3 minutes
+export class AppComponent implements OnInit {
+  constructor(private apollo: Apollo) {}
+
+  ngOnInit(): void {
+    this.apollo
+      .watchQuery({
+        query: gql`
+          query refreshToken {
+            refreshToken
+          }
+        `,
+        pollInterval: 30000,
+      })
+      .valueChanges.subscribe();
   }
 }

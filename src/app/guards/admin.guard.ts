@@ -8,7 +8,7 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +24,7 @@ export class AdminGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    return this.authService.watch().valueChanges.pipe(
+    return this.authService.fetch().pipe(
       map((data) => {
         const user = data.data.auth;
         if (user.accountName === 'Admin') {
@@ -33,6 +33,10 @@ export class AdminGuard implements CanActivate {
 
         this.router.navigateByUrl('/').then();
         return false;
+      }),
+      catchError((err) => {
+        this.router.navigateByUrl('/').then();
+        throw err;
       })
     );
   }

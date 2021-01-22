@@ -21,24 +21,25 @@
         align-items: center;
       }
     }
+  }
 
-    &-estimated-total {
-      padding: $space-md;
-      background-color: rgba(0, 0, 0, 0.2);
+  &-estimated-total {
+    margin: $space-lg 0;
+    padding: $space-md;
+    background-color: rgba(0, 0, 0, 0.2);
 
-      &-info {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
+    &-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-      &-actions {
-        display: flex;
-        flex-direction: row-reverse;
+    &-actions {
+      display: flex;
+      flex-direction: row-reverse;
 
-        app-submit-button {
-          margin-left: $space-md;
-        }
+      app-submit-button {
+        margin-left: $space-md;
       }
     }
   }

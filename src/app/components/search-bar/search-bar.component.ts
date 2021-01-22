@@ -16,6 +16,8 @@ export class SearchBarComponent implements OnInit {
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.authService.fetch().subscribe((resp) => (this.user = resp.data.auth));
+    this.authService
+      .watch()
+      .valueChanges.subscribe((resp) => (this.user = resp.data.auth));
   }
 }

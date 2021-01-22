@@ -8,16 +8,7 @@ import { User } from '../models/user';
 export class FriendsService extends Query<Response> {
   document = gql`
     query friends {
-      friends {
-        id
-        accountName
-        customUrl
-        displayName
-        profilePicture {
-          id
-          contentType
-        }
-      }
+
     }
   `;
 }

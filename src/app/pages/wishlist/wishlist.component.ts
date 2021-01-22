@@ -49,7 +49,10 @@ export class WishlistComponent implements OnInit {
         const removedId = resp.data?.removeFromWishlist.id;
         if (removedId) {
           this.wishlist = this.wishlist.filter((game) => game.id !== removedId);
-          this.isLoading = false;
+          this.authService
+            .watch()
+            .refetch()
+            .then(() => (this.isLoading = false));
         }
       });
   }

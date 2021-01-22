@@ -26,6 +26,8 @@ import { GameDetailComponent } from './pages/game-detail/game-detail.component';
 import { GameSearchComponent } from './pages/game-search/game-search.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { WishlistComponent } from './pages/wishlist/wishlist.component';
+import { GamePurchaseComponent } from './pages/game-purchase/game-purchase.component';
+import { GameGiftComponent } from './pages/game-gift/game-gift.component';
 
 const routes: Routes = [
   {
@@ -38,7 +40,14 @@ const routes: Routes = [
           { path: 'top-up', component: TopUpComponent },
           { path: 'chat', component: ChatComponent },
           { path: 'store', component: StoreComponent },
-          { path: 'cart', component: CartComponent },
+          {
+            path: 'cart',
+            children: [
+              { path: '', component: CartComponent },
+              { path: 'purchase', component: GamePurchaseComponent },
+              { path: 'gift', component: GameGiftComponent },
+            ],
+          },
           { path: 'wishlist', component: WishlistComponent },
         ],
         canActivate: [AuthGuard],

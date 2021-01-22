@@ -1,0 +1,24 @@
+.purchase {
+  &-confirm {
+    &-actions {
+      * {
+        width: 100%;
+      }
+    }
+  }
+
+  &-form {
+    &-actions {
+      display: flex;
+    }
+
+    div {
+      display: flex;
+      justify-content: space-between;
+
+      * {
+        width: 100%;
+      }
+    }
+  }
+}

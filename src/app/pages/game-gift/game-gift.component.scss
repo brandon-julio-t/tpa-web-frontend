@@ -1,0 +1,76 @@
+@use 'src/app/styles/spacings' as *;
+
+.gift {
+  &-breadcrumbs {
+    margin-bottom: $space-lg;
+
+    span {
+      margin-right: $space-md;
+    }
+  }
+
+  &-phase-one {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: $space-md;
+
+      input[type="radio"] {
+        width: fit-content;
+        display: inline-block;
+        margin-right: $space-md;
+        margin-bottom: 0;
+      }
+
+      img {
+        height: 32px;
+        margin-right: $space-md;
+      }
+    }
+  }
+
+  &-phase-two {
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+
+      label {
+        flex-grow: 1;
+
+        &:first-child {
+          margin-right: $space-md;
+        }
+      }
+    }
+  }
+
+  &-phase-three {
+    &-choose-payment {
+      button {
+        width: 100%;
+      }
+    }
+
+    &-payment-form {
+      .row {
+        display: flex;
+        justify-content: space-between;
+
+        label {
+          flex-grow: 1;
+        }
+
+        *:not(:last-child) {
+          margin-right: $space-md;
+        }
+      }
+    }
+  }
+
+  &-phase-four {
+  }
+}

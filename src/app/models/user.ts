@@ -9,6 +9,7 @@ export interface User {
   customUrl: string;
   displayName: string;
   email: string;
+  friends: User[];
   profilePicture: AssetFile;
   profileTheme: string;
   realName: string;

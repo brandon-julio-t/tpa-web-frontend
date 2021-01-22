@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Game } from '../../models/game';
-import { Apollo } from 'apollo-angular';
+import { Apollo, gql } from 'apollo-angular';
 import { AuthService } from '../../services/auth.service';
 import { AssetService } from '../../services/asset.service';
 import { SafeUrl } from '@angular/platform-browser';
@@ -37,5 +37,52 @@ export class CartComponent implements OnInit {
       .valueChanges.subscribe((resp) => (this.cart = resp.data.auth.cart));
   }
 
-  onRemove(id: number): void {}
+  onRemove(id: number): void {
+    this.isLoading = true;
+    this.apollo
+      .mutate<{ removeFromCart: Game }>({
+        mutation: gql`
+          mutation removeFromCart($gameId: ID!) {
+            removeFromCart(gameId: $gameId) {
+              id
+            }
+          }
+        `,
+        variables: { gameId: id },
+      })
+      .subscribe((resp) => {
+        if (resp.data?.removeFromCart) {
+          this.authService
+            .watch()
+            .refetch()
+            .then(() => (this.isLoading = false));
+        }
+      });
+  }
+
+  onClearCart(): void {
+    if (
+      confirm(
+        'Are you sure you want to remove all items from your shopping cart?'
+      )
+    ) {
+      this.isLoading = true;
+      this.apollo
+        .mutate<{ clearCart: boolean }>({
+          mutation: gql`
+            mutation clearCart {
+              clearCart
+            }
+          `,
+        })
+        .subscribe((resp) => {
+          if (resp.data?.clearCart) {
+            this.authService
+              .watch()
+              .refetch()
+              .then(() => (this.isLoading = false));
+          }
+        });
+    }
+  }
 }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FriendsService } from '../../services/friends.service';
 import { User } from '../../models/user';
 import { AssetService } from '../../services/asset.service';
 import { SafeUrl } from '@angular/platform-browser';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-chat',
@@ -15,7 +15,7 @@ export class ChatComponent implements OnInit {
 
   constructor(
     private assetService: AssetService,
-    private friendsService: FriendsService
+    private authService: AuthService
   ) {}
 
   profilePicture(id: number): SafeUrl {
@@ -23,8 +23,8 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.friendsService
+    this.authService
       .fetch()
-      .subscribe((resp) => (this.friends = resp.data.friends));
+      .subscribe((resp) => (this.friends = resp.data.auth.friends));
   }
 }
