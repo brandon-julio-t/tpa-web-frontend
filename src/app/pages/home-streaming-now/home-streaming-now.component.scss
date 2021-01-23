@@ -1,0 +1,14 @@
+@use 'src/app/styles/components' as *;
+
+.streams {
+  &-list {
+    display: flex;
+    flex-wrap: wrap;
+
+    &-item {
+      a {
+        @include tag;
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+<section class="streaming container">
+  <video [srcObject]="stream" autoplay playsinline></video>
+  <button (click)="onStartStreaming()" class="btn btn-blue">
+    Start Streaming
+  </button>
+  <button (click)="onStopStreaming()" class="btn btn-red">
+    Stop Streaming
+  </button>
+</section>

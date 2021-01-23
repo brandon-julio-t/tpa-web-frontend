@@ -71,13 +71,17 @@ type Mutation {
   denyUnsuspendRequests(id: ID!): User!
   giftWithCard(input: Gift!): Float!
   giftWithWallet(input: Gift!): Float!
+  joinStream(accountName: String!, rtcAnswer: String!): String!
   login(accountName: String!, password: String!): User!
   logout: User!
+  newIceCandidate(accountName: String!, candidate: String!): String!
   redeemWallet(code: String!): Boolean!
   register(accountName: String!, countryId: ID!, email: String!, password: String!): User!
   removeFromCart(gameId: ID!): Game!
   removeFromWishlist(gameId: ID!): Game!
   sendOTP(email: String!): Boolean!
+  startStreaming(rtcConnection: String!): String!
+  stopStreaming: Boolean!
   submitReport(description: String!, userId: ID!): Report!
   suspendAccount(id: ID!): User!
   unfriend(userId: ID!): User!
@@ -130,6 +134,8 @@ type Query {
   promo(id: ID!): Promo!
   promos(page: Int!): PromoPagination!
   refreshToken: Boolean!
+  streams: [String!]!
+  user(accountName: String!): User!
   users(page: Int!): UserPagination!
 }
 
@@ -142,6 +148,8 @@ type Report {
 }
 
 type Subscription {
+  onNewIceCandidate(accountName: String!): String!
+  onStreamJoin: String!
   privateMessageAdded: PrivateMessage!
 }
 
@@ -159,6 +167,7 @@ type User {
   profileTheme: String!
   realName: String!
   reportCounts: Int!
+  stream: String!
   summary: String!
   suspendedAt: Time
   walletBalance: Float!

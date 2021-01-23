@@ -44,6 +44,9 @@ import { CartComponent } from './pages/cart/cart.component';
 import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { GamePurchaseComponent } from './pages/game-purchase/game-purchase.component';
 import { GameGiftComponent } from './pages/game-gift/game-gift.component';
+import { StreamingComponent } from './pages/streaming/streaming.component';
+import { WatchStreamComponent } from './pages/watch-stream/watch-stream.component';
+import { HomeStreamingNowComponent } from './pages/home-streaming-now/home-streaming-now.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +85,9 @@ import { GameGiftComponent } from './pages/game-gift/game-gift.component';
     WishlistComponent,
     GamePurchaseComponent,
     GameGiftComponent,
+    StreamingComponent,
+    WatchStreamComponent,
+    HomeStreamingNowComponent,
   ],
   imports: [
     BrowserModule,

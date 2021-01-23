@@ -28,6 +28,8 @@ import { CartComponent } from './pages/cart/cart.component';
 import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { GamePurchaseComponent } from './pages/game-purchase/game-purchase.component';
 import { GameGiftComponent } from './pages/game-gift/game-gift.component';
+import { WatchStreamComponent } from './pages/watch-stream/watch-stream.component';
+import { StreamingComponent } from './pages/streaming/streaming.component';
 
 const routes: Routes = [
   {
@@ -40,6 +42,11 @@ const routes: Routes = [
           { path: 'top-up', component: TopUpComponent },
           { path: 'chat', component: ChatComponent },
           { path: 'store', component: StoreComponent },
+          { path: 'streaming', component: StreamingComponent },
+          {
+            path: 'watch-stream/:accountName',
+            component: WatchStreamComponent,
+          },
           {
             path: 'cart',
             children: [
