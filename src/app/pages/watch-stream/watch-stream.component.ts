@@ -11,15 +11,14 @@ import { User } from '../../models/user';
 export class WatchStreamComponent implements OnInit {
   user: User | null = null;
   connection: RTCPeerConnection;
-  stream = new MediaStream();
+  stream: MediaStream | null = null;
 
   constructor(private apollo: Apollo, private route: ActivatedRoute) {
     this.connection = new RTCPeerConnection({
-      iceServers: [{ urls: 'stun:stun.l.google.com:19302' }],
+      iceServers: [{ urls: 'stun:stun.1.google.com:19302' }],
     });
 
     this.connection.ontrack = async (e) => {
-      this.connection.addTrack(e.track, this.stream);
       this.stream = e.streams[0];
     };
   }
@@ -43,12 +42,13 @@ export class WatchStreamComponent implements OnInit {
         this.user = resp.data.user;
 
         const { accountName, stream } = this.user;
-        const offer = JSON.parse(stream) as RTCSessionDescriptionInit;
 
         await this.connection.setRemoteDescription(
-          new RTCSessionDescription(offer)
+          new RTCSessionDescription(JSON.parse(stream))
         );
-        const answer = await this.connection.createAnswer();
+        const answer = new RTCSessionDescription(
+          await this.connection.createAnswer()
+        );
         await this.connection.setLocalDescription(answer);
 
         this.apollo
@@ -99,8 +99,9 @@ export class WatchStreamComponent implements OnInit {
           .subscribe(async (r) => {
             const candidateStr = r.data?.onNewIceCandidate;
             if (candidateStr) {
-              const candidate = JSON.parse(candidateStr) as RTCIceCandidate;
-              await this.connection.addIceCandidate(candidate);
+              await this.connection.addIceCandidate(
+                new RTCIceCandidate(JSON.parse(candidateStr))
+              );
             }
           });
       });

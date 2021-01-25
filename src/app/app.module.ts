@@ -47,6 +47,8 @@ import { GameGiftComponent } from './pages/game-gift/game-gift.component';
 import { StreamingComponent } from './pages/streaming/streaming.component';
 import { WatchStreamComponent } from './pages/watch-stream/watch-stream.component';
 import { HomeStreamingNowComponent } from './pages/home-streaming-now/home-streaming-now.component';
+import { HomeSideBarComponent } from './components/home-side-bar/home-side-bar.component';
+import { GameDetailReviewsComponent } from './components/game-detail-reviews/game-detail-reviews.component';
 
 @NgModule({
   declarations: [
@@ -88,6 +90,8 @@ import { HomeStreamingNowComponent } from './pages/home-streaming-now/home-strea
     StreamingComponent,
     WatchStreamComponent,
     HomeStreamingNowComponent,
+    HomeSideBarComponent,
+    GameDetailReviewsComponent,
   ],
   imports: [
     BrowserModule,

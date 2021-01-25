@@ -1,4 +1,17 @@
 @use 'src/app/styles/spacings' as *;
+@use 'src/app/styles/breakpoints' as *;
+
+.relative {
+  position: relative;
+
+  app-home-side-bar {
+    position: absolute;
+
+    @media (max-width: $screen-2xl) {
+      display: none;
+    }
+  }
+}
 
 .home {
   &-game-categories {

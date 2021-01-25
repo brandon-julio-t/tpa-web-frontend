@@ -117,8 +117,10 @@
       </p>
     </section>
 
-    <section class="detail-review">
-      <h2>Review</h2>
-    </section>
+    <app-game-detail-reviews
+      (vote)="onVote()"
+      [mostHelpfulReviews]="game?.mostHelpfulReviews"
+      [recentReviews]="game?.recentReviews"
+    ></app-game-detail-reviews>
   </section>
 </section>

@@ -1,0 +1,92 @@
+@use 'src/app/styles/spacings' as *;
+
+.grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-gap: $space-lg;
+
+  .left {
+    .review-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-gap: $space-md;
+
+      &-item {
+        display: grid;
+        grid-template-areas:
+          "user recommendation"
+          "user created-at"
+          "user body"
+          "user actions";
+
+        background-color: rgba(0, 0, 0, 0.2);
+        padding: $space-md;
+
+        &-user {
+          grid-area: user;
+
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+
+          img {
+            max-width: 32px;
+            margin-right: $space-md;
+          }
+        }
+
+        &-content {
+          &-recommendation {
+            grid-area: recommended;
+          }
+
+          &-created-at {
+            grid-area: creatd-at;
+          }
+
+          &-body {
+            grid-area: body;
+          }
+
+          &-actions {
+            grid-area: actions;
+            display: flex;
+            flex-wrap: wrap;
+
+            .btn:first-child {
+              margin-right: $space-md;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .right {
+    .review-list {
+      display: grid;
+      grid-gap: $space-md;
+
+      &-item {
+        background: linear-gradient(
+          to right,
+          rgba(34, 50, 70, 1) -1%,
+          rgba(34, 50, 70, 1) 0%,
+          rgba(34, 50, 70, 0) 92%,
+          rgba(34, 50, 70, 0) 100%
+        );
+
+        padding: $space-md;
+
+        &-actions {
+          grid-area: actions;
+          display: flex;
+          flex-wrap: wrap;
+
+          .btn:first-child {
+            margin-right: $space-md;
+          }
+        }
+      }
+    }
+  }
+}

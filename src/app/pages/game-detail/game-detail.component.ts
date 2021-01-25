@@ -47,6 +47,46 @@ export class GameDetailComponent implements OnInit {
             }
             isInappropriate
             price
+            mostHelpfulReviews {
+              id
+              content
+              createdAt
+              downVoters {
+                id
+              }
+              downVotes
+              isRecommended
+              upVoters {
+                id
+              }
+              upVotes
+              user {
+                id
+                displayName
+                profilePicture {
+                  id
+                  contentType
+                }
+              }
+            }
+            recentReviews {
+              id
+              content
+              createdAt
+              downVoters {
+                id
+              }
+              downVotes
+              isRecommended
+              upVoters {
+                id
+              }
+              upVotes
+              user {
+                id
+                displayName
+              }
+            }
             slideshows {
               file {
                 id
@@ -176,5 +216,9 @@ export class GameDetailComponent implements OnInit {
           this.authService.watch().refetch().then();
         }
       });
+  }
+
+  onVote(): void {
+    this.gameQuery.refetch().then();
   }
 }

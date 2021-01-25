@@ -26,7 +26,9 @@ type Game {
   isInCart: Boolean!
   isInWishlist: Boolean!
   isInappropriate: Boolean!
+  mostHelpfulReviews: [GameReview!]!
   price: Float!
+  recentReviews: [GameReview!]!
   slideshows: [GameSlideshow!]!
   systemRequirements: String!
   tags: [GameTag!]!
@@ -41,6 +43,18 @@ type GameGenre {
 type GamePagination {
   data: [Game!]!
   totalPages: Int!
+}
+
+type GameReview {
+  content: String!
+  createdAt: Time!
+  downVoters: [User!]!
+  downVotes: Int!
+  id: ID!
+  isRecommended: Boolean!
+  upVoters: [User!]!
+  upVotes: Int!
+  user: User!
 }
 
 type GameSlideshow {
@@ -65,10 +79,13 @@ type Mutation {
   createGame(input: CreateGame!): Game!
   createProfileComment(comment: String!, profileId: ID!): ProfileComment!
   createPromo(discount: Float!, endAt: Time!): Promo!
+  createReview(content: String!, gameId: ID!, isRecommended: Boolean!): GameReview!
   deleteGame(id: ID!): Game!
   deleteProfileComment(id: ID!): ProfileComment!
   deletePromo(id: ID!): Promo!
+  deleteReview(id: ID!): GameReview!
   denyUnsuspendRequests(id: ID!): User!
+  downVoteReview(id: ID!): GameReview!
   giftWithCard(input: Gift!): Float!
   giftWithWallet(input: Gift!): Float!
   joinStream(accountName: String!, rtcAnswer: String!): String!
@@ -86,6 +103,7 @@ type Mutation {
   suspendAccount(id: ID!): User!
   unfriend(userId: ID!): User!
   unsuspendRequest(accountName: String!): String!
+  upVoteReview(id: ID!): GameReview!
   updateGame(input: UpdateGame!): Game!
   updateProfile(input: UpdateUser): User!
   updatePromo(discount: Float!, endAt: Time!, id: ID!): Promo!

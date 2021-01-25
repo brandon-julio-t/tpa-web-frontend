@@ -2,6 +2,7 @@ import { GameSlideshow } from './game-slideshow';
 import { GameTag } from './game-tag';
 import { AssetFile } from './asset-file';
 import { GameGenre } from './game-genre';
+import { GameReview } from './game-review';
 
 export interface Game {
   id: number;
@@ -13,6 +14,8 @@ export interface Game {
   isInCart: boolean;
   isInWishlist: boolean;
   price: number;
+  mostHelpfulReviews: GameReview[];
+  recentReviews: GameReview[];
   slideshows: GameSlideshow[];
   systemRequirements: string;
   tags: GameTag[];

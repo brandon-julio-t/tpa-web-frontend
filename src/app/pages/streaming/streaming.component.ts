@@ -8,12 +8,12 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./streaming.component.scss'],
 })
 export class StreamingComponent implements OnInit, OnDestroy {
-  stream: MediaStream | null = null;
+  stream = new MediaStream();
   connection: RTCPeerConnection;
 
   constructor(private apollo: Apollo, private authService: AuthService) {
     this.connection = new RTCPeerConnection({
-      iceServers: [{ urls: 'stun:stun.l.google.com:19302' }],
+      iceServers: [{ urls: 'stun:stun.1.google.com:19302' }],
     });
   }
 
@@ -55,10 +55,9 @@ export class StreamingComponent implements OnInit, OnDestroy {
         .subscribe(async (r) => {
           const candidateStr = r.data?.onNewIceCandidate;
           if (candidateStr) {
-            const candidate = new RTCIceCandidate(
-              JSON.parse(candidateStr) as RTCIceCandidate
+            await this.connection.addIceCandidate(
+              new RTCIceCandidate(JSON.parse(candidateStr))
             );
-            await this.connection.addIceCandidate(candidate);
           }
         });
     });
@@ -74,9 +73,8 @@ export class StreamingComponent implements OnInit, OnDestroy {
       .subscribe(async (resp) => {
         const answerStr = resp.data?.onStreamJoin;
         if (answerStr) {
-          const answer = JSON.parse(answerStr) as RTCSessionDescriptionInit;
           await this.connection.setRemoteDescription(
-            new RTCSessionDescription(answer)
+            new RTCSessionDescription(JSON.parse(answerStr))
           );
         }
       });
@@ -95,10 +93,12 @@ export class StreamingComponent implements OnInit, OnDestroy {
       }
     });
 
-    const offer = await this.connection.createOffer();
+    const offer = new RTCSessionDescription(
+      await this.connection.createOffer()
+    );
     await this.connection.setLocalDescription(offer);
 
-    this.stream.getVideoTracks()[0].onended = () => this.onStopStreaming();
+    // this.stream.getVideoTracks()[0].onended = () => this.onStopStreaming();
 
     this.apollo
       .mutate({
@@ -113,7 +113,7 @@ export class StreamingComponent implements OnInit, OnDestroy {
   }
 
   onStopStreaming(): void {
-    this.stream = null;
+    this.stream = new MediaStream();
 
     this.apollo
       .mutate({

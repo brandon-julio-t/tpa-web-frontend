@@ -1,0 +1,102 @@
+<section class="grid">
+  <section class="left">
+    <h2>
+      MOST HELPFUL REVIEWS
+      <small>IN THE PAST 30 DAYS</small>
+    </h2>
+
+    <section class="review-list">
+      <div *ngFor="let review of mostHelpfulReviews" class="review-list-item">
+        <div class="review-list-item-user">
+          <img
+            [src]="asset(review.user.profilePicture.id)"
+            alt="Profile Picture"
+          />
+          <span>{{ review.user.displayName }}</span>
+        </div>
+
+        <div class="review-list-item-content">
+          <h3
+            [class.text-blue]="review.isRecommended"
+            [class.text-red]="!review.isRecommended"
+            class="review-list-item-content-recommendation"
+          >
+            <fa-icon
+              [icon]="review.isRecommended ? faThumbsUp : faThumbsDown"
+            ></fa-icon>
+            {{ review.isRecommended ? "Recommended" : "Not Recommended" }}
+          </h3>
+
+          <small class="review-list-item-content-created-at">
+            Posted: {{ review.createdAt | date }}
+          </small>
+
+          <p class="review-list-item-content-body">
+            {{ review.content }}
+          </p>
+
+          <div *ngIf="user" class="review-list-item-content-actions">
+            <button
+              (click)="upVote(review.id)"
+              [class.btn-black]="!hasUpVoted(review)"
+              [class.btn-blue]="hasUpVoted(review)"
+              class="btn"
+            >
+              <fa-icon [icon]="faThumbsUp"></fa-icon>
+            </button>
+            <button
+              (click)="downVote(review.id)"
+              [class.btn-black]="!hasDownVoted(review)"
+              [class.btn-blue]="hasDownVoted(review)"
+              class="btn"
+            >
+              <fa-icon [icon]="faThumbsDown"></fa-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <section class="right">
+    <h2>RECENTLY POSTED</h2>
+    <section class="review-list">
+      <div *ngFor="let review of recentReviews" class="review-list-item">
+        <p>
+          <fa-icon
+            [icon]="review.isRecommended ? faThumbsUp : faThumbsDown"
+          ></fa-icon>
+
+          <span>
+            {{ review.user.displayName }}
+          </span>
+        </p>
+
+        <small>Posted: {{ review.createdAt | date }}</small>
+
+        <p>
+          {{ review.content }}
+        </p>
+
+        <div *ngIf="user" class="review-list-item-actions">
+          <button
+            (click)="upVote(review.id)"
+            [class.btn-black]="!hasUpVoted(review)"
+            [class.btn-blue]="hasUpVoted(review)"
+            class="btn"
+          >
+            <fa-icon [icon]="faThumbsUp"></fa-icon>
+          </button>
+          <button
+            (click)="downVote(review.id)"
+            [class.btn-black]="!hasDownVoted(review)"
+            [class.btn-blue]="hasDownVoted(review)"
+            class="btn"
+          >
+            <fa-icon [icon]="faThumbsDown"></fa-icon>
+          </button>
+        </div>
+      </div>
+    </section>
+  </section>
+</section>

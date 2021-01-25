@@ -1,0 +1,12 @@
+@use 'src/app/styles/spacings' as *;
+
+h2 {
+  margin-top: $space-md;
+}
+
+a {
+  display: block;
+  text-align: left;
+  color: #67c1f5;
+  margin: $space-sm 0;
+}
