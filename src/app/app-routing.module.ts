@@ -37,6 +37,10 @@ const routes: Routes = [
     children: [
       { path: '', component: HomeComponent, pathMatch: 'full' },
       {
+        path: 'search/:keyword',
+        component: GameSearchComponent,
+      },
+      {
         path: '',
         children: [
           { path: 'top-up', component: TopUpComponent },
@@ -61,10 +65,7 @@ const routes: Routes = [
       },
       {
         path: 'game',
-        children: [
-          { path: ':id', component: GameDetailComponent },
-          { path: 'search', component: GameSearchComponent },
-        ],
+        children: [{ path: ':id', component: GameDetailComponent }],
       },
     ],
   },

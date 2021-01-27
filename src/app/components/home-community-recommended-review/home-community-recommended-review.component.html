@@ -1,0 +1,29 @@
+<section *ngIf="review" class="carousel">
+  <h3 class="carousel-content">{{ review?.content }}</h3>
+
+  <div class="carousel-user">
+    <img
+      [src]="asset(review?.user?.profilePicture?.id)"
+      alt="Profile picture"
+      class="carousel-user-profile-picture"
+    />
+
+    <p class="carousel-user-display-name">
+      {{ review?.user?.displayName }}
+    </p>
+  </div>
+
+  <section class="carousel-control">
+    <button class="btn btn-blue" (click)="prev()">
+      <fa-icon [icon]="faChevronLeft"></fa-icon>
+    </button>
+
+    <span>
+      {{ this.selectedReviewIndex + 1 }} of {{ totalReviews | number }} review
+    </span>
+
+    <button class="btn btn-blue" (click)="next()">
+      <fa-icon [icon]="faChevronRight"></fa-icon>
+    </button>
+  </section>
+</section>

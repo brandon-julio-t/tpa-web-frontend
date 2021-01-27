@@ -1,0 +1,29 @@
+@use 'src/app/styles/spacings' as *;
+
+.home-community-recommended {
+  margin: $space-lg 0;
+}
+
+.games {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &-carousel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 350px;
+    grid-gap: $space-md;
+
+    &-banner {
+      height: inherit;
+      object-fit: cover;
+    }
+
+    &-left,
+    &-right {
+      margin: $space-md;
+      cursor: pointer;
+    }
+  }
+}

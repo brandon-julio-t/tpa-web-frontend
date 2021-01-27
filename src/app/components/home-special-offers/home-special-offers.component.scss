@@ -1,0 +1,70 @@
+@use 'src/app/styles/spacings' as *;
+@use 'src/app/styles/sizes' as *;
+
+.grid-carousel-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .grid-carousel-left,
+  .grid-carousel-right {
+    margin: $space-md;
+    cursor: pointer;
+  }
+
+  .grid-carousel {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: $space-md;
+
+    &-item {
+      background: linear-gradient(
+        -45deg,
+        rgba(64, 121, 153, 1) 5%,
+        rgba(42, 62, 89, 1) 95%
+      );
+
+      &-banner {
+        width: 100%;
+        grid-area: banner;
+      }
+
+      &-detail {
+        display: flex;
+        justify-content: flex-end;
+        padding: $space-md;
+
+        &-discount {
+          grid-area: discount;
+          text-align: right;
+          color: #a4d007;
+          background: #4c6b22;
+          font-size: 26px;
+          padding: $space-sm;
+        }
+
+        &-price-container {
+          background-color: rgba(20, 31, 44, 0.8);
+          grid-area: price;
+          text-align: right;
+          padding: $space-sm;
+
+          &-item {
+            &-original-price {
+              display: block;
+              color: #577180;
+              font-size: 11px;
+              text-decoration: line-through;
+            }
+
+            &-discounted-price {
+              display: block;
+              color: #acdbf5;
+              font-size: 13px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

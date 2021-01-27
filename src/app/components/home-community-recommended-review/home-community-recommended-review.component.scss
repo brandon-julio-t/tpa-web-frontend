@@ -1,0 +1,30 @@
+@use 'src/app/styles/spacings' as *;
+
+.carousel {
+  margin: $space-lg 0;
+
+  &-content {
+    overflow: hidden;
+    height: 210px;
+  }
+
+  &-user {
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+    align-items: center;
+
+    &-profile-picture {
+      height: 36px;
+    }
+
+    &-display-name {
+      font-weight: bold;
+    }
+  }
+
+  &-control {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

@@ -2,6 +2,8 @@
 @use 'src/app/styles/sizes' as *;
 
 section {
+  margin: $space-lg 0;
+
   .carousel {
     &-item {
       box-shadow: 0 0 7px 0 #000;

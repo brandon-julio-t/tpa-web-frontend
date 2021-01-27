@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -49,6 +49,10 @@ import { WatchStreamComponent } from './pages/watch-stream/watch-stream.componen
 import { HomeStreamingNowComponent } from './pages/home-streaming-now/home-streaming-now.component';
 import { HomeSideBarComponent } from './components/home-side-bar/home-side-bar.component';
 import { GameDetailReviewsComponent } from './components/game-detail-reviews/game-detail-reviews.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { HomeSpecialOffersComponent } from './components/home-special-offers/home-special-offers.component';
+import { HomeCommunityRecommendedComponent } from './components/home-community-recommended/home-community-recommended.component';
+import { HomeCommunityRecommendedReviewComponent } from './components/home-community-recommended-review/home-community-recommended-review.component';
 
 @NgModule({
   declarations: [
@@ -92,6 +96,9 @@ import { GameDetailReviewsComponent } from './components/game-detail-reviews/gam
     HomeStreamingNowComponent,
     HomeSideBarComponent,
     GameDetailReviewsComponent,
+    HomeSpecialOffersComponent,
+    HomeCommunityRecommendedComponent,
+    HomeCommunityRecommendedReviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -105,8 +112,10 @@ import { GameDetailReviewsComponent } from './components/game-detail-reviews/gam
     RecaptchaModule,
     FontAwesomeModule,
     FormsModule,
+    NgxSpinnerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}

@@ -31,7 +31,7 @@ export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
           console.error(`[Network error]: ${networkError.message}`);
         }
       }),
-      // createPersistedQueryLink({ sha256 }),
+      createPersistedQueryLink({ sha256 }),
       split(
         ({ query }) => {
           const mainDefinition = getMainDefinition(query);

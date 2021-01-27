@@ -1,0 +1,40 @@
+<section class="home-special-offers">
+  <h2 class="letter-space">SPECIAL OFFERS</h2>
+
+  <section class="grid-carousel-container">
+    <div class="grid-carousel-left">
+      <fa-icon (click)="prev()" [icon]="faChevronLeft" size="2x"></fa-icon>
+    </div>
+    <section class="grid-carousel">
+      <div *ngFor="let g of paginatedGames" class="grid-carousel-item">
+        <a [routerLink]="['game', g.id]">
+          <img
+            [src]="asset(g.banner.id)"
+            alt="Banner"
+            class="grid-carousel-item-banner"
+          />
+          <div class="grid-carousel-item-detail">
+            <span class="grid-carousel-item-detail-discount">
+              -{{ g.discount | percent }}
+            </span>
+            <span class="grid-carousel-item-detail-price-container">
+              <span
+                class="grid-carousel-item-detail-price-container-item-original-price"
+              >
+                ${{ g.price | number }}
+              </span>
+              <span
+                class="grid-carousel-item-detail-price-container-item-discounted-price"
+              >
+                ${{ discounted(g.price, g.discount) | number }}
+              </span>
+            </span>
+          </div>
+        </a>
+      </div>
+    </section>
+    <div class="grid-carousel-right">
+      <fa-icon (click)="next()" [icon]="faChevronRight" size="2x"></fa-icon>
+    </div>
+  </section>
+</section>

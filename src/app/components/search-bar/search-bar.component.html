@@ -1,12 +1,22 @@
 <section *ngIf="user" class="wishlist-cart">
-  <a routerLink="/cart" class="btn-cart">Cart ({{ user?.cartCount }})</a>
-  <a routerLink="/wishlist" class="btn-wishlist">
+  <a class="btn-cart" routerLink="/cart">Cart ({{ user?.cartCount }})</a>
+  <a class="btn-wishlist" routerLink="/wishlist">
     Wishlist ({{ user?.wishlistCount }})
   </a>
 </section>
+
 <section class="search-bar">
-  <label for="search-input">
-    <input id="search-input" placeholder="search the store" type="text" />
-    <fa-icon [icon]="faSearch" size="2x"></fa-icon>
-  </label>
+  <form [formGroup]="searchForm" (submit)="onSubmit($event)">
+    <label for="search-input">
+      <input
+        formControlName="keyword"
+        id="search-input"
+        placeholder="search the store"
+        type="text"
+      />
+      <button type="submit">
+        <fa-icon [icon]="faSearch" size="2x"></fa-icon>
+      </button>
+    </label>
+  </form>
 </section>

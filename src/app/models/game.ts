@@ -9,6 +9,7 @@ export interface Game {
   banner: AssetFile;
   createdAt: Date;
   description: string;
+  discount: number;
   genre: GameGenre;
   isInappropriate: boolean;
   isInCart: boolean;

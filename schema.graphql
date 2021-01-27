@@ -139,6 +139,7 @@ type PromoPagination {
 type Query {
   allCountries: [Country!]!
   auth: User
+  communityRecommended: [Game!]!
   featuredAndRecommendedGames: [Game!]!
   games(page: Int!): GamePagination!
   genres: [GameGenre!]!
@@ -152,6 +153,8 @@ type Query {
   promo(id: ID!): Promo!
   promos(page: Int!): PromoPagination!
   refreshToken: Boolean!
+  searchGames(keyword: String!, page: Int!): GamePagination!
+  specialOffersGame: [Game!]!
   streams: [String!]!
   user(accountName: String!): User!
   users(page: Int!): UserPagination!
@@ -242,6 +245,6 @@ input UpdateUser {
 }
 
 
-scalar Time
-
 scalar Upload
+
+scalar Time

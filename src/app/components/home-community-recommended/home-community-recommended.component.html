@@ -1,0 +1,42 @@
+<section class="home-community-recommended">
+  <h2 class="letter-space">
+    THE COMMUNITY RECOMMENDS
+    <br />
+    <small>THESE GAMES TODAY</small>
+  </h2>
+
+  <section *ngIf="game" class="games">
+    <div class="games-carousel-left">
+      <fa-icon (click)="prev()" [icon]="faChevronLeft" size="2x"></fa-icon>
+    </div>
+
+    <section class="games-carousel">
+      <img
+        (mouseenter)="isHover = !isHover"
+        (mouseleave)="isHover = !isHover"
+        *ngIf="!isHover"
+        [src]="asset(game?.banner?.id)"
+        alt="banner"
+        class="games-carousel-banner"
+      />
+      <video
+        (mouseenter)="isHover = !isHover"
+        (mouseleave)="isHover = !isHover"
+        *ngIf="isHover"
+        [src]="video(game)"
+        autoplay
+        class="games-carousel-banner"
+      ></video>
+
+      <div class="games-carousel-detail">
+        <app-home-community-recommended-review
+          [reviews]="game?.mostHelpfulReviews"
+        ></app-home-community-recommended-review>
+      </div>
+    </section>
+
+    <div class="games-carousel-right">
+      <fa-icon (click)="next()" [icon]="faChevronRight" size="2x"></fa-icon>
+    </div>
+  </section>
+</section>

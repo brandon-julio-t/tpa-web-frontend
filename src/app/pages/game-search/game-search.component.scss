@@ -1,0 +1,44 @@
+@use 'src/app/styles/spacings' as *;
+
+.games {
+  &-list {
+    display: grid;
+    grid-gap: $space-md;
+
+    &-item {
+      display: grid;
+      grid-gap: $space-md;
+      grid-template-columns: 1fr 3fr 1fr 1fr;
+      grid-template-areas: "banner title created-at price";
+      align-items: center;
+
+      border: 1px solid rgba(139, 185, 224, 0);
+      background-color: rgba(0, 0, 0, 0.2);
+
+      &:hover {
+        border: 1px solid rgba(139, 185, 224, 0.2);
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+
+      img {
+        width: 100%;
+      }
+
+      &-banner {
+        grid-area: banner;
+      }
+
+      &-title {
+        grid-area: title;
+      }
+
+      &-created-at {
+        grid-area: created-at;
+      }
+
+      &-price {
+        grid-area: price;
+      }
+    }
+  }
+}

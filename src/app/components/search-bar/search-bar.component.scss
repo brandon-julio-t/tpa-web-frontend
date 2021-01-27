@@ -28,17 +28,21 @@
   flex-direction: row-reverse;
   margin: $space-lg 0;
 
-  label[for="search-input"] {
-    display: flex;
-    align-items: center;
-    max-width: 200px;
+  form {
+    margin: 0;
 
-    input {
-      margin: 0;
-    }
+    label[for="search-input"] {
+      display: flex;
+      align-items: center;
+      max-width: 200px;
 
-    fa-icon {
-      height: 100%;
+      input {
+        margin: 0;
+      }
+
+      fa-icon {
+        height: 100%;
+      }
     }
   }
 }

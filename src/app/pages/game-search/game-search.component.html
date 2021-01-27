@@ -1,1 +1,28 @@
-<p>game-search works!</p>
+<section class="games container">
+  <app-search-bar></app-search-bar>
+
+  <section class="games-list">
+    <a
+      [routerLink]="['/game', game.id]"
+      *ngFor="let game of games"
+      class="games-list-item"
+    >
+      <img
+        [src]="asset(game.banner.id)"
+        alt="Game banner"
+        class="grid-list-item-banner"
+      />
+      <span class="grid-list-item-title">{{ game.title }}</span>
+      <span class="grid-list-item-created-at">
+        {{ game.createdAt | date }}
+      </span>
+      <span class="grid-list-item-price">
+        {{ game.price | currency: "$" }}
+      </span>
+    </a>
+
+    <ngx-spinner type="ball-clip-rotate-multiple">
+      <p>Loading more games...</p>
+    </ngx-spinner>
+  </section>
+</section>
