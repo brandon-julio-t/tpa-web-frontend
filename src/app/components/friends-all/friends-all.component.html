@@ -1,0 +1,13 @@
+<section class="friends">
+  <div *ngFor="let friend of friends" class="friends-item">
+    <img
+      [src]="asset(friend.profilePicture.id)"
+      alt="Profile picture"
+      class="friends-item-profile-picture"
+    />
+
+    <span class="friends-item-display-name">
+      {{ friend.displayName }}
+    </span>
+  </div>
+</section>

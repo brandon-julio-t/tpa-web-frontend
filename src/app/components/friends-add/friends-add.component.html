@@ -1,0 +1,55 @@
+<h2 class="add-friend-title">ADD A FRIEND</h2>
+<section class="add-friend">
+  <h3 class="add-friend-label">Your Friend Code</h3>
+  <p class="add-friend-code">{{ user?.friendCode }}</p>
+  <p class="add-friend-description">
+    Enter your friend's Friend Code to invite them to connect.
+  </p>
+
+  <form [formGroup]="form" class="add-friend-form">
+    <label for="code">
+      <input
+        class="add-friend-form-input"
+        formControlName="code"
+        id="code"
+        placeholder="Enter a Friend Code"
+        type="text"
+      />
+    </label>
+
+    <button (click)="onSearch()" type="submit"></button>
+  </form>
+
+  <div *ngIf="searchedUser" class="add-friend-searched-user">
+    <div class="add-friend-searched-user-profile">
+      <img
+        [src]="asset(searchedUser?.profilePicture?.id)"
+        alt="Profile picture"
+        class="add-friend-searched-user-profile-picture"
+      />
+
+      <p class="add-friend-searched-user-profile-display-name">
+        {{ searchedUser?.displayName }}
+      </p>
+      <p
+        [routerLink]="['/profile', searchedUser?.customUrl]"
+        class="add-friend-searched-user-profile-link"
+      >
+        Profile Link
+      </p>
+      <p class="add-friend-searched-user-profile-summary">
+        {{ searchedUser?.summary }}
+      </p>
+    </div>
+
+    <div class="add-friend-searched-user-actions">
+      <button
+        (click)="onSendInvite(searchedUser?.id)"
+        [disabled]="!canAdd(searchedUser?.id)"
+        class="btn btn-black"
+      >
+        Send Invite
+      </button>
+    </div>
+  </div>
+</section>

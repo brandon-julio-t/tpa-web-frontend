@@ -1,0 +1,51 @@
+<section *ngIf="user$ | async as user" class="friends container">
+  <section class="friends-user">
+    <img
+      [src]="asset(user.profilePicture.id)"
+      alt="Profile picture"
+      class="friends-user-profile-picture"
+    />
+    <h2 class="friends-user-display-name">
+      {{ user.displayName }}
+    </h2>
+  </section>
+
+  <section class="friends-tabs">
+    <div
+      (click)="selected = 0"
+      [class.friends-tabs-item-active]="selected === 0"
+      class="friends-tabs-item"
+    >
+      You Friends
+    </div>
+    <div
+      (click)="selected = 1"
+      [class.friends-tabs-item-active]="selected === 1"
+      class="friends-tabs-item"
+    >
+      Add a Friend
+    </div>
+    <div
+      (click)="selected = 2"
+      [class.friends-tabs-item-active]="selected === 2"
+      class="friends-tabs-item"
+    >
+      Pending Invites
+    </div>
+  </section>
+
+  <section class="friends-content">
+    <app-friends-all
+      (refresh)="onRefresh()"
+      *ngIf="selected === 0"
+      [friends]="user.friends"
+    ></app-friends-all>
+    <app-friends-add *ngIf="selected === 1" [user]="user"></app-friends-add>
+    <app-friends-pending-invites
+      (refresh)="onRefresh()"
+      *ngIf="selected === 2"
+      [ingoing]="user.ingoingFriendRequests"
+      [outgoing]="user.outgoingFriendRequests"
+    ></app-friends-pending-invites>
+  </section>
+</section>

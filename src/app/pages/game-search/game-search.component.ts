@@ -55,7 +55,6 @@ export class GameSearchComponent implements OnInit {
     const { scrollY } = window;
     const { clientHeight, scrollHeight } = document.body;
     const position = scrollY + clientHeight;
-    console.log({ position, scrollHeight });
     if (position >= scrollHeight) {
       this.spinner.show();
 

@@ -11,7 +11,10 @@ export interface User {
   customUrl: string;
   displayName: string;
   email: string;
+  friendCode: string;
   friends: User[];
+  outgoingFriendRequests: User[];
+  ingoingFriendRequests: User[];
   profilePicture: AssetFile;
   profileTheme: string;
   realName: string;

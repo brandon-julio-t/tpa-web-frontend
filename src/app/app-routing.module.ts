@@ -30,6 +30,7 @@ import { GamePurchaseComponent } from './pages/game-purchase/game-purchase.compo
 import { GameGiftComponent } from './pages/game-gift/game-gift.component';
 import { WatchStreamComponent } from './pages/watch-stream/watch-stream.component';
 import { StreamingComponent } from './pages/streaming/streaming.component';
+import { FriendsComponent } from './pages/friends/friends.component';
 
 const routes: Routes = [
   {
@@ -40,6 +41,7 @@ const routes: Routes = [
         path: 'search/:keyword',
         component: GameSearchComponent,
       },
+      { path: 'friends', component: FriendsComponent },
       {
         path: '',
         children: [

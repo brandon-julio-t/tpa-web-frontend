@@ -16,6 +16,13 @@ type Country {
   name: String!
 }
 
+type FriendRequest {
+  createdAt: Time!
+  friend: User!
+  id: ID!
+  user: User!
+}
+
 type Game {
   banner: AssetFile!
   createdAt: Time!
@@ -68,11 +75,11 @@ type GameTag {
 }
 
 type Mutation {
+  acceptFriendRequest(userId: ID!): User!
   addPrivateMessage(friendId: ID!, text: String!): PrivateMessage!
   addToCart(gameId: ID!): Game!
   addToWishlist(gameId: ID!): Game!
   approveUnsuspendRequests(id: ID!): User!
-  befriend(userId: ID!): User!
   checkoutWithCard: Float!
   checkoutWithWallet: Float!
   clearCart: Boolean!
@@ -81,6 +88,7 @@ type Mutation {
   createPromo(discount: Float!, endAt: Time!): Promo!
   createReview(content: String!, gameId: ID!, isRecommended: Boolean!): GameReview!
   deleteGame(id: ID!): Game!
+  deleteNotification(id: ID!): Notification!
   deleteProfileComment(id: ID!): ProfileComment!
   deletePromo(id: ID!): Promo!
   deleteReview(id: ID!): GameReview!
@@ -94,20 +102,27 @@ type Mutation {
   newIceCandidate(accountName: String!, candidate: String!): String!
   redeemWallet(code: String!): Boolean!
   register(accountName: String!, countryId: ID!, email: String!, password: String!): User!
+  rejectFriendRequest(userId: ID!): User!
   removeFromCart(gameId: ID!): Game!
   removeFromWishlist(gameId: ID!): Game!
+  sendFriendRequest(userId: ID!): User!
   sendOTP(email: String!): Boolean!
   startStreaming(rtcConnection: String!): String!
   stopStreaming: Boolean!
   submitReport(description: String!, userId: ID!): Report!
   suspendAccount(id: ID!): User!
-  unfriend(userId: ID!): User!
   unsuspendRequest(accountName: String!): String!
   upVoteReview(id: ID!): GameReview!
   updateGame(input: UpdateGame!): Game!
   updateProfile(input: UpdateUser): User!
   updatePromo(discount: Float!, endAt: Time!, id: ID!): Promo!
   verifyOTP(otp: String!): Boolean!
+}
+
+type Notification {
+  content: String!
+  createdAt: Time!
+  id: ID!
 }
 
 type PrivateMessage {
@@ -149,6 +164,7 @@ type Query {
   getProfile(customUrl: String!): User!
   getReportsByUser(id: ID!): [Report!]!
   newAndTrending: [Game!]!
+  notificationById(id: ID!): Notification!
   privateMessage(friendId: ID!): [PrivateMessage!]!
   profileComments(profileId: ID!): [ProfileComment!]!
   promo(id: ID!): Promo!
@@ -160,6 +176,7 @@ type Query {
   streams: [String!]!
   topSellers: [Game!]!
   user(accountName: String!): User!
+  userByFriendCode(code: String!): User!
   users(page: Int!): UserPagination!
 }
 
@@ -185,8 +202,12 @@ type User {
   customUrl: String!
   displayName: String!
   email: String!
+  friendCode: String!
   friends: [User!]!
   id: ID!
+  ingoingFriendRequests: [User!]!
+  notification: [Notification!]!
+  outgoingFriendRequests: [User!]!
   profilePicture: AssetFile!
   profileTheme: String!
   realName: String!

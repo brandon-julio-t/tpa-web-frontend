@@ -37,6 +37,8 @@ export class ProfileComponent implements OnInit {
         query profileComments($profileId: ID!) {
           profileComments(profileId: $profileId) {
             id
+            comment
+            createdAt
             user {
               id
               displayName
@@ -44,8 +46,6 @@ export class ProfileComponent implements OnInit {
                 id
               }
             }
-            comment
-            createdAt
           }
         }
       `,
@@ -61,7 +61,22 @@ export class ProfileComponent implements OnInit {
   }
 
   get isFriend(): boolean {
-    return this.friends.some((friend) => friend.id === this.profile?.id);
+    return (
+      this.user?.friends.some((friend) => friend.id === this.profile?.id) ??
+      false
+    );
+  }
+
+  get isFriendRequested(): boolean {
+    return (
+      (this.user?.ingoingFriendRequests.some(
+        (friend) => friend.id === this.profile?.id
+      ) ||
+        this.user?.outgoingFriendRequests.some(
+          (friend) => friend.id === this.profile?.id
+        )) ??
+      false
+    );
   }
 
   ngOnInit(): void {
@@ -190,10 +205,10 @@ export class ProfileComponent implements OnInit {
     this.isLoading = true;
 
     this.apollo
-      .mutate<{ befriend: User }>({
+      .mutate<{ sendFriendRequest: User }>({
         mutation: gql`
-          mutation befriend($userId: ID!) {
-            befriend(userId: $userId) {
+          mutation sendFriendRequest($userId: ID!) {
+            sendFriendRequest(userId: $userId) {
               id
               accountName
             }
@@ -202,7 +217,7 @@ export class ProfileComponent implements OnInit {
         variables: { userId: id },
       })
       .subscribe((resp) => {
-        const friend = resp.data?.befriend;
+        const friend = resp.data?.sendFriendRequest;
         if (friend) {
           this.friends = [...this.friends, friend];
           this.isLoading = false;

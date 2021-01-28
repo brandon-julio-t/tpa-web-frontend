@@ -1,0 +1,55 @@
+<section class="invites">
+  <section class="ingoing">
+    <h2 class="ingoing-title">RECEIVED INVITES</h2>
+
+    <section class="ingoing-content">
+      <div *ngFor="let friend of ingoing" class="ingoing-content-item">
+        <img
+          [src]="asset(friend.profilePicture.id)"
+          alt="Profile picture"
+          class="ingoing-content-item-profile-picture"
+        />
+
+        <span class="ingoing-content-item-display-name">
+          {{ friend.displayName }}
+        </span>
+
+        <div class="ingoing-content-item-actions">
+          <button (click)="onAccept(friend.id)" class="btn btn-blue">
+            Accept
+          </button>
+          <button (click)="onReject(friend.id)" class="btn btn-red">
+            Reject
+          </button>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <section class="outgoing">
+    <h2 class="outgoing-title">SENT INVITES</h2>
+
+    <section class="outgoing-content">
+      <div *ngFor="let friend of outgoing" class="outgoing-content-item">
+        <img
+          [src]="asset(friend.profilePicture.id)"
+          alt="Profile picture"
+          class="outgoing-content-item-profile-picture"
+        />
+
+        <span class="outgoing-content-item-display-name">
+          {{ friend.displayName }}
+        </span>
+
+        <div class="outgoing-content-item-actions">
+          <button (click)="onAccept(friend.id)" class="btn btn-blue">
+            Accept
+          </button>
+          <button (click)="onReject(friend.id)" class="btn btn-red">
+            Reject
+          </button>
+        </div>
+      </div>
+    </section>
+  </section>
+</section>

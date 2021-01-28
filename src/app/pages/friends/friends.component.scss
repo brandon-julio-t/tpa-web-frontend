@@ -1,0 +1,53 @@
+@use 'src/app/styles/spacings' as *;
+@use 'src/app/styles/mixins' as *;
+
+.friends {
+  display: grid;
+  grid-gap: $space-md;
+  grid-template-columns: 1fr 4fr;
+  grid-template-areas:
+    "user user"
+    "tabs contents";
+
+  &-user {
+    grid-area: user;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-gap: $space-md;
+    align-items: center;
+
+    &-profile-picture {
+      height: 64px;
+      width: 64px;
+      object-fit: cover;
+    }
+
+    &-display-name {
+      text-align: left;
+      margin: 0;
+    }
+  }
+
+  &-tabs {
+    grid-area: tabs;
+    color: #ebebeb;
+
+    &-item {
+      @include clickable;
+      padding: $space-md;
+      text-align: left;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+
+      &-active {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      &-profile-picture {
+        height: 100%;
+      }
+    }
+  }
+}

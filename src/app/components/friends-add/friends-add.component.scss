@@ -1,0 +1,88 @@
+@use 'src/app/styles/spacings' as *;
+@use 'src/app/styles/sizes' as *;
+@use 'src/app/styles/mixins' as *;
+
+.add-friend {
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: $space-md;
+
+  &-title {
+    padding: $space-md;
+    background-color: #015e80;
+    color: #ffffff;
+    margin: 0;
+  }
+
+  &-label {
+    color: #ffffff;
+  }
+
+  &-code {
+    background-color: rgba(144, 144, 144, 0.1);
+    padding: $space-md;
+    color: #ffffff;
+    border-radius: $size-md;
+  }
+
+  &-description {
+    margin: $space-md 0;
+  }
+
+  &-form {
+    margin: 0;
+
+    &-input {
+    }
+
+    &-submit {
+    }
+  }
+
+  &-searched-user {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-gap: $space-md;
+
+    padding: $space-md;
+    background: #2c3842;
+    box-shadow: 0 4px 20px rgb(0 0 0 / 25%);
+
+    &-profile {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      grid-template-areas:
+        "profile-picture display-name"
+        "profile-picture profile-link"
+        "profile-picture summary";
+      grid-gap: $space-md;
+
+      text-align: left;
+
+      &-picture {
+        grid-area: profile-picture;
+        height: 64px;
+        width: 64px;
+        object-fit: cover;
+      }
+
+      &-display-name {
+        grid-area: display-name;
+        color: #ffffff;
+      }
+
+      &-link {
+        @include clickable;
+        text-align: left;
+        grid-area: profile-link;
+        color: #09b9ff;
+      }
+
+      &-summary {
+        grid-area: summary;
+      }
+    }
+
+    &-actions {
+    }
+  }
+}

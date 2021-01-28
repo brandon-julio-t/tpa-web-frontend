@@ -32,6 +32,21 @@ export class AuthService extends Query<Response> {
             contentType
           }
         }
+        friendCode
+        outgoingFriendRequests {
+          id
+          displayName
+          profilePicture {
+            id
+          }
+        }
+        ingoingFriendRequests {
+          id
+          displayName
+          profilePicture {
+            id
+          }
+        }
         profileTheme
         realName
         summary

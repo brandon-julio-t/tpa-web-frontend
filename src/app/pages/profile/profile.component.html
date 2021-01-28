@@ -15,8 +15,8 @@
 
   <div class="profile-actions">
     <app-submit-button
-      *ngIf="user?.id !== profile?.id && !isFriend"
       (click)="onBefriend(profile?.id)"
+      *ngIf="user?.id !== profile?.id && !isFriendRequested && !isFriend"
       [loading]="isLoading"
       class="btn btn-blue"
     >

@@ -57,6 +57,10 @@ import { HomeCategoriesContainerComponent } from './components/home-categories-c
 import { HomeCategoriesContentComponent } from './components/home-categories-content/home-categories-content.component';
 import { HomeCategoriesTopSellersComponent } from './components/home-categories-top-sellers/home-categories-top-sellers.component';
 import { HomeCategoriesSpecialsComponent } from './components/home-categories-specials/home-categories-specials.component';
+import { FriendsComponent } from './pages/friends/friends.component';
+import { FriendsAddComponent } from './components/friends-add/friends-add.component';
+import { FriendsPendingInvitesComponent } from './components/friends-pending-invites/friends-pending-invites.component';
+import { FriendsAllComponent } from './components/friends-all/friends-all.component';
 
 @NgModule({
   declarations: [
@@ -107,6 +111,10 @@ import { HomeCategoriesSpecialsComponent } from './components/home-categories-sp
     HomeCategoriesContentComponent,
     HomeCategoriesTopSellersComponent,
     HomeCategoriesSpecialsComponent,
+    FriendsComponent,
+    FriendsAddComponent,
+    FriendsPendingInvitesComponent,
+    FriendsAllComponent,
   ],
   imports: [
     BrowserModule,

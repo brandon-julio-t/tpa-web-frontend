@@ -1,0 +1,48 @@
+@use 'src/app/styles/spacings' as *;
+@use 'src/app/styles/mixins' as *;
+
+.invites {
+  .ingoing,
+  .outgoing {
+    margin: $space-lg;
+
+    &-title {
+      color: #ffffff;
+      background-color: #015e80;
+      padding: $space-md;
+    }
+
+    &-content {
+      display: grid;
+      grid-gap: $space-md;
+
+      &-item {
+        background-color: rgba(29, 31, 36, 0.8);
+        display: grid;
+        grid-template-columns: auto 2fr 1fr;
+        align-items: center;
+        grid-gap: $space-md;
+        height: fit-content;
+
+        &:hover {
+          box-shadow: 0 0 5px rgb(0 0 0 / 40%);
+        }
+
+        &-profile-picture {
+          height: 64px;
+          width: 64px;
+          object-fit: cover;
+        }
+
+        &-actions {
+          display: grid;
+          grid-template-columns: auto auto;
+
+          button {
+            justify-self: center;
+          }
+        }
+      }
+    }
+  }
+}
