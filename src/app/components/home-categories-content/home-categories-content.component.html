@@ -1,0 +1,75 @@
+<section class="games">
+  <section class="games-list">
+    <div
+      (mouseover)="selected = i"
+      *ngFor="let g of games; index as i"
+      [class.games-list-item-active]="isActive(i)"
+      [routerLink]="['game', g.id]"
+      class="games-list-item pointer"
+    >
+      <img
+        [src]="asset(g.banner.id)"
+        alt="Banner"
+        class="games-list-item-banner"
+      />
+      <p
+        [class.games-list-item-title-active]="isActive(i)"
+        class="games-list-item-title"
+      >
+        {{ g.title }}
+      </p>
+      <small class="games-list-item-tags">
+        <span
+          *ngFor="let t of g.tags"
+          [class.games-list-item-tags-item-active]="isActive(i)"
+          class="games-list-item-tags-item"
+        >
+          {{ t.name }}
+        </span>
+      </small>
+
+      <div
+        *ngIf="g.discount"
+        [class.games-list-item-price-active]="isActive(i)"
+        class="games-list-item-price"
+      >
+        <p *ngIf="g.discount" class="games-list-item-price-discount">
+          {{ g.discount | percent }}
+        </p>
+        <p class="games-list-item-price-original">
+          {{ g.price | currency: "$" }}
+        </p>
+        <small *ngIf="g.discount" class="games-list-item-price-discounted">
+          {{ discountedPrice(g.price, g.discount) | currency: "$" }}
+        </small>
+      </div>
+
+      <div
+        *ngIf="!g.discount"
+        [class.games-list-item-price-active]="isActive(i)"
+        class="games-list-item-price"
+      >
+        <p class="games-list-item-price-clean">
+          {{ g.price | currency: "$" }}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="games-detail">
+    <h3 class="games-detail-title">{{ game?.title }}</h3>
+    <small class="games-detail-tags">
+      <span *ngFor="let t of game?.tags || []" class="games-detail-tags-item">
+        {{ t.name }}
+      </span>
+    </small>
+    <div class="games-detail-slideshows">
+      <img
+        *ngFor="let s of slideshowImages(game?.slideshows)"
+        [src]="asset(s.file.id)"
+        alt="Game slideshow"
+        class="games-detail-slideshows-item"
+      />
+    </div>
+  </section>
+</section>

@@ -1,4 +1,4 @@
-<section class="home-community-recommended">
+<section class="home-community-recommended container">
   <h2 class="letter-space">
     THE COMMUNITY RECOMMENDS
     <br />
@@ -12,16 +12,16 @@
 
     <section class="games-carousel">
       <img
-        (mouseenter)="isHover = !isHover"
-        (mouseleave)="isHover = !isHover"
+        (mouseover)="isHover = true"
+        (mouseleave)="isHover = false"
         *ngIf="!isHover"
         [src]="asset(game?.banner?.id)"
         alt="banner"
         class="games-carousel-banner"
       />
       <video
-        (mouseenter)="isHover = !isHover"
-        (mouseleave)="isHover = !isHover"
+        (mouseover)="isHover = true"
+        (mouseleave)="isHover = false"
         *ngIf="isHover"
         [src]="video(game)"
         autoplay

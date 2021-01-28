@@ -2,7 +2,7 @@
 @use 'src/app/styles/sizes' as *;
 
 section {
-  margin: $space-lg 0;
+  margin: $space-lg auto;
 
   .carousel {
     &-item {

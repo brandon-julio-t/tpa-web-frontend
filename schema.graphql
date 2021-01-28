@@ -148,6 +148,7 @@ type Query {
   getGameById(id: ID!): Game!
   getProfile(customUrl: String!): User!
   getReportsByUser(id: ID!): [Report!]!
+  newAndTrending: [Game!]!
   privateMessage(friendId: ID!): [PrivateMessage!]!
   profileComments(profileId: ID!): [ProfileComment!]!
   promo(id: ID!): Promo!
@@ -155,7 +156,9 @@ type Query {
   refreshToken: Boolean!
   searchGames(keyword: String!, page: Int!): GamePagination!
   specialOffersGame: [Game!]!
+  specials: [Game!]!
   streams: [String!]!
+  topSellers: [Game!]!
   user(accountName: String!): User!
   users(page: Int!): UserPagination!
 }
@@ -245,6 +248,6 @@ input UpdateUser {
 }
 
 
-scalar Upload
-
 scalar Time
+
+scalar Upload

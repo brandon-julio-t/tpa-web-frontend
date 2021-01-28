@@ -1,0 +1,31 @@
+<section class="categories">
+  <div class="container">
+    <section class="categories-tabs">
+      <span
+        class="categories-tabs-item"
+        [class.categories-tabs-item-active]="idx === 0"
+        (click)="idx = 0"
+      >
+        New and Trending
+      </span>
+      <span
+        class="categories-tabs-item"
+        [class.categories-tabs-item-active]="idx === 1"
+        (click)="idx = 1"
+      >
+        Top Sellers
+      </span>
+      <span
+        class="categories-tabs-item"
+        [class.categories-tabs-item-active]="idx === 2"
+        (click)="idx = 2"
+      >
+        Specials
+      </span>
+    </section>
+
+    <section class="categories-games">
+      <app-home-categories-content [idx]="idx"></app-home-categories-content>
+    </section>
+  </div>
+</section>

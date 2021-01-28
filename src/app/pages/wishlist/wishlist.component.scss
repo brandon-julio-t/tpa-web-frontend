@@ -1,5 +1,5 @@
 @use 'src/app/styles/spacings' as *;
-@use 'src/app/styles/components' as *;
+@use 'src/app/styles/mixins' as *;
 
 .wishlist {
   &-list {

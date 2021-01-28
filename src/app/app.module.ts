@@ -53,6 +53,10 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { HomeSpecialOffersComponent } from './components/home-special-offers/home-special-offers.component';
 import { HomeCommunityRecommendedComponent } from './components/home-community-recommended/home-community-recommended.component';
 import { HomeCommunityRecommendedReviewComponent } from './components/home-community-recommended-review/home-community-recommended-review.component';
+import { HomeCategoriesContainerComponent } from './components/home-categories-container/home-categories-container.component';
+import { HomeCategoriesContentComponent } from './components/home-categories-content/home-categories-content.component';
+import { HomeCategoriesTopSellersComponent } from './components/home-categories-top-sellers/home-categories-top-sellers.component';
+import { HomeCategoriesSpecialsComponent } from './components/home-categories-specials/home-categories-specials.component';
 
 @NgModule({
   declarations: [
@@ -99,6 +103,10 @@ import { HomeCommunityRecommendedReviewComponent } from './components/home-commu
     HomeSpecialOffersComponent,
     HomeCommunityRecommendedComponent,
     HomeCommunityRecommendedReviewComponent,
+    HomeCategoriesContainerComponent,
+    HomeCategoriesContentComponent,
+    HomeCategoriesTopSellersComponent,
+    HomeCategoriesSpecialsComponent,
   ],
   imports: [
     BrowserModule,

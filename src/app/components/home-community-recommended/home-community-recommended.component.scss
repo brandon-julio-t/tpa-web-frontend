@@ -1,7 +1,8 @@
 @use 'src/app/styles/spacings' as *;
+@use 'src/app/styles/mixins' as *;
 
 .home-community-recommended {
-  margin: $space-lg 0;
+  margin: $space-lg auto;
 }
 
 .games {
@@ -10,13 +11,15 @@
   align-items: center;
 
   &-carousel {
+    @include shadow;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    height: 350px;
     grid-gap: $space-md;
 
     &-banner {
-      height: inherit;
+      @include shadow;
+      height: 100%;
+      width: 100%;
       object-fit: cover;
     }
 

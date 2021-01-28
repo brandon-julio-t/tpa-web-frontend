@@ -1,9 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 
+@use 'app/styles/mixins' as *;
+@use 'app/styles/utilities' as *;
 @use 'src/app/styles/breakpoints' as *;
 @use 'src/app/styles/sizes' as *;
 @use 'src/app/styles/spacings' as *;
-@use 'app/styles/utilities' as *;
 
 *,
 *:before,
@@ -50,12 +51,7 @@ button {
 
 a,
 button {
-  text-align: center;
-  color: inherit;
-
-  &:hover {
-    color: #ffffff;
-  }
+  @include clickable;
 }
 
 form {

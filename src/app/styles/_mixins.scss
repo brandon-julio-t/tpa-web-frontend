@@ -1,0 +1,28 @@
+@mixin clickable {
+  text-align: center;
+  color: inherit;
+  cursor: pointer;
+
+  &:hover {
+    color: #ffffff;
+  }
+}
+
+@mixin tag {
+  display: inline-block;
+  padding: 8px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  margin-right: 8px;
+  margin-top: 8px;
+}
+
+@mixin shadow {
+  box-shadow: 0 0 4px #000;
+}
+
+@mixin fit-image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}

@@ -1,0 +1,136 @@
+@use 'src/app/styles/spacings' as *;
+@use 'src/app/styles/sizes' as *;
+@use 'src/app/styles/mixins' as *;
+
+.games {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-areas: "list detail";
+  grid-gap: $space-md;
+
+  &-list {
+    grid-area: list;
+
+    &-item {
+      display: grid;
+      grid-template-columns: 2fr 5fr 1fr 1fr;
+      grid-template-areas:
+        "banner title discount price"
+        "banner tags discount price";
+      align-items: center;
+      justify-content: flex-start;
+      grid-gap: $space-md;
+      margin-bottom: $space-md;
+      background: rgba(0, 0, 0, 0.2);
+
+      &-active {
+        background: linear-gradient(to right, #c6e6f8 5%, #95bcd3 95%);
+      }
+
+      &-banner {
+        @include fit-image;
+        grid-area: banner;
+      }
+
+      &-title {
+        grid-area: title;
+        color: #c7d5e0;
+        margin-top: $space-md;
+
+        &-active {
+          color: #10161b;
+        }
+      }
+
+      &-tags {
+        grid-area: tags;
+        color: #384959;
+        margin-bottom: $space-md;
+
+        &-item {
+          &-active {
+            color: #10161b;
+          }
+        }
+      }
+
+      &-price {
+        grid-area: price;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-areas:
+          "discount original-price"
+          "discount discounted-price";
+        align-items: center;
+        text-align: right;
+        color: #acdbf5;
+        font-size: 13px;
+        grid-gap: $space-md;
+        margin-right: $space-md;
+
+        &-active {
+          color: #263645;
+        }
+
+        &-discount {
+          grid-area: discount;
+          color: #a4d007;
+          background: #4c6b22;
+          font-size: 14px;
+          text-align: center;
+          padding: $space-sm;
+        }
+
+        &-original {
+          grid-area: original-price;
+          text-decoration: line-through;
+          color: #7193a6;
+          font-size: 11px;
+        }
+
+        &-discounted {
+          grid-area: discounted-price;
+          color: inherit;
+        }
+
+        &-clean {
+          grid-row: span 2;
+          grid-column: span 2;
+          color: inherit;
+        }
+      }
+    }
+  }
+
+  &-detail {
+    grid-area: detail;
+    background: linear-gradient(to right, #c6e6f8 5%, #95bcd3 95%);
+    padding: $space-md;
+
+    &-title {
+      color: #263645;
+    }
+
+    &-tags {
+      &-item {
+        background-color: rgba(38, 54, 69, 0.6);
+        color: #ffffff;
+        margin-right: $space-sm;
+        margin-bottom: $space-sm;
+        border-radius: $size-sm;
+        padding: $space-sm;
+        display: inline-block;
+
+        &:hover {
+          color: #66c0f4;
+        }
+      }
+    }
+
+    &-slideshows {
+      &-item {
+        width: 100%;
+      }
+    }
+  }
+}
