@@ -1,0 +1,19 @@
+<section class="notifications">
+  <section (click)="isOpen = !isOpen" class="notifications-header">
+    <fa-icon [icon]="faEnvelope"></fa-icon>
+  </section>
+
+  <section [class.hidden]="!isOpen" class="notifications-dropdown">
+    <div class="notifications-dropdown-item">0 new comments</div>
+    <hr />
+    <div routerLink="/friends" class="notifications-dropdown-item">
+      0 new invites
+    </div>
+    <hr />
+    <div class="notifications-dropdown-item">0 new gifts</div>
+    <hr />
+    <div routerLink="/chat" class="notifications-dropdown-item">
+      0 unread chat messages
+    </div>
+  </section>
+</section>

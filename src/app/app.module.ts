@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -61,6 +61,8 @@ import { FriendsComponent } from './pages/friends/friends.component';
 import { FriendsAddComponent } from './components/friends-add/friends-add.component';
 import { FriendsPendingInvitesComponent } from './components/friends-pending-invites/friends-pending-invites.component';
 import { FriendsAllComponent } from './components/friends-all/friends-all.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NotificationsComponent } from './components/notifications/notifications.component';
 
 @NgModule({
   declarations: [
@@ -115,6 +117,7 @@ import { FriendsAllComponent } from './components/friends-all/friends-all.compon
     FriendsAddComponent,
     FriendsPendingInvitesComponent,
     FriendsAllComponent,
+    NotificationsComponent,
   ],
   imports: [
     BrowserModule,
@@ -129,6 +132,7 @@ import { FriendsAllComponent } from './components/friends-all/friends-all.compon
     FontAwesomeModule,
     FormsModule,
     NgxSpinnerModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

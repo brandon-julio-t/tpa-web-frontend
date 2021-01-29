@@ -1,3 +1,4 @@
+<ngx-spinner></ngx-spinner>
 <h2 class="add-friend-title">ADD A FRIEND</h2>
 <section class="add-friend">
   <h3 class="add-friend-label">Your Friend Code</h3>
@@ -43,11 +44,7 @@
     </div>
 
     <div class="add-friend-searched-user-actions">
-      <button
-        (click)="onSendInvite(searchedUser?.id)"
-        [disabled]="!canAdd(searchedUser?.id)"
-        class="btn btn-black"
-      >
+      <button (click)="onSendInvite(searchedUser?.id)" class="btn btn-black">
         Send Invite
       </button>
     </div>

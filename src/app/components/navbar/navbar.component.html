@@ -25,7 +25,10 @@
       <div *ngIf="user" class="dropdown">
         <span class="dropdown-header">
           <span>
-            <a href="#">{{ user?.displayName }}</a>
+            <a>
+              <app-notifications></app-notifications>
+              {{ user?.displayName }}
+            </a>
             <a routerLink="/top-up">
               {{ user?.walletBalance | currency: "$" }}
             </a>

@@ -1,0 +1,41 @@
+@use 'src/app/styles/spacings' as *;
+
+.notifications {
+  background-color: #262625;
+  padding: $space-sm;
+  display: inline-block;
+  position: relative;
+  z-index: 2;
+
+  &:hover {
+    background-color: #575451;
+  }
+
+  &-header {
+  }
+
+  &-dropdown {
+    position: absolute;
+    right: 0;
+    width: 250px;
+    box-shadow: 0 0 12px #000000;
+    background-color: #171a21;
+    border: 1px solid #171a21;
+
+    hr {
+      margin: 0;
+      background-color: #262a31;
+      height: 1px;
+    }
+
+    &-item {
+      text-align: left;
+      padding: $space-md;
+
+      &:hover {
+        background-color: #373d44;
+        color: #ffffff;
+      }
+    }
+  }
+}
