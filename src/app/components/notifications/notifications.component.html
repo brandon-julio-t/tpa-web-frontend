@@ -1,19 +1,26 @@
-<section class="notifications">
+<section *ngIf="user$ | async as user" class="notifications">
   <section (click)="isOpen = !isOpen" class="notifications-header">
     <fa-icon [icon]="faEnvelope"></fa-icon>
   </section>
 
   <section [class.hidden]="!isOpen" class="notifications-dropdown">
-    <div class="notifications-dropdown-item">0 new comments</div>
-    <hr />
-    <div routerLink="/friends" class="notifications-dropdown-item">
-      0 new invites
+    <div
+      class="notifications-dropdown-item"
+      [routerLink]="['profile', user.customUrl]"
+    >
+      {{ user.receivedProfileCommentsCount }} new comments
     </div>
     <hr />
-    <div class="notifications-dropdown-item">0 new gifts</div>
+    <div class="notifications-dropdown-item" routerLink="/friends">
+      {{ user.receivedInvitesCount }} new invites
+    </div>
     <hr />
-    <div routerLink="/chat" class="notifications-dropdown-item">
-      0 unread chat messages
+    <div class="notifications-dropdown-item">
+      {{ user.receivedGiftsCount }} new gifts
+    </div>
+    <hr />
+    <div class="notifications-dropdown-item" routerLink="/chat">
+      {{ user.receivedMessagesCount }} unread chat messages
     </div>
   </section>
 </section>

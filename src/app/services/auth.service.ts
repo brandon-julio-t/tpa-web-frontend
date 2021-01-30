@@ -49,6 +49,10 @@ export class AuthService extends Query<Response> {
         }
         profileTheme
         realName
+        receivedGiftsCount
+        receivedInvitesCount
+        receivedMessagesCount
+        receivedProfileCommentsCount
         summary
         walletBalance
         suspendedAt

@@ -13,11 +13,15 @@ export interface User {
   email: string;
   friendCode: string;
   friends: User[];
-  outgoingFriendRequests: User[];
   ingoingFriendRequests: User[];
+  outgoingFriendRequests: User[];
   profilePicture: AssetFile;
   profileTheme: string;
   realName: string;
+  receivedGiftsCount: number;
+  receivedInvitesCount: number;
+  receivedMessagesCount: number;
+  receivedProfileCommentsCount: number;
   reportCounts: number;
   stream: string;
   summary: string;

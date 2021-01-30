@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { AuthService } from '../../services/auth.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-notifications',
@@ -7,10 +9,15 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./notifications.component.scss'],
 })
 export class NotificationsComponent implements OnInit {
-  faEnvelope = faEnvelope;
+  user$ = this.authService
+    .watch()
+    .valueChanges.pipe(map((value) => value.data.auth));
+
   isOpen = false;
 
-  constructor() {}
+  faEnvelope = faEnvelope;
+
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {}
 }

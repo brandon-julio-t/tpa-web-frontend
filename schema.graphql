@@ -206,11 +206,15 @@ type User {
   friends: [User!]!
   id: ID!
   ingoingFriendRequests: [User!]!
-  notification: [Notification!]!
+  notifications: [Notification!]!
   outgoingFriendRequests: [User!]!
   profilePicture: AssetFile!
   profileTheme: String!
   realName: String!
+  receivedGiftsCount: Int!
+  receivedInvitesCount: Int!
+  receivedMessagesCount: Int!
+  receivedProfileCommentsCount: Int!
   reportCounts: Int!
   stream: String!
   summary: String!
@@ -269,6 +273,6 @@ input UpdateUser {
 }
 
 
-scalar Time
-
 scalar Upload
+
+scalar Time
