@@ -38,7 +38,7 @@ const routes: Routes = [
     children: [
       { path: '', component: HomeComponent, pathMatch: 'full' },
       {
-        path: 'search/:keyword',
+        path: 'search',
         component: GameSearchComponent,
       },
       { path: 'friends', component: FriendsComponent },

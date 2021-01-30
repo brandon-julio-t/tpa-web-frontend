@@ -1,9 +1,19 @@
 @use 'src/app/styles/spacings' as *;
 
 .games {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-gap: $space-md;
+  grid-template-areas:
+    "search-bar search-bar"
+    "game-list game-filter";
+
+  app-search-bar {
+    grid-area: search-bar;
+  }
+
   &-list {
-    display: grid;
-    grid-gap: $space-md;
+    grid-area: game-list;
 
     &-item {
       display: grid;
@@ -11,7 +21,8 @@
       grid-template-columns: 1fr 3fr 1fr 1fr;
       grid-template-areas: "banner title created-at price";
       align-items: center;
-
+      height: fit-content;
+      margin-bottom: $space-md;
       border: 1px solid rgba(139, 185, 224, 0);
       background-color: rgba(0, 0, 0, 0.2);
 
@@ -39,6 +50,53 @@
       &-price {
         grid-area: price;
       }
+    }
+  }
+
+  &-filter {
+    grid-area: game-filter;
+
+    &-price {
+      &-title {
+      }
+
+      &-input {
+      }
+
+      &-info {
+      }
+    }
+
+    &-tags {
+      &-title {
+      }
+
+      &-radio {
+        display: grid;
+        grid-template-columns: auto;
+        overflow: auto;
+        height: 350px;
+
+        &-input {
+          width: fit-content;
+          display: inline;
+        }
+
+        &-label {
+        }
+      }
+    }
+
+    &-category {
+      &-title {
+      }
+
+      &-input {
+      }
+    }
+
+    .btn {
+      width: 100%;
     }
   }
 }

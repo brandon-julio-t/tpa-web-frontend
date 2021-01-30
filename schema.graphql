@@ -170,7 +170,7 @@ type Query {
   promo(id: ID!): Promo!
   promos(page: Int!): PromoPagination!
   refreshToken: Boolean!
-  searchGames(keyword: String!, page: Int!): GamePagination!
+  searchGames(category: String!, genres: [ID!]!, keyword: String!, page: Int!, price: Int!): GamePagination!
   specialOffersGame: [Game!]!
   specials: [Game!]!
   streams: [String!]!
@@ -273,6 +273,6 @@ input UpdateUser {
 }
 
 
-scalar Upload
-
 scalar Time
+
+scalar Upload

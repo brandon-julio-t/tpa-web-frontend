@@ -1,10 +1,14 @@
+<ngx-spinner type="ball-clip-rotate-multiple">
+  <p>Loading more games...</p>
+</ngx-spinner>
+
 <section class="games container">
   <app-search-bar></app-search-bar>
 
   <section class="games-list">
     <a
-      [routerLink]="['/game', game.id]"
       *ngFor="let game of games"
+      [routerLink]="['/game', game.id]"
       class="games-list-item"
     >
       <img
@@ -20,9 +24,58 @@
         {{ game.price | currency: "$" }}
       </span>
     </a>
+  </section>
 
-    <ngx-spinner type="ball-clip-rotate-multiple">
-      <p>Loading more games...</p>
-    </ngx-spinner>
+  <section class="games-filter">
+    <section class="games-filter-price">
+      <h2 class="games-filter-price-title">Filter by Price</h2>
+
+      <label for="price">
+        <input
+          [(ngModel)]="price"
+          class="games-filter-price-input"
+          id="price"
+          max="300"
+          min="0"
+          step="10"
+          type="range"
+        />
+      </label>
+
+      <p class="games-filter-price-info">Under {{ price | currency: "$" }}</p>
+    </section>
+
+    <section class="games-filter-tags">
+      <h2 class="games-filter-tags-title">Filter by Tags input</h2>
+
+      <div class="games-filter-tags-radio">
+        <label *ngFor="let tag of gameTags$ | async">
+          <input
+            (change)="onTagSelected(tag.id, $event)"
+            [checked]="selectedGameTagIds.includes(tag.id)"
+            class="games-filter-tags-radio-input"
+            type="checkbox"
+          />
+          <span class="games-filter-tags-radio-label">
+            {{ tag.name }}
+          </span>
+        </label>
+      </div>
+    </section>
+
+    <section class="games-filter-category">
+      <h2 class="games-filter-category-title">Filter by Category</h2>
+
+      <label>
+        <select [(ngModel)]="category" class="games-filter-category-input">
+          <option selected>-</option>
+          <option value="community_recommends">Community Recommends</option>
+          <option value="special_offers">Special Offers</option>
+          <option value="top_sellers">Top Sellers</option>
+        </select>
+      </label>
+    </section>
+
+    <button (click)="onApplyFilter()" class="btn btn-blue">Apply Filter</button>
   </section>
 </section>

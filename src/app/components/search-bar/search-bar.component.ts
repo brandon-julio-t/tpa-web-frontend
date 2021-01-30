@@ -36,6 +36,10 @@ export class SearchBarComponent implements OnInit {
       return;
     }
 
-    this.router.navigate(['search', this.searchForm.value.keyword]).then();
+    this.router
+      .navigate(['search'], {
+        queryParams: { keyword: this.searchForm.value.keyword },
+      })
+      .then();
   }
 }
