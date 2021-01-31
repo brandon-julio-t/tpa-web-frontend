@@ -1,29 +1,45 @@
-<ngx-spinner type="ball-clip-rotate-multiple">
-  <p>Loading more games...</p>
-</ngx-spinner>
+<ngx-spinner type="line-scale-pulse-out-rapid"></ngx-spinner>
 
 <section class="games container">
   <app-search-bar></app-search-bar>
 
   <section class="games-list">
-    <a
-      *ngFor="let game of games"
-      [routerLink]="['/game', game.id]"
-      class="games-list-item"
-    >
-      <img
-        [src]="asset(game.banner.id)"
-        alt="Game banner"
-        class="grid-list-item-banner"
-      />
-      <span class="grid-list-item-title">{{ game.title }}</span>
-      <span class="grid-list-item-created-at">
-        {{ game.createdAt | date }}
-      </span>
-      <span class="grid-list-item-price">
-        {{ game.price | currency: "$" }}
-      </span>
-    </a>
+    <div *ngFor="let game of games" class="games-list-item">
+      <a [routerLink]="['/game', game.id]" class="games-list-item-row">
+        <img
+          [src]="asset(game.banner.id)"
+          alt="Game banner"
+          class="games-list-item-row-banner"
+        />
+        <span class="games-list-item-row-title">{{ game.title }}</span>
+        <span class="games-list-item-row-created-at">
+          {{ game.createdAt | date }}
+        </span>
+        <span class="games-list-item-price">
+          {{ game.price | currency: "$" }}
+        </span>
+      </a>
+
+      <div class="games-list-item-detail">
+        <p class="games-list-item-detail-title">{{ game.title }}</p>
+        <small class="games-list-item-detail-released">
+          Released: {{ game.createdAt | date }}
+        </small>
+        <img
+          [src]="asset(game.banner.id)"
+          alt="Banner"
+          class="games-list-item-detail-banner"
+        />
+        <div class="games-list-item-detail-tags">
+          <span
+            *ngFor="let t of game.tags"
+            class="games-list-item-detail-tags-item"
+          >
+            {{ t.name }}
+          </span>
+        </div>
+      </div>
+    </div>
   </section>
 
   <section class="games-filter">

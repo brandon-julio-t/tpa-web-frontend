@@ -14,8 +14,6 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./game-search.component.scss'],
 })
 export class GameSearchComponent implements OnInit {
-  gamesQuery = this.apollo.watchQuery<Output, Input>({ query });
-
   games: Game[] = [];
   gameTags$ = this.apollo
     .query<{ getAllGameTags: GameTag[] }>({
@@ -126,6 +124,9 @@ const query = gql`
         }
         createdAt
         price
+        tags {
+          name
+        }
         title
       }
       totalPages

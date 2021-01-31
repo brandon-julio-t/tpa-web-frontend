@@ -1,4 +1,5 @@
 @use 'src/app/styles/spacings' as *;
+@use 'src/app/styles/mixins' as *;
 
 .games {
   display: grid;
@@ -16,39 +17,90 @@
     grid-area: game-list;
 
     &-item {
-      display: grid;
-      grid-gap: $space-md;
-      grid-template-columns: 1fr 3fr 1fr 1fr;
-      grid-template-areas: "banner title created-at price";
-      align-items: center;
-      height: fit-content;
-      margin-bottom: $space-md;
-      border: 1px solid rgba(139, 185, 224, 0);
-      background-color: rgba(0, 0, 0, 0.2);
+      position: relative;
+      display: flex;
+
+      &-row {
+        display: grid;
+        grid-gap: $space-md;
+        grid-template-columns: 1fr 3fr 1fr 1fr;
+        grid-template-areas: "banner title created-at price";
+        align-items: center;
+        height: fit-content;
+        margin-bottom: $space-md;
+        border: 1px solid rgba(139, 185, 224, 0);
+        background-color: rgba(0, 0, 0, 0.2);
+
+        &:hover {
+          border: 1px solid rgba(139, 185, 224, 0.2);
+          background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        img {
+          width: 100%;
+        }
+
+        &-banner {
+          grid-area: banner;
+        }
+
+        &-title {
+          grid-area: title;
+        }
+
+        &-created-at {
+          grid-area: created-at;
+        }
+
+        &-price {
+          grid-area: price;
+        }
+      }
 
       &:hover {
-        border: 1px solid rgba(139, 185, 224, 0.2);
-        background-color: rgba(0, 0, 0, 0.4);
+        .games-list-item-detail {
+          display: block;
+        }
       }
 
-      img {
-        width: 100%;
-      }
+      &-detail {
+        position: absolute;
+        right: calc(-274px - 16px - 16px);
+        display: none;
+        padding: $space-md;
+        background-color: #ffffff;
 
-      &-banner {
-        grid-area: banner;
-      }
+        &-title {
+          color: #000000;
+        }
 
-      &-title {
-        grid-area: title;
-      }
+        &-released {
+          display: block;
+          color: #000000;
+        }
 
-      &-created-at {
-        grid-area: created-at;
-      }
+        &-banner {
+          width: 274px;
+          height: auto;
+          object-fit: cover;
+        }
 
-      &-price {
-        grid-area: price;
+        &-tags {
+          display: flex;
+          flex-wrap: wrap;
+          width: 274px;
+
+          &-item {
+            @include tag;
+            display: inline-block;
+            background: rgba(0, 0, 0, 0.2);
+            color: #000000;
+
+            &:nth-child(odd) {
+              margin-right: $space-md;
+            }
+          }
+        }
       }
     }
   }
