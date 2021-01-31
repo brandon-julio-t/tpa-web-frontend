@@ -9,12 +9,14 @@ export interface Game {
   banner: AssetFile;
   createdAt: Date;
   description: string;
+  developer: string;
   discount: number;
   genre: GameGenre;
   isInappropriate: boolean;
   isInCart: boolean;
   isInWishlist: boolean;
   price: number;
+  publisher: string;
   mostHelpfulReviews: GameReview[];
   recentReviews: GameReview[];
   slideshows: GameSlideshow[];

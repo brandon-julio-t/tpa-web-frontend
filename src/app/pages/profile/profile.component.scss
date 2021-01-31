@@ -1,26 +1,65 @@
 @use 'src/app/styles/spacings' as *;
 @use 'src/app/styles/sizes' as *;
+@use 'src/app/styles/mixins' as *;
 
 .profile {
   padding: $space-md;
   border-radius: $size-md;
 
-  &-picture {
-    display: flex;
+  &-information {
+    display: grid;
+    grid-template-columns: auto 2fr 1fr;
+    grid-gap: $space-md;
+    grid-template-areas:
+      "profile-picture display-name level"
+      "profile-picture summary actions";
 
-    &-image {
+    &-picture-image {
+      grid-area: profile-picture;
       max-width: 164px;
       padding-right: $space-md;
     }
 
     &-display-name {
+      grid-area: display-name;
       padding-top: $space-md;
+    }
+
+    &-summary {
+      grid-area: summary;
+    }
+
+    &-level {
+      grid-area: level;
+      align-self: center;
+    }
+
+    &-actions {
+      grid-area: actions;
     }
   }
 
-  &-actions {
-    justify-self: flex-end;
-    text-align: center;
+  &-games {
+    &-item {
+      @include clickable;
+      text-align: left;
+      background-color: rgba(0, 0, 0, 0.3);
+      padding: $space-md;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      grid-gap: $space-md;
+      margin-bottom: $space-md;
+
+      &-banner {
+        width: 184px;
+        height: auto;
+        object-fit: cover;
+      }
+
+      &-item {
+      }
+    }
   }
 
   &-comments {
@@ -32,6 +71,40 @@
       &-profile-picture {
         max-height: 32px;
         margin-right: $space-md;
+      }
+    }
+  }
+}
+
+.report {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &-form {
+    position: relative;
+    background: radial-gradient(
+        circle at top left,
+        rgba(74, 81, 92, 0.4) 0%,
+        rgba(75, 81, 92, 0) 60%
+      ),
+      #25282e;
+    width: 500px;
+    padding: $space-lg;
+
+    &-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: $space-md;
+
+      .btn {
+        width: 100%;
       }
     }
   }

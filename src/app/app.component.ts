@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
             refreshToken
           }
         `,
-        pollInterval: 30000,
+        pollInterval: 5000000,
       })
       .valueChanges.subscribe();
   }

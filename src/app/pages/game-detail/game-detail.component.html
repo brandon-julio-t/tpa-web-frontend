@@ -1,7 +1,7 @@
 <section class="detail container">
   <app-search-bar></app-search-bar>
 
-  <section *ngIf="!hasInputAge" class="detail-inappropriate">
+  <section *ngIf="!hasInputAge && game" class="detail-inappropriate">
     <img [src]="asset(game?.banner?.id)" alt="" />
 
     <p class="text-center">
@@ -65,8 +65,8 @@
         <p>{{ game?.description }}</p>
         <p>All reviews: [TBD]</p>
         <p>Release Date: {{ game?.createdAt | date }}</p>
-        <p>Developer: DVD PROJEKT GREEN</p>
-        <p>Publisher: DVD PROJEKT GREEN</p>
+        <p>Developer: {{ game?.developer }}</p>
+        <p>Publisher: {{ game?.publisher }}</p>
         <p>Popular user-defined tags for this product:</p>
         <div class="detail-carousel-right-tags">
           <span *ngFor="let tag of game?.tags">

@@ -7,6 +7,8 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { AssetService } from '../../services/asset.service';
 import { ProfileComment } from '../../models/profile-comment';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { map } from 'rxjs/operators';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-profile',
@@ -14,13 +16,36 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
+  profileGames$ = this.apollo
+    .query<{ auth: User }>({
+      query: gql`
+        query authGames {
+          auth {
+            games {
+              id
+              title
+              banner {
+                id
+              }
+            }
+          }
+        }
+      `,
+    })
+    .pipe(map((value) => value.data.auth.games));
+
   user: User | null = null;
   profile: User | null = null;
   comments: ProfileComment[] = [];
   commentsQuery: QueryRef<{ profileComments: ProfileComment[] }>;
   profileCommentForm: FormGroup;
   isLoading = false;
+  isReporting = false;
   friends: User[] = [];
+
+  reportForm = this.fb.group({
+    detail: ['', Validators.required],
+  });
 
   constructor(
     private apollo: Apollo,
@@ -28,7 +53,8 @@ export class ProfileComponent implements OnInit {
     private route: ActivatedRoute,
     private sanitizer: DomSanitizer,
     private authService: AuthService,
-    private assetService: AssetService
+    private assetService: AssetService,
+    private spinner: NgxSpinnerService
   ) {
     this.commentsQuery = this.apollo.watchQuery<{
       profileComments: ProfileComment[];
@@ -79,6 +105,10 @@ export class ProfileComponent implements OnInit {
     );
   }
 
+  asset(id: number): SafeUrl {
+    return this.assetService.get(id);
+  }
+
   ngOnInit(): void {
     const customUrl = this.route.snapshot.paramMap.get('customUrl');
     if (!customUrl) {
@@ -100,6 +130,8 @@ export class ProfileComponent implements OnInit {
               displayName
               customUrl
               profileTheme
+              summary
+              level
               country {
                 id
                 name
@@ -221,6 +253,35 @@ export class ProfileComponent implements OnInit {
         if (friend) {
           this.friends = [...this.friends, friend];
           this.isLoading = false;
+        }
+      });
+  }
+
+  onReport(): void {
+    if (this.reportForm.invalid) {
+      return;
+    }
+
+    this.spinner.show();
+
+    this.apollo
+      .mutate({
+        mutation: gql`
+          mutation submitReport($userId: ID!, $description: String!) {
+            submitReport(userId: $userId, description: $description) {
+              id
+            }
+          }
+        `,
+        variables: {
+          userId: this.profile?.id,
+          description: this.reportForm.value.detail,
+        },
+      })
+      .subscribe((resp) => {
+        if (resp.data) {
+          this.spinner.hide();
+          this.isReporting = false;
         }
       });
   }

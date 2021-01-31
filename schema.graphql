@@ -27,6 +27,7 @@ type Game {
   banner: AssetFile!
   createdAt: Time!
   description: String!
+  developer: String!
   discount: Float!
   genre: GameGenre!
   id: ID!
@@ -35,6 +36,7 @@ type Game {
   isInappropriate: Boolean!
   mostHelpfulReviews: [GameReview!]!
   price: Float!
+  publisher: String!
   recentReviews: [GameReview!]!
   slideshows: [GameSlideshow!]!
   systemRequirements: String!
@@ -204,8 +206,10 @@ type User {
   email: String!
   friendCode: String!
   friends: [User!]!
+  games: [Game!]!
   id: ID!
   ingoingFriendRequests: [User!]!
+  level: Int!
   notifications: [Notification!]!
   outgoingFriendRequests: [User!]!
   profilePicture: AssetFile!

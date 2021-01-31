@@ -18,6 +18,7 @@ export class AuthService extends Query<Response> {
         customUrl
         displayName
         email
+        level
         profilePicture {
           id
           contentType

@@ -38,6 +38,10 @@ export class CartComponent implements OnInit {
   }
 
   onRemove(id: number): void {
+    if (!confirm('Are you sure you want to remove this game?')) {
+      return;
+    }
+
     this.isLoading = true;
     this.apollo
       .mutate<{ removeFromCart: Game }>({

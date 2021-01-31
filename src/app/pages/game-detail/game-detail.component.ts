@@ -40,6 +40,7 @@ export class GameDetailComponent implements OnInit {
             }
             createdAt
             description
+            developer
             discount
             genre {
               id
@@ -47,6 +48,7 @@ export class GameDetailComponent implements OnInit {
             }
             isInappropriate
             price
+            publisher
             mostHelpfulReviews {
               id
               content

@@ -2,34 +2,60 @@
   [ngStyle]="{ backgroundColor: profile?.profileTheme }"
   class="profile container"
 >
-  <div class="profile-picture">
+  <div class="profile-information">
     <img
       [src]="profilePicture"
       alt="Profile Picture"
-      class="profile-picture-image"
+      class="profile-information-picture-image"
       width="auto"
     />
+    <h2 class="profile-information-display-name">{{ profile?.displayName }}</h2>
+    <p class="profile-information-summary">{{ profile?.summary }}</p>
+    <p class="profile-information-level">Level {{ profile?.level }}</p>
 
-    <h2 class="profile-picture-display-name">{{ profile?.displayName }}</h2>
+    <div *ngIf="user" class="profile-information-actions">
+      <app-submit-button
+        (click)="onBefriend(profile?.id)"
+        *ngIf="user?.id !== profile?.id && !isFriendRequested && !isFriend"
+        [loading]="isLoading"
+        class="btn btn-blue"
+      >
+        Add Friend
+      </app-submit-button>
+      <app-submit-button
+        (click)="isReporting = true"
+        *ngIf="user?.id !== profile?.id"
+        [loading]="isLoading"
+        class="btn btn-red"
+      >
+        Report
+      </app-submit-button>
+      <a
+        *ngIf="profile?.id === user?.id"
+        [routerLink]="['/profile', 'edit', profile?.customUrl]"
+        class="btn btn-black"
+      >
+        Edit Profile
+      </a>
+    </div>
   </div>
 
-  <div class="profile-actions">
-    <app-submit-button
-      (click)="onBefriend(profile?.id)"
-      *ngIf="user?.id !== profile?.id && !isFriendRequested && !isFriend"
-      [loading]="isLoading"
-      class="btn btn-blue"
+  <section class="profile-games">
+    <h2>Games</h2>
+
+    <div
+      *ngFor="let game of profileGames$ | async"
+      [routerLink]="['/game', game.id]"
+      class="profile-games-item"
     >
-      Add Friend
-    </app-submit-button>
-    <a
-      *ngIf="profile?.id === user?.id"
-      [routerLink]="['/profile', 'edit', profile?.customUrl]"
-      class="btn btn-black"
-    >
-      Edit Profile
-    </a>
-  </div>
+      <img
+        [src]="asset(game.banner.id)"
+        alt="Banner"
+        class="profile-games-item-banner"
+      />
+      <h3 class="profile-games-item-title">{{ game.title }}</h3>
+    </div>
+  </section>
 
   <ul class="profile-comments">
     <li *ngFor="let comment of comments" class="profile-comments-item">
@@ -79,5 +105,30 @@
     >
       Submit
     </app-submit-button>
+  </form>
+</section>
+
+<section *ngIf="isReporting" class="report">
+  <form [formGroup]="reportForm" class="report-form">
+    <ngx-spinner
+      [fullScreen]="false"
+      type="line-scale-pulse-out-rapid"
+    ></ngx-spinner>
+
+    <label for="report-detail">
+      <textarea
+        formControlName="detail"
+        id="report-detail"
+        placeholder="Fill in the details..."
+        rows="10"
+      ></textarea>
+    </label>
+
+    <div class="report-form-actions">
+      <button (click)="onReport()" class="btn btn-red" type="submit">
+        Submit
+      </button>
+      <button (click)="isReporting = false" class="btn btn-black">Back</button>
+    </div>
   </form>
 </section>
