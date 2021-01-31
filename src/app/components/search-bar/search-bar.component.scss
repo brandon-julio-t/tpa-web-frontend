@@ -1,4 +1,5 @@
 @use 'src/app/styles/spacings' as *;
+@use 'src/app/styles/mixins' as *;
 
 .wishlist-cart {
   display: flex;
@@ -21,27 +22,70 @@
   }
 }
 
-.search-bar {
+.search-outer-container {
   background: rgba(62, 126, 167, 0.8);
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
-  display: flex;
-  flex-direction: row-reverse;
-  margin: $space-lg 0;
 
-  form {
-    margin: 0;
+  .search-inner-container {
+    max-width: 450px;
+    position: relative;
+    margin-top: $space-lg;
+    margin-bottom: $space-lg;
+    margin-left: auto;
 
-    label[for="search-input"] {
+    label {
       display: flex;
-      align-items: center;
-      max-width: 200px;
+    }
 
-      input {
+    .search {
+      &-input {
         margin: 0;
       }
 
-      fa-icon {
-        height: 100%;
+      &-result {
+        position: absolute;
+        right: 0;
+        z-index: 999;
+        background-color: #ffffff;
+
+        hr {
+          grid-area: separator;
+          margin: 0;
+        }
+
+        &-game {
+          @include clickable;
+          text-align: left;
+          margin: $space-md;
+          display: grid;
+          align-items: center;
+          grid-template-columns: auto 1fr;
+          grid-template-areas:
+            "separator separator"
+            "banner title"
+            "banner price";
+
+          &:hover {
+            background-color: #171a21;
+            color: #ffffff;
+          }
+
+          &-banner {
+            grid-area: banner;
+            height: 100px;
+            width: auto;
+            object-fit: cover;
+            margin-right: $space-md;
+          }
+
+          &-title {
+            grid-area: title;
+          }
+
+          &-price {
+            grid-area: price;
+          }
+        }
       }
     }
   }
