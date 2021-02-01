@@ -1,0 +1,90 @@
+@use 'src/app/styles/spacings' as *;
+
+.review {
+  &-game {
+    &-title {
+    }
+
+    &-banner {
+      width: 100%;
+      object-fit: cover;
+      margin: $space-lg 0;
+    }
+  }
+
+  &-recommendation {
+    display: flex;
+    align-items: center;
+    margin: $space-md 0;
+
+    &-thumbs {
+      margin-right: $space-md;
+    }
+
+    &-text {
+    }
+  }
+
+  &-user {
+    display: flex;
+    align-items: center;
+    margin: $space-md 0;
+
+    &-profile-picture {
+      grid-area: profile-picture;
+      height: 32px;
+      width: 32px;
+      object-fit: cover;
+      margin-right: $space-md;
+    }
+
+    &-display-name {
+      grid-area: display-name;
+    }
+  }
+
+  &-created-at {
+  }
+
+  &-content {
+    margin: $space-md 0;
+  }
+
+  &-comments {
+    margin: $space-md 0;
+
+    &-item {
+      margin: $space-md 0;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      grid-template-areas: "profile-picture display-name" "profile-picture body";
+
+      &-profile-picture {
+        grid-area: profile-picture;
+        margin-right: $space-md;
+        height: 64px;
+        width: 64px;
+        object-fit: cover;
+      }
+
+      &-display-name {
+        grid-area: display-name;
+      }
+
+      &-body {
+        grid-area: body;
+      }
+    }
+
+    &-pagination {
+      display: flex;
+      align-items: center;
+      width: fit-content;
+      margin: 0 auto;
+
+      span {
+        margin: 0 $space-lg;
+      }
+    }
+  }
+}

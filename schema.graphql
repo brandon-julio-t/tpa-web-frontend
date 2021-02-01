@@ -99,6 +99,7 @@ type GamePagination {
 }
 
 type GameReview {
+  comment(page: Int!): GameReviewCommentPagination!
   content: String!
   createdAt: Time!
   downVoters: [User!]!
@@ -109,6 +110,18 @@ type GameReview {
   upVoters: [User!]!
   upVotes: Int!
   user: User!
+}
+
+type GameReviewComment {
+  body: String!
+  createdAt: Time!
+  id: ID!
+  user: User!
+}
+
+type GameReviewCommentPagination {
+  data: [GameReviewComment!]!
+  totalPages: Int!
 }
 
 type GameSlideshow {
@@ -151,6 +164,7 @@ type Mutation {
   logout: User!
   newIceCandidate(accountName: String!, candidate: String!): String!
   postCommunityImagesAndVideosComment(body: String!, imageAndVideoId: ID!): CommunityImageAndVideoComment!
+  postGameReviewComment(input: GameReviewCommentInput!): GameReviewComment!
   redeemWallet(code: String!): Boolean!
   register(accountName: String!, countryId: ID!, email: String!, password: String!): User!
   rejectFriendRequest(userId: ID!): User!
@@ -303,6 +317,11 @@ input CreateGame {
   title: String!
 }
 
+input GameReviewCommentInput {
+  body: String!
+  reviewId: ID!
+}
+
 input Gift {
   firstName: String!
   message: String!
@@ -335,6 +354,6 @@ input UpdateUser {
 }
 
 
-scalar Time
-
 scalar Upload
+
+scalar Time

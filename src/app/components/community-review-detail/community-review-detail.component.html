@@ -1,1 +1,74 @@
-<p>community-review-detail works!</p>
+<ngx-spinner></ngx-spinner>
+
+<section *ngIf="review$ | async as review" class="review container">
+  <h2 class="review-game-title">{{ review.game.title }}</h2>
+
+  <img
+    [src]="asset(review.game.banner.id)"
+    alt="Game banner"
+    class="review-game-banner"
+  />
+
+  <div class="review-user">
+    <img
+      [src]="asset(review.user.profilePicture.id)"
+      alt="Profile picture"
+      class="review-user-profile-picture"
+    />
+
+    <h3 class="review-user-display-name">{{ review.user.displayName }}</h3>
+  </div>
+
+  <div class="review-recommendation">
+    <fa-icon
+      *ngIf="review.isRecommended"
+      [icon]="faThumbsUp"
+      class="review-recommendation-thumbs"
+      size="3x"
+    ></fa-icon>
+    <fa-icon
+      *ngIf="!review.isRecommended"
+      [icon]="faThumbsDown"
+      class="review-recommendation-thumbs"
+      size="3x"
+    ></fa-icon>
+
+    <p class="review-recommendation-text">
+      {{ review.isRecommended ? "" : "Not" }} Recommended
+    </p>
+  </div>
+
+  <small class="review-created-at">{{ review.createdAt | date }}</small>
+
+  <p class="review-content">{{ review.content }}</p>
+
+  <section class="review-comments">
+    <h3>Comments</h3>
+    <hr />
+
+    <div
+      *ngFor="let comment of review.comment.data"
+      class="review-comments-item"
+    >
+      <img
+        [src]="asset(comment.user.profilePicture.id)"
+        alt="profile picture"
+        class="review-comments-item-profile-picture"
+      />
+
+      <h4 class="review-comments-item-display-name">
+        {{ comment.user.displayName }}
+      </h4>
+
+      <p class="review-comments-item-body">
+        {{ comment.body }}
+      </p>
+    </div>
+
+    <div class="review-comments-pagination">
+      <button (click)="prev()" class="btn btn-black"><</button>
+      <span>{{ currentPage }} / {{ review.comment.totalPages }}</span>
+      <button (click)="next()" class="btn btn-black">></button>
+    </div>
+  </section>
+</section>
