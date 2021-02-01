@@ -1,0 +1,52 @@
+<ngx-spinner type="line-scale-pulse-out-rapid"></ngx-spinner>
+
+<section>
+  <button class="btn btn-blue" routerLink="/create-community-images-and-videos">
+    Create
+  </button>
+
+  <section class="posts">
+    <div
+      *ngFor="let imageAndVideo of imagesAndVideos$ | async"
+      [routerLink]="['/community-images-and-videos', imageAndVideo.id]"
+      class="posts-item"
+    >
+      <h2 class="posts-item-name">{{ imageAndVideo.name }}</h2>
+
+      <img
+        *ngIf="isImage(imageAndVideo.file)"
+        [src]="asset(imageAndVideo.file.id)"
+        alt="Banner"
+        class="posts-item-image"
+      />
+      <video
+        *ngIf="isVideo(imageAndVideo.file)"
+        [src]="asset(imageAndVideo.file.id)"
+        class="posts-item-video"
+        controls
+      ></video>
+
+      <div class="posts-item-details">
+        <button
+          (click)="like(imageAndVideo.id)"
+          [class.btn-blue]="imageAndVideo.isLiked"
+          class="posts-item-details-like btn btn-black"
+        >
+          <fa-icon [icon]="faThumbsUp"></fa-icon>
+        </button>
+        <button
+          (click)="dislike(imageAndVideo.id)"
+          [class.btn-red]="imageAndVideo.isDisliked"
+          class="posts-item-details-dislike btn btn-black"
+        >
+          <fa-icon [icon]="faThumbsDown"></fa-icon>
+        </button>
+
+        <span class="posts-item-details-likes">
+          <fa-icon [icon]="faThumbsUp"></fa-icon>
+          {{ imageAndVideo.likes }}
+        </span>
+      </div>
+    </div>
+  </section>
+</section>

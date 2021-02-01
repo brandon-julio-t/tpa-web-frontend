@@ -11,6 +11,50 @@ type AssetFile {
   id: ID!
 }
 
+type Community {
+  discussion(id: ID!): CommunityDiscussion!
+  discussions: [CommunityDiscussion!]!
+  imageAndVideo(id: ID!): CommunityImageAndVideo!
+  imagesAndVideos: [CommunityImageAndVideo!]!
+  review(id: ID!): CommunityReview!
+  reviews: [CommunityReview!]!
+}
+
+type CommunityDiscussion {
+  id: ID!
+}
+
+type CommunityImageAndVideo {
+  comments(page: Int!): CommunityImageAndVideoCommentPagination!
+  createdAt: Time!
+  description: String!
+  dislikes: Int!
+  file: AssetFile!
+  id: ID!
+  isDisliked: Boolean!
+  isLiked: Boolean!
+  likes: Int!
+  name: String!
+  user: User!
+}
+
+type CommunityImageAndVideoComment {
+  body: String!
+  communityImagesAndVideos: CommunityImageAndVideo!
+  createdAt: Time!
+  id: ID!
+  user: User!
+}
+
+type CommunityImageAndVideoCommentPagination {
+  data: [CommunityImageAndVideoComment!]!
+  totalPages: Int!
+}
+
+type CommunityReview {
+  id: ID!
+}
+
 type Country {
   id: ID!
   name: String!
@@ -89,6 +133,7 @@ type Mutation {
   checkoutWithCard: Float!
   checkoutWithWallet: Float!
   clearCart: Boolean!
+  createCommunityImagesAndVideos(input: CreateCommunityImageAndVideo!): CommunityImageAndVideo!
   createGame(input: CreateGame!): Game!
   createProfileComment(comment: String!, profileId: ID!): ProfileComment!
   createPromo(discount: Float!, endAt: Time!): Promo!
@@ -99,13 +144,16 @@ type Mutation {
   deletePromo(id: ID!): Promo!
   deleteReview(id: ID!): GameReview!
   denyUnsuspendRequests(id: ID!): User!
+  dislikeCreateCommunityImagesAndVideos(imageAndVideoId: ID!): CommunityImageAndVideo!
   downVoteReview(id: ID!): GameReview!
   giftWithCard(input: Gift!): Float!
   giftWithWallet(input: Gift!): Float!
   joinStream(accountName: String!, rtcAnswer: String!): String!
+  likeCreateCommunityImagesAndVideos(imageAndVideoId: ID!): CommunityImageAndVideo!
   login(accountName: String!, password: String!): User!
   logout: User!
   newIceCandidate(accountName: String!, candidate: String!): String!
+  postCommunityImagesAndVideosComment(body: String!, imageAndVideoId: ID!): CommunityImageAndVideoComment!
   redeemWallet(code: String!): Boolean!
   register(accountName: String!, countryId: ID!, email: String!, password: String!): User!
   rejectFriendRequest(userId: ID!): User!
@@ -160,6 +208,7 @@ type PromoPagination {
 type Query {
   allCountries: [Country!]!
   auth: User
+  community: Community!
   communityRecommended: [Game!]!
   discoverQueue: DiscoveryQueue!
   featuredAndRecommendedGames: [Game!]!
@@ -239,6 +288,12 @@ type UserPagination {
   totalPages: Int!
 }
 
+input CreateCommunityImageAndVideo {
+  description: String!
+  file: Upload!
+  name: String!
+}
+
 input CreateGame {
   banner: Upload!
   description: String!
@@ -283,6 +338,6 @@ input UpdateUser {
 }
 
 
-scalar Time
-
 scalar Upload
+
+scalar Time

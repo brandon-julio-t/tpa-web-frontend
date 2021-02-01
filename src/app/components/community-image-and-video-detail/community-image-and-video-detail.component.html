@@ -1,0 +1,92 @@
+<ngx-spinner type="line-scale-pulse-out-rapid"></ngx-spinner>
+
+<section *ngIf="imageAndVideo$ | async as imageAndVideo" class="post container">
+  <h2 class="post-name">{{ imageAndVideo.name }}</h2>
+
+  <img
+    *ngIf="isImage(imageAndVideo.file)"
+    [src]="asset(imageAndVideo.file.id)"
+    alt="showcase"
+    class="post-image"
+  />
+  <video
+    *ngIf="isVideo(imageAndVideo.file)"
+    [src]="asset(imageAndVideo.file.id)"
+    class="post-video"
+    controls
+  ></video>
+
+  <div class="post-details">
+    <button
+      (click)="like(imageAndVideo.id)"
+      [class.btn-blue]="imageAndVideo.isLiked"
+      class="post-details-like btn btn-black"
+    >
+      <fa-icon [icon]="faThumbsUp"></fa-icon>
+    </button>
+    <button
+      (click)="dislike(imageAndVideo.id)"
+      [class.btn-red]="imageAndVideo.isDisliked"
+      class="post-details-dislike btn btn-black"
+    >
+      <fa-icon [icon]="faThumbsDown"></fa-icon>
+    </button>
+
+    <span class="post-details-likes">
+      <fa-icon [icon]="faThumbsUp"></fa-icon>
+      {{ imageAndVideo.likes }}
+    </span>
+  </div>
+
+  <hr />
+
+  <section class="post-submit-comment">
+    <label>
+      <textarea
+        [(ngModel)]="commentBody"
+        placeholder="Type your thoughts here..."
+        rows="10"
+      ></textarea>
+    </label>
+
+    <button (click)="onSubmitComment()" class="btn btn-blue" type="submit">
+      Submit
+    </button>
+  </section>
+
+  <section class="post-comments">
+    <h2>Comments</h2>
+    <hr />
+    <div class="post-comments-list">
+      <div
+        *ngFor="let comment of imageAndVideo.comments.data"
+        class="post-comments-list-item"
+      >
+        <img
+          [src]="asset(comment.user.profilePicture.id)"
+          alt="Profile picture"
+          class="post-comments-list-item-profile-picture"
+        />
+
+        <h3 class="post-comments-list-item-display-name">
+          {{ comment.user.displayName }}
+        </h3>
+
+        <p class="post-comments-list-item-created-at">
+          <small>{{ comment.createdAt | date }}</small>
+        </p>
+
+        <p class="post-comments-list-item-body">
+          {{ comment.body }}
+        </p>
+      </div>
+    </div>
+    <div class="post-comments-actions">
+      <button (click)="prev()" class="btn btn-black"><</button>
+      <span>
+        {{ this.currentPage }} / {{ imageAndVideo.comments.totalPages }}
+      </span>
+      <button (click)="next()" class="btn btn-black">></button>
+    </div>
+  </section>
+</section>

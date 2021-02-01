@@ -1,0 +1,27 @@
+<ngx-spinner type="line-scale-pulse-out-rapid"></ngx-spinner>
+
+<form [formGroup]="form">
+  <label for="name">
+    Name
+    <input formControlName="name" id="name" type="text" />
+  </label>
+
+  <label for="description">
+    Description
+    <textarea
+      formControlName="description"
+      id="description"
+      rows="10"
+      type="text"
+    ></textarea>
+  </label>
+
+  <label for="file">
+    Image or Video
+    <input (change)="onFileChange($event.target)" id="file" type="file" />
+  </label>
+
+  <button (click)="onSubmit()" class="btn btn-blue" type="submit">
+    Submit
+  </button>
+</form>

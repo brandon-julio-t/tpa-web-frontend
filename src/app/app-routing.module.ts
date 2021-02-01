@@ -32,12 +32,27 @@ import { WatchStreamComponent } from './pages/watch-stream/watch-stream.componen
 import { StreamingComponent } from './pages/streaming/streaming.component';
 import { FriendsComponent } from './pages/friends/friends.component';
 import { DiscoveryQueueNewReleasesComponent } from './pages/discovery-queue-new-releases/discovery-queue-new-releases.component';
+import { CommunityComponent } from './pages/community/community.component';
+import { CommunityImageAndVideoCreateComponent } from './components/community-image-and-video-create/community-image-and-video-create.component';
+import { CommunityImageAndVideoDetailComponent } from './components/community-image-and-video-detail/community-image-and-video-detail.component';
 
 const routes: Routes = [
   {
     path: '',
     children: [
       { path: '', component: HomeComponent, pathMatch: 'full' },
+      {
+        path: 'community',
+        children: [{ path: ':tab', component: CommunityComponent }],
+      },
+      {
+        path: 'create-community-images-and-videos',
+        component: CommunityImageAndVideoCreateComponent,
+      },
+      {
+        path: 'community-images-and-videos/:id',
+        component: CommunityImageAndVideoDetailComponent,
+      },
       {
         path: 'discover',
         children: [

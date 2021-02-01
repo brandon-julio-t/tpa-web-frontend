@@ -1,0 +1,79 @@
+@use 'src/app/styles/spacings' as *;
+
+.post {
+  &-image,
+  &-video {
+    width: 100%;
+    object-fit: cover;
+  }
+
+  &-details {
+    display: grid;
+    align-items: center;
+    grid-gap: $space-md;
+    grid-template-columns: auto auto 1fr;
+
+    &-like,
+    &-dislike {
+      display: inline-block;
+    }
+
+    &-likes {
+      justify-self: flex-end;
+    }
+  }
+
+  &-submit-comment {
+    margin: $space-lg 0;
+  }
+
+  &-comments {
+    &-list {
+      &-item {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        grid-template-areas:
+          "profile-picture display-name"
+          "profile-picture created-at"
+          "profile-picture body";
+
+        margin: $space-lg 0;
+
+        &-profile-picture {
+          grid-area: profile-picture;
+          width: 64px;
+          height: 64px;
+          object-fit: cover;
+          margin-right: $space-md;
+        }
+
+        &-display-name {
+          grid-area: display-name;
+          margin-bottom: 0;
+        }
+
+        &-created-at {
+          grid-area: created-at;
+        }
+
+        &-body {
+          grid-area: body;
+          margin: $space-md 0;
+        }
+      }
+    }
+
+    &-actions {
+      width: fit-content;
+      margin: 0 auto;
+
+      button {
+        display: inline-block;
+      }
+
+      span {
+        margin: 0 $space-md;
+      }
+    }
+  }
+}

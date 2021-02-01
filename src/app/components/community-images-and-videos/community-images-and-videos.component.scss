@@ -1,0 +1,38 @@
+@use 'src/app/styles/spacings' as *;
+@use 'src/app/styles/mixins' as *;
+
+.posts {
+  &-item {
+    @include clickable;
+    padding: $space-sm;
+    text-align: left;
+
+    &:hover {
+      border: 1px solid #2f89bc;
+    }
+
+    &-name {
+    }
+
+    &-image,
+    &-video {
+      width: 100%;
+    }
+
+    &-details {
+      display: grid;
+      align-items: center;
+      grid-gap: $space-md;
+      grid-template-columns: auto auto 1fr;
+
+      &-like,
+      &-dislike {
+        display: inline-block;
+      }
+
+      &-likes {
+        justify-self: flex-end;
+      }
+    }
+  }
+}

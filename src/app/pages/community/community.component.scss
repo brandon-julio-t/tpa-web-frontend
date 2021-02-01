@@ -1,0 +1,14 @@
+@use 'src/app/styles/spacings' as *;
+
+.community {
+  &-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: $space-md;
+    justify-content: center;
+
+    button {
+      width: 100%;
+    }
+  }
+}

@@ -6,7 +6,27 @@
 
     <div class="navigations">
       <a routerLink="/store">Store</a>
-      <a>Community</a>
+
+      <div class="dropdown">
+        <span class="dropdown-header">
+          <a routerLink="/community/images-and-videos">COMMUNITY</a>
+        </span>
+
+        <div class="dropdown-list">
+          <a
+            class="dropdown-list-item"
+            routerLink="/community/images-and-videos"
+          >
+            Images and Videos
+          </a>
+          <a class="dropdown-list-item" routerLink="/community/reviews">
+            Reviews
+          </a>
+          <a class="dropdown-list-item" routerLink="/community/discussions">
+            Discussions
+          </a>
+        </div>
+      </div>
 
       <div *ngIf="user" class="dropdown">
         <span class="dropdown-header">

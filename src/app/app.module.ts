@@ -65,6 +65,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { GameDetailReviewCreateComponent } from './components/game-detail-review-create/game-detail-review-create.component';
 import { DiscoveryQueueNewReleasesComponent } from './pages/discovery-queue-new-releases/discovery-queue-new-releases.component';
+import { CommunityComponent } from './pages/community/community.component';
+import { CommunityImagesAndVideosComponent } from './components/community-images-and-videos/community-images-and-videos.component';
+import { CommunityImageAndVideoCreateComponent } from './components/community-image-and-video-create/community-image-and-video-create.component';
+import { CommunityImageAndVideoDetailComponent } from './components/community-image-and-video-detail/community-image-and-video-detail.component';
 
 @NgModule({
   declarations: [
@@ -122,6 +126,10 @@ import { DiscoveryQueueNewReleasesComponent } from './pages/discovery-queue-new-
     NotificationsComponent,
     GameDetailReviewCreateComponent,
     DiscoveryQueueNewReleasesComponent,
+    CommunityComponent,
+    CommunityImagesAndVideosComponent,
+    CommunityImageAndVideoCreateComponent,
+    CommunityImageAndVideoDetailComponent,
   ],
   imports: [
     BrowserModule,

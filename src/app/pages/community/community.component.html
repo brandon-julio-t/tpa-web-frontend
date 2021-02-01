@@ -1,0 +1,31 @@
+<section class="community container">
+  <section class="community-tabs">
+    <button
+      class="btn btn-black"
+      routerLinkActive="btn-blue"
+      routerLink="/community/images-and-videos"
+    >
+      Images and Videos
+    </button>
+    <button
+      class="btn btn-black"
+      routerLinkActive="btn-blue"
+      routerLink="/community/reviews"
+    >
+      Reviews
+    </button>
+    <button
+      class="btn btn-black"
+      routerLinkActive="btn-blue"
+      routerLink="/community/discussions"
+    >
+      Discussions
+    </button>
+  </section>
+
+  <app-community-images-and-videos
+    *ngIf="currentTab === 'images-and-videos'"
+  ></app-community-images-and-videos>
+  <section *ngIf="currentTab === 'reviews'">Reviews</section>
+  <section *ngIf="currentTab === 'discussions'">Discussions</section>
+</section>

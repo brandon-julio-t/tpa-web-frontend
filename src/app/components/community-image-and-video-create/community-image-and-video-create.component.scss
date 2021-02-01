@@ -1,0 +1,9 @@
+@use 'src/app/styles/spacings' as *;
+
+form {
+  margin: $space-lg auto;
+
+  button {
+    width: 100%;
+  }
+}
