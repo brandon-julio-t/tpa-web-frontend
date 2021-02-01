@@ -1,0 +1,51 @@
+@use 'src/app/styles/spacings' as *;
+@use 'src/app/styles/mixins' as *;
+
+.reviews {
+  display: grid;
+  grid-gap: $space-md;
+  grid-template-columns: repeat(3, 1fr);
+
+  &-item {
+    @include clickable;
+    text-align: left;
+    display: grid;
+    grid-gap: $space-md;
+    grid-template-columns: auto auto;
+    grid-template-areas:
+      "helpful helpful"
+      "banner banner"
+      "thumbs text"
+      "created-at created-at";
+
+    padding: $space-md;
+    background-color: #0d131b;
+    border: 1px solid transparent;
+
+    &:hover {
+      border: 1px solid #2f89bc;
+    }
+
+    &-helpful {
+      grid-area: helpful;
+    }
+
+    &-banner {
+      grid-area: banner;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    &-thumbs {
+      grid-area: thumbs;
+    }
+
+    &-text {
+      grid-area: text;
+    }
+
+    &-created-at {
+      grid-area: created-at;
+    }
+  }
+}

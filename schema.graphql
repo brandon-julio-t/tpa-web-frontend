@@ -16,8 +16,8 @@ type Community {
   discussions: [CommunityDiscussion!]!
   imageAndVideo(id: ID!): CommunityImageAndVideo!
   imagesAndVideos: [CommunityImageAndVideo!]!
-  review(id: ID!): CommunityReview!
-  reviews: [CommunityReview!]!
+  review(id: ID!): GameReview!
+  reviews: [GameReview!]!
 }
 
 type CommunityDiscussion {
@@ -49,10 +49,6 @@ type CommunityImageAndVideoComment {
 type CommunityImageAndVideoCommentPagination {
   data: [CommunityImageAndVideoComment!]!
   totalPages: Int!
-}
-
-type CommunityReview {
-  id: ID!
 }
 
 type Country {
@@ -107,6 +103,7 @@ type GameReview {
   createdAt: Time!
   downVoters: [User!]!
   downVotes: Int!
+  game: Game!
   id: ID!
   isRecommended: Boolean!
   upVoters: [User!]!
@@ -338,6 +335,6 @@ input UpdateUser {
 }
 
 
-scalar Upload
-
 scalar Time
+
+scalar Upload

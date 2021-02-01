@@ -1,4 +1,5 @@
 import { User } from './user';
+import { Game } from './game';
 
 export interface GameReview {
   id: number;
@@ -6,6 +7,7 @@ export interface GameReview {
   createdAt: Date;
   downVoters: User[];
   downVotes: number;
+  game: Game;
   isRecommended: boolean;
   upVoters: User[];
   upVotes: number;

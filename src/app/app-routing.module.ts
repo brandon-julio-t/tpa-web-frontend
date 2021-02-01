@@ -35,6 +35,7 @@ import { DiscoveryQueueNewReleasesComponent } from './pages/discovery-queue-new-
 import { CommunityComponent } from './pages/community/community.component';
 import { CommunityImageAndVideoCreateComponent } from './components/community-image-and-video-create/community-image-and-video-create.component';
 import { CommunityImageAndVideoDetailComponent } from './components/community-image-and-video-detail/community-image-and-video-detail.component';
+import { CommunityReviewDetailComponent } from './components/community-review-detail/community-review-detail.component';
 
 const routes: Routes = [
   {
@@ -52,6 +53,10 @@ const routes: Routes = [
       {
         path: 'community-images-and-videos/:id',
         component: CommunityImageAndVideoDetailComponent,
+      },
+      {
+        path: 'community-reviews/:id',
+        component: CommunityReviewDetailComponent,
       },
       {
         path: 'discover',

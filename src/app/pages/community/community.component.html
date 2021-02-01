@@ -2,22 +2,22 @@
   <section class="community-tabs">
     <button
       class="btn btn-black"
-      routerLinkActive="btn-blue"
       routerLink="/community/images-and-videos"
+      routerLinkActive="btn-blue"
     >
       Images and Videos
     </button>
     <button
       class="btn btn-black"
-      routerLinkActive="btn-blue"
       routerLink="/community/reviews"
+      routerLinkActive="btn-blue"
     >
       Reviews
     </button>
     <button
       class="btn btn-black"
-      routerLinkActive="btn-blue"
       routerLink="/community/discussions"
+      routerLinkActive="btn-blue"
     >
       Discussions
     </button>
@@ -26,6 +26,8 @@
   <app-community-images-and-videos
     *ngIf="currentTab === 'images-and-videos'"
   ></app-community-images-and-videos>
-  <section *ngIf="currentTab === 'reviews'">Reviews</section>
+  <app-community-reviews *ngIf="currentTab === 'reviews'">
+    Reviews
+  </app-community-reviews>
   <section *ngIf="currentTab === 'discussions'">Discussions</section>
 </section>

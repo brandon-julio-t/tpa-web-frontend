@@ -69,6 +69,8 @@ import { CommunityComponent } from './pages/community/community.component';
 import { CommunityImagesAndVideosComponent } from './components/community-images-and-videos/community-images-and-videos.component';
 import { CommunityImageAndVideoCreateComponent } from './components/community-image-and-video-create/community-image-and-video-create.component';
 import { CommunityImageAndVideoDetailComponent } from './components/community-image-and-video-detail/community-image-and-video-detail.component';
+import { CommunityReviewsComponent } from './components/community-reviews/community-reviews.component';
+import { CommunityReviewDetailComponent } from './components/community-review-detail/community-review-detail.component';
 
 @NgModule({
   declarations: [
@@ -130,6 +132,8 @@ import { CommunityImageAndVideoDetailComponent } from './components/community-im
     CommunityImagesAndVideosComponent,
     CommunityImageAndVideoCreateComponent,
     CommunityImageAndVideoDetailComponent,
+    CommunityReviewsComponent,
+    CommunityReviewDetailComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,37 @@
+<section class="reviews">
+  <div
+    *ngFor="let review of reviews$ | async"
+    [routerLink]="['/community-reviews', review.id]"
+    class="reviews-item"
+  >
+    <small *ngIf="review.isRecommended" class="reviews-item-helpful">
+      {{ review.upVotes }} people finds this review helpful
+    </small>
+
+    <img
+      [src]="asset(review.game.banner.id)"
+      alt="Banner"
+      class="reviews-item-banner"
+    />
+
+    <fa-icon
+      *ngIf="review.isRecommended"
+      [icon]="faThumbsUp"
+      class="reviews-item-thumbs"
+      size="3x"
+    ></fa-icon>
+    <fa-icon
+      *ngIf="!review.isRecommended"
+      [icon]="faThumbsDown"
+      class="reviews-item-thumbs"
+      size="3x"
+    ></fa-icon>
+    <span class="reviews-item-text">
+      {{ review.isRecommended ? "" : "Not" }} Recommended
+    </span>
+
+    <small class="reviews-item-created-at">
+      Posted: {{ review.createdAt | date }}
+    </small>
+  </div>
+</section>
