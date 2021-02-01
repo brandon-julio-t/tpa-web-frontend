@@ -18,6 +18,13 @@ export class AuthService extends Query<Response> {
         customUrl
         displayName
         email
+        games {
+          id
+          title
+          banner {
+            id
+          }
+        }
         level
         profilePicture {
           id

@@ -1,0 +1,44 @@
+<section *ngIf="game$ | async as game; else noQueue" class="game container">
+  <h2 class="game-title">{{ game.title }}</h2>
+
+  <p>
+    <small class="game-release-date">
+      Release date: {{ game.createdAt | date }}
+    </small>
+  </p>
+  <p>
+    <small class="game-developer">Developer: {{ game.developer }}</small>
+  </p>
+  <p>
+    <small class="game-publisher">Developer: {{ game.publisher }}</small>
+  </p>
+
+  <img [src]="asset(game.banner.id)" alt="Banner" class="game-banner" />
+
+  <button
+    (click)="next()"
+    *ngIf="remaining$ | async as remaining"
+    class="game-next-in-queue btn btn-blue"
+  >
+    Next in Queue ({{ remaining }} remaining)
+  </button>
+
+  <section>
+    <h3>About this game</h3>
+    <hr />
+    <p class="game-description">{{ game.description }}</p>
+  </section>
+
+  <section>
+    <h3>System Requirements</h3>
+    <hr />
+    <p class="game-system-requirements">{{ game.systemRequirements }}</p>
+  </section>
+</section>
+
+<ng-template #noQueue>
+  <section class="container">
+    <h2>Queue is Empty</h2>
+    <button (click)="restart()" class="btn btn-blue">Restart Queue</button>
+  </section>
+</ng-template>

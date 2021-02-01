@@ -7,7 +7,6 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { AssetService } from '../../services/asset.service';
 import { ProfileComment } from '../../models/profile-comment';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { map } from 'rxjs/operators';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
@@ -16,24 +15,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  profileGames$ = this.apollo
-    .query<{ auth: User }>({
-      query: gql`
-        query authGames {
-          auth {
-            games {
-              id
-              title
-              banner {
-                id
-              }
-            }
-          }
-        }
-      `,
-    })
-    .pipe(map((value) => value.data.auth.games));
-
   user: User | null = null;
   profile: User | null = null;
   comments: ProfileComment[] = [];
@@ -123,6 +104,13 @@ export class ProfileComponent implements OnInit {
               id
               accountName
               email
+              games {
+                id
+                banner {
+                  id
+                }
+                title
+              }
               walletBalance
               displayName
               realName

@@ -44,7 +44,7 @@
     <h2>Games</h2>
 
     <div
-      *ngFor="let game of profileGames$ | async"
+      *ngFor="let game of profile?.games"
       [routerLink]="['/game', game.id]"
       class="profile-games-item"
     >

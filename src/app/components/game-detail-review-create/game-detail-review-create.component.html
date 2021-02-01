@@ -1,0 +1,34 @@
+<ngx-spinner type="line-scale-pulse-out-rapid"></ngx-spinner>
+
+<section *ngIf="isUserOwnsGame$ | async" class="review">
+  <h2>Review</h2>
+
+  <form [formGroup]="reviewForm" class="review-form">
+    <label for="review-content">
+      <textarea
+        class="review-form-textarea"
+        formControlName="content"
+        id="review-content"
+        rows="10"
+      ></textarea>
+    </label>
+
+    <label for="is-recommended">
+      <input
+        class="review-form-checkbox"
+        formControlName="isRecommended"
+        id="is-recommended"
+        type="checkbox"
+      />
+      Is Recommended
+    </label>
+
+    <button
+      (click)="onSubmit()"
+      class="review-form-submit btn btn-blue"
+      type="submit"
+    >
+      Post Review
+    </button>
+  </form>
+</section>

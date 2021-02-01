@@ -117,8 +117,13 @@
       </p>
     </section>
 
+    <app-game-detail-review-create
+      (create)="refreshGames()"
+      [game]="game"
+    ></app-game-detail-review-create>
+
     <app-game-detail-reviews
-      (vote)="onVote()"
+      (vote)="refreshGames()"
       [mostHelpfulReviews]="game?.mostHelpfulReviews"
       [recentReviews]="game?.recentReviews"
     ></app-game-detail-reviews>

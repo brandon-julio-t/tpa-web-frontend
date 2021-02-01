@@ -15,99 +15,24 @@ import { User } from '../../models/user';
   styleUrls: ['./game-detail.component.scss'],
 })
 export class GameDetailComponent implements OnInit {
-  game: Game | null = null;
+  game: Game | undefined;
   birthdate: Date | null = null;
   hasInputAge = false;
   currentAssetFile: AssetFile | null = null;
   user: User | null = null;
   isLoading = false;
-  gameQuery: QueryRef<{ getGameById: Game }>;
+  gameQuery: QueryRef<{ getGameById: Game }> = this.apollo.watchQuery<{
+    getGameById: Game;
+  }>({
+    query: gameQueryGql,
+  });
 
   constructor(
     private apollo: Apollo,
     private route: ActivatedRoute,
     private assetService: AssetService,
     private authService: AuthService
-  ) {
-    this.gameQuery = this.apollo.watchQuery<{ getGameById: Game }>({
-      query: gql`
-        query getGameById($id: ID!) {
-          getGameById(id: $id) {
-            id
-            banner {
-              id
-              contentType
-            }
-            createdAt
-            description
-            developer
-            discount
-            genre {
-              id
-              name
-            }
-            isInappropriate
-            price
-            publisher
-            mostHelpfulReviews {
-              id
-              content
-              createdAt
-              downVoters {
-                id
-              }
-              downVotes
-              isRecommended
-              upVoters {
-                id
-              }
-              upVotes
-              user {
-                id
-                displayName
-                profilePicture {
-                  id
-                  contentType
-                }
-              }
-            }
-            recentReviews {
-              id
-              content
-              createdAt
-              downVoters {
-                id
-              }
-              downVotes
-              isRecommended
-              upVoters {
-                id
-              }
-              upVotes
-              user {
-                id
-                displayName
-              }
-            }
-            slideshows {
-              file {
-                id
-                contentType
-              }
-            }
-            systemRequirements
-            tags {
-              id
-              name
-            }
-            title
-            isInCart
-            isInWishlist
-          }
-        }
-      `,
-    });
-  }
+  ) {}
 
   get slideshows(): GameSlideshow[] {
     const source = this.game?.slideshows ?? [];
@@ -220,7 +145,84 @@ export class GameDetailComponent implements OnInit {
       });
   }
 
-  onVote(): void {
+  refreshGames(): void {
     this.gameQuery.refetch().then();
   }
 }
+
+const gameQueryGql = gql`
+  query getGameById($id: ID!) {
+    getGameById(id: $id) {
+      id
+      banner {
+        id
+        contentType
+      }
+      createdAt
+      description
+      developer
+      discount
+      genre {
+        id
+        name
+      }
+      isInappropriate
+      price
+      publisher
+      mostHelpfulReviews {
+        id
+        content
+        createdAt
+        downVoters {
+          id
+        }
+        downVotes
+        isRecommended
+        upVoters {
+          id
+        }
+        upVotes
+        user {
+          id
+          displayName
+          profilePicture {
+            id
+            contentType
+          }
+        }
+      }
+      recentReviews {
+        id
+        content
+        createdAt
+        downVoters {
+          id
+        }
+        downVotes
+        isRecommended
+        upVoters {
+          id
+        }
+        upVotes
+        user {
+          id
+          displayName
+        }
+      }
+      slideshows {
+        file {
+          id
+          contentType
+        }
+      }
+      systemRequirements
+      tags {
+        id
+        name
+      }
+      title
+      isInCart
+      isInWishlist
+    }
+  }
+`;

@@ -16,6 +16,10 @@ type Country {
   name: String!
 }
 
+type DiscoveryQueue {
+  newReleases: [Game!]!
+}
+
 type FriendRequest {
   createdAt: Time!
   friend: User!
@@ -157,6 +161,7 @@ type Query {
   allCountries: [Country!]!
   auth: User
   communityRecommended: [Game!]!
+  discoverQueue: DiscoveryQueue!
   featuredAndRecommendedGames: [Game!]!
   games(page: Int!): GamePagination!
   genres: [GameGenre!]!
@@ -220,6 +225,7 @@ type User {
   receivedMessagesCount: Int!
   receivedProfileCommentsCount: Int!
   reportCounts: Int!
+  status: String!
   stream: String!
   summary: String!
   suspendedAt: Time

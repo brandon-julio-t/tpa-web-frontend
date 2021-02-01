@@ -15,7 +15,7 @@ import { User } from '../../models/user';
 export class GameDetailReviewsComponent implements OnInit {
   @Input() mostHelpfulReviews: GameReview[] | undefined = [];
   @Input() recentReviews: GameReview[] | undefined = [];
-  @Output() vote = new EventEmitter<boolean>();
+  @Output() vote = new EventEmitter<void>();
 
   user: User | null = null;
 

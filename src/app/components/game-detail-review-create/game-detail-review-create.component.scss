@@ -1,0 +1,19 @@
+@use 'src/app/styles/spacings' as *;
+
+.review {
+  margin: $space-lg 0;
+
+  &-form {
+    width: 100%;
+
+    &-textarea {
+    }
+
+    &-checkbox {
+    }
+
+    &-submit {
+      margin-left: auto;
+    }
+  }
+}

@@ -63,6 +63,8 @@ import { FriendsPendingInvitesComponent } from './components/friends-pending-inv
 import { FriendsAllComponent } from './components/friends-all/friends-all.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotificationsComponent } from './components/notifications/notifications.component';
+import { GameDetailReviewCreateComponent } from './components/game-detail-review-create/game-detail-review-create.component';
+import { DiscoveryQueueNewReleasesComponent } from './pages/discovery-queue-new-releases/discovery-queue-new-releases.component';
 
 @NgModule({
   declarations: [
@@ -118,6 +120,8 @@ import { NotificationsComponent } from './components/notifications/notifications
     FriendsPendingInvitesComponent,
     FriendsAllComponent,
     NotificationsComponent,
+    GameDetailReviewCreateComponent,
+    DiscoveryQueueNewReleasesComponent,
   ],
   imports: [
     BrowserModule,

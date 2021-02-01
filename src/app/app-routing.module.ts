@@ -31,6 +31,7 @@ import { GameGiftComponent } from './pages/game-gift/game-gift.component';
 import { WatchStreamComponent } from './pages/watch-stream/watch-stream.component';
 import { StreamingComponent } from './pages/streaming/streaming.component';
 import { FriendsComponent } from './pages/friends/friends.component';
+import { DiscoveryQueueNewReleasesComponent } from './pages/discovery-queue-new-releases/discovery-queue-new-releases.component';
 
 const routes: Routes = [
   {
@@ -38,12 +39,22 @@ const routes: Routes = [
     children: [
       { path: '', component: HomeComponent, pathMatch: 'full' },
       {
+        path: 'discover',
+        children: [
+          {
+            path: 'new-releases',
+            component: DiscoveryQueueNewReleasesComponent,
+          },
+        ],
+      },
+      {
         path: 'search',
         component: GameSearchComponent,
       },
       { path: 'friends', component: FriendsComponent },
       {
         path: '',
+        canActivate: [AuthGuard],
         children: [
           { path: 'top-up', component: TopUpComponent },
           { path: 'chat', component: ChatComponent },
@@ -63,7 +74,6 @@ const routes: Routes = [
           },
           { path: 'wishlist', component: WishlistComponent },
         ],
-        canActivate: [AuthGuard],
       },
       {
         path: 'game',
@@ -88,6 +98,7 @@ const routes: Routes = [
       { path: 'login', component: LoginAdminComponent },
       {
         path: '',
+        canActivate: [AdminGuard],
         children: [
           { path: '', component: AdminComponent },
           {
@@ -122,7 +133,6 @@ const routes: Routes = [
             ],
           },
         ],
-        canActivate: [AdminGuard],
       },
     ],
   },
