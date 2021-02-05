@@ -1,0 +1,42 @@
+<section class="games">
+  <div class="games-search">
+    <label>
+      <input [(ngModel)]="title" type="text" />
+    </label>
+
+    <button (click)="onTitleChange()" class="btn btn-blue">Search Game</button>
+  </div>
+
+  <a class="btn btn-blue" routerLink="/create-community-discussions">Create</a>
+
+  <div *ngFor="let game of games$ | async" class="games-item">
+    <img [src]="asset(game.banner.id)" alt="Banner" class="games-item-banner" />
+
+    <h2 class="games-item-title">{{ game.title }}</h2>
+
+    <div class="games-item-discussions">
+      <div
+        *ngFor="let discussion of game.topDiscussions"
+        [routerLink]="['/community-discussions', discussion.id]"
+        class="games-item-discussions-item"
+      >
+        <fa-icon
+          [icon]="faEnvelope"
+          class="games-item-discussions-item-envelope"
+        ></fa-icon>
+
+        <h3 class="games-item-discussions-item-title">
+          {{ discussion.title }}
+        </h3>
+
+        <small class="games-item-discussions-item-user-display-name">
+          {{ discussion.user.displayName }}
+        </small>
+
+        <span class="games-item-discussions-item-created-at">
+          {{ discussion.createdAt | date }}
+        </span>
+      </div>
+    </div>
+  </div>
+</section>

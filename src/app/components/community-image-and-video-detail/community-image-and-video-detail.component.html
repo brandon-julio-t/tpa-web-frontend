@@ -38,6 +38,18 @@
     </span>
   </div>
 
+  <section class="post-user">
+    <img
+      [src]="asset(imageAndVideo.user.profilePicture.id)"
+      alt="Profile picture"
+      class="post-user-profile-picture"
+    />
+
+    <span class="poser-user-display-name">
+      {{ imageAndVideo.user.displayName }}
+    </span>
+  </section>
+
   <hr />
 
   <section class="post-submit-comment">

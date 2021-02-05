@@ -1,0 +1,79 @@
+@use 'src/app/styles/spacings' as *;
+@use 'src/app/styles/mixins' as *;
+
+.games {
+  &-search {
+    display: grid;
+    grid-gap: $space-md;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+  }
+
+  &-item {
+    display: grid;
+    grid-gap: $space-md;
+    grid-template-columns: 128px auto;
+    grid-template-areas:
+      "banner title"
+      "discussions discussions";
+
+    background-color: #171a21;
+    padding: $space-md;
+
+    &-banner {
+      @include image-control;
+      grid-area: banner;
+    }
+
+    &-title {
+      grid-area: title;
+    }
+
+    &-discussions {
+      grid-area: discussions;
+
+      &-item {
+        grid-area: discussions;
+        display: grid;
+        align-items: center;
+        grid-gap: $space-md;
+        grid-template-columns: auto 1fr auto;
+        grid-template-areas:
+          "envelope title created-at"
+          "envelope user-display-name created-at";
+
+        background-color: #212f43;
+        cursor: pointer;
+        padding: $space-md;
+
+        &:hover {
+          background-color: #272f38;
+        }
+
+        &-envelope {
+          grid-area: envelope;
+          text-align: left;
+          color: #2f89bc;
+        }
+
+        &-title {
+          grid-area: title;
+          text-align: left;
+          color: #ffffff;
+        }
+
+        &-user-display-name {
+          grid-area: user-display-name;
+          text-align: left;
+          color: #2f89bc;
+        }
+
+        &-created-at {
+          grid-area: created-at;
+          text-align: left;
+          color: #2f89bc;
+        }
+      }
+    }
+  }
+}

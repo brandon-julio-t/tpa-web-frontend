@@ -28,7 +28,7 @@
       }
 
       &-banner {
-        @include fit-image;
+        @include image-control;
         grid-area: banner;
       }
 

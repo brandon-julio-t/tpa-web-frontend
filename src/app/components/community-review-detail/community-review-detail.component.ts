@@ -29,6 +29,7 @@ export class CommunityReviewDetailComponent implements OnInit {
   reviewId = 0;
   faThumbsDown = faThumbsDown;
   faThumbsUp = faThumbsUp;
+  addReview = '';
 
   constructor(
     private apollo: Apollo,
@@ -56,6 +57,37 @@ export class CommunityReviewDetailComponent implements OnInit {
 
   asset(id: number): SafeUrl {
     return this.assetService.get(id);
+  }
+
+  async onSubmit(): Promise<void> {
+    if (!this.addReview) {
+      return;
+    }
+
+    this.spinner.show();
+    this.apollo
+      .mutate({
+        mutation: gql`
+          mutation postGameReviewComment($body: String!, $reviewId: ID!) {
+            postGameReviewComment(input: { body: $body, reviewId: $reviewId }) {
+              id
+            }
+          }
+        `,
+        variables: {
+          body: this.addReview,
+          reviewId: this.reviewId,
+        },
+      })
+      .subscribe(async (resp) => {
+        if (resp.data) {
+          await this.query$.refetch({
+            id: this.reviewId,
+            page: this.currentPage,
+          });
+          this.spinner.hide();
+        }
+      });
   }
 
   async next(): Promise<void> {
@@ -94,6 +126,7 @@ const GQL_QUERY = gql`
   query communityReview($id: ID!, $page: Int!) {
     community {
       review(id: $id) {
+        id
         content
         comment(page: $page) {
           data {

@@ -1,0 +1,26 @@
+<section [formGroup]="form" class="form container">
+  <label for="title">
+    Title
+    <input formControlName="title" id="title" type="text" />
+  </label>
+
+  <label for="game">
+    Game
+    <select formControlName="gameId" id="game">
+      <option *ngFor="let game of games$ | async" value="{{ game.id }}">
+        {{ game.title }}
+      </option>
+    </select>
+  </label>
+
+  <label for="description">
+    Description
+    <textarea
+      formControlName="description"
+      id="description"
+      rows="10"
+    ></textarea>
+  </label>
+
+  <button (click)="onSubmit()" class="btn btn-blue">Submit</button>
+</section>

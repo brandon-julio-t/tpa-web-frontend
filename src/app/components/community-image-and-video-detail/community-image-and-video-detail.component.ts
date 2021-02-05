@@ -33,6 +33,12 @@ export class CommunityImageAndVideoDetailComponent implements OnInit {
         community {
           imageAndVideo(id: $id) {
             id
+            user {
+              displayName
+              profilePicture {
+                id
+              }
+            }
             comments(page: $page) {
               data {
                 id

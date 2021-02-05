@@ -273,4 +273,6 @@ export class ProfileComponent implements OnInit {
         }
       });
   }
+
+  onStartChat(id: number): void {}
 }

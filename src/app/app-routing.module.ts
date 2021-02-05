@@ -36,6 +36,8 @@ import { CommunityComponent } from './pages/community/community.component';
 import { CommunityImageAndVideoCreateComponent } from './components/community-image-and-video-create/community-image-and-video-create.component';
 import { CommunityImageAndVideoDetailComponent } from './components/community-image-and-video-detail/community-image-and-video-detail.component';
 import { CommunityReviewDetailComponent } from './components/community-review-detail/community-review-detail.component';
+import { CommunityDiscussionDetailComponent } from './components/community-discussion-detail/community-discussion-detail.component';
+import { CommunityDiscussionCreateComponent } from './components/community-discussion-create/community-discussion-create.component';
 
 const routes: Routes = [
   {
@@ -57,6 +59,14 @@ const routes: Routes = [
       {
         path: 'community-reviews/:id',
         component: CommunityReviewDetailComponent,
+      },
+      {
+        path: 'create-community-discussions',
+        component: CommunityDiscussionCreateComponent,
+      },
+      {
+        path: 'community-discussions/:id',
+        component: CommunityDiscussionDetailComponent,
       },
       {
         path: 'discover',

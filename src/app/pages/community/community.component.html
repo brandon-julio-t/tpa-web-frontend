@@ -26,8 +26,10 @@
   <app-community-images-and-videos
     *ngIf="currentTab === 'images-and-videos'"
   ></app-community-images-and-videos>
-  <app-community-reviews *ngIf="currentTab === 'reviews'">
-    Reviews
-  </app-community-reviews>
-  <section *ngIf="currentTab === 'discussions'">Discussions</section>
+  <app-community-reviews
+    *ngIf="currentTab === 'reviews'"
+  ></app-community-reviews>
+  <app-community-discussions
+    *ngIf="currentTab === 'discussions'"
+  ></app-community-discussions>
 </section>

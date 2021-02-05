@@ -3,6 +3,7 @@ import { GameTag } from './game-tag';
 import { AssetFile } from './asset-file';
 import { GameGenre } from './game-genre';
 import { GameReview } from './game-review';
+import { GameDiscussion } from './game-discussion';
 
 export interface Game {
   id: number;
@@ -11,6 +12,7 @@ export interface Game {
   description: string;
   developer: string;
   discount: number;
+  discussions: GameDiscussion[];
   genre: GameGenre;
   isInappropriate: boolean;
   isInCart: boolean;
@@ -23,4 +25,5 @@ export interface Game {
   systemRequirements: string;
   tags: GameTag[];
   title: string;
+  topDiscussions: GameDiscussion[];
 }

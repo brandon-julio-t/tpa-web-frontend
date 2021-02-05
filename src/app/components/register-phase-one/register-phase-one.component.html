@@ -65,11 +65,16 @@
   <small *ngIf="registerForm.touched && !isCaptchaPassed" class="text-red">
     Please pass this captcha first
   </small>
+  <label>
+    <input formControlName="agree" type="checkbox" />
+    I am 13 years old or older and agree to the terms of the Steam Subscriber
+    Agreement and the Value of Privacy Policy.
+  </label>
   <app-submit-button
-    type="submit"
-    class="btn btn-blue"
-    [loading]="isLoading"
     (click)="onSubmit()"
+    [loading]="isLoading"
+    class="btn btn-blue"
+    type="submit"
   >
     Submit
   </app-submit-button>

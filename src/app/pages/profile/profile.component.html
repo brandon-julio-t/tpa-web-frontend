@@ -15,6 +15,15 @@
 
     <div *ngIf="user" class="profile-information-actions">
       <app-submit-button
+        (click)="onStartChat(user.id)"
+        *ngIf="isFriend"
+        [queryParams]="{ accountName: profile?.accountName }"
+        [routerLink]="['/chat']"
+        class="btn btn-blue"
+      >
+        Start Chat
+      </app-submit-button>
+      <app-submit-button
         (click)="onBefriend(profile?.id)"
         *ngIf="user?.id !== profile?.id && !isFriendRequested && !isFriend"
         [loading]="isLoading"

@@ -1,0 +1,78 @@
+@use 'src/app/styles/spacings' as *;
+@use 'src/app/styles/mixins' as *;
+
+.discussion {
+  display: grid;
+  grid-gap: $space-md;
+  grid-template-columns: 64px auto auto;
+  grid-template-areas:
+    "profile-picture display-name created-at"
+    "profile-picture body body"
+    "comments comments comments";
+
+  &-user {
+    &-profile-picture {
+      @include image-control;
+      grid-area: profile-picture;
+    }
+
+    &-display-name {
+      grid-area: display-name;
+    }
+  }
+
+  &-created-at {
+    grid-area: created-at;
+    justify-self: flex-end;
+  }
+
+  &-body {
+    grid-area: body;
+  }
+
+  &-comments {
+    grid-area: comments;
+
+    &-submit {
+      margin: $space-lg 0;
+    }
+
+    &-item {
+      display: grid;
+      grid-gap: $space-md;
+      grid-template-columns: 32px auto;
+      grid-template-areas:
+        "profile-picture display-name"
+        "profile-picture body";
+
+      margin-bottom: $space-md;
+
+      &-user {
+        &-profile-picture {
+          @include image-control;
+          grid-area: profile-picture;
+          height: 32px;
+        }
+
+        &-display-name {
+          grid-area: display-name;
+        }
+      }
+
+      &-body {
+        grid-area: body;
+      }
+
+      &-actions {
+        display: flex;
+        align-items: center;
+        width: fit-content;
+        margin: 0 auto;
+
+        span {
+          margin: 0 $space-lg;
+        }
+      }
+    }
+  }
+}

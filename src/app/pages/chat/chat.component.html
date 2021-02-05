@@ -3,7 +3,7 @@
     <li
       *ngFor="let friend of friends"
       class="chat-friends-item"
-      (click)="currentFriend = friend"
+      (click)="onChat(friend)"
     >
       <img
         [src]="profilePicture(friend.profilePicture.id)"

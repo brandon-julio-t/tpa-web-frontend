@@ -27,6 +27,7 @@ export class RegisterPhaseOneComponent implements OnInit {
       email: fb.control('', [Validators.required, Validators.email]),
       emailConfirm: fb.control('', [Validators.required, Validators.email]),
       countryId: fb.control('', Validators.required),
+      agree: [false, Validators.requiredTrue],
     });
   }
 

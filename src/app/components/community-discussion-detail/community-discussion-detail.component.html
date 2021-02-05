@@ -1,0 +1,54 @@
+<ngx-spinner></ngx-spinner>
+
+<section *ngIf="discussion$ | async as discussion" class="discussion container">
+  <img
+    [src]="asset(discussion.user.profilePicture.id)"
+    alt="Profile picture"
+    class="discussion-user-profile-picture"
+  />
+  <h2 class="discussion-user-display-name">
+    {{ discussion.user.displayName }}
+  </h2>
+
+  <small class="discussion-created-at">{{ discussion.createdAt | date }}</small>
+
+  <p class="discussion-body">{{ discussion.body }}</p>
+
+  <section class="discussion-comments">
+    <hr />
+
+    <div class="discussion-comments-submit">
+      <label>
+        <textarea [(ngModel)]="comment" rows="10"></textarea>
+      </label>
+      <button (click)="onSubmit()" class="btn btn-blue">Submit</button>
+    </div>
+
+    <hr />
+
+    <div
+      *ngFor="let comment of discussion.comments.data"
+      class="discussion-comments-item"
+    >
+      <img
+        [src]="asset(comment.user.profilePicture.id)"
+        alt="Profile picture"
+        class="discussion-comments-item-user-profile-picture"
+      />
+
+      <h3 class="discussion-comments-item-user-display-name">
+        {{ comment.user.displayName }}
+      </h3>
+
+      <p class="discussion-comments-item-body">
+        {{ comment.body }}
+      </p>
+    </div>
+
+    <div class="discussion-comments-item-actions">
+      <button (click)="onPrev()" class="btn btn-black"><</button>
+      <span>{{ this.page }} / {{ discussion.comments.totalPages }}</span>
+      <button (click)="onNext()" class="btn btn-black">></button>
+    </div>
+  </section>
+</section>

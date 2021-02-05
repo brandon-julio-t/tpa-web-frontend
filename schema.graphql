@@ -21,7 +21,26 @@ type Community {
 }
 
 type CommunityDiscussion {
+  body: String!
+  comments(page: Int!): CommunityDiscussionCommentPagination!
+  createdAt: Time!
+  game: Game!
   id: ID!
+  title: String!
+  user: User!
+}
+
+type CommunityDiscussionComment {
+  body: String!
+  communityDiscussion: CommunityDiscussion!
+  createdAt: Time!
+  id: ID!
+  user: User!
+}
+
+type CommunityDiscussionCommentPagination {
+  data: [CommunityDiscussionComment!]!
+  totalPages: Int!
 }
 
 type CommunityImageAndVideo {
@@ -73,6 +92,7 @@ type Game {
   description: String!
   developer: String!
   discount: Float!
+  discussions: [CommunityDiscussion!]!
   genre: GameGenre!
   id: ID!
   isInCart: Boolean!
@@ -86,6 +106,7 @@ type Game {
   systemRequirements: String!
   tags: [GameTag!]!
   title: String!
+  topDiscussions: [CommunityDiscussion!]!
 }
 
 type GameGenre {
@@ -163,6 +184,8 @@ type Mutation {
   login(accountName: String!, password: String!): User!
   logout: User!
   newIceCandidate(accountName: String!, candidate: String!): String!
+  postCommunityDiscussion(input: PostCommunityDiscussion!): CommunityDiscussion!
+  postCommunityDiscussionComment(input: PostCommunityDiscussionComment!): CommunityDiscussionComment!
   postCommunityImagesAndVideosComment(body: String!, imageAndVideoId: ID!): CommunityImageAndVideoComment!
   postGameReviewComment(input: GameReviewCommentInput!): GameReviewComment!
   redeemWallet(code: String!): Boolean!
@@ -218,11 +241,14 @@ type PromoPagination {
 
 type Query {
   allCountries: [Country!]!
+  allGames: [Game!]!
   auth: User
   community: Community!
   communityRecommended: [Game!]!
   discoverQueue: DiscoveryQueue!
   featuredAndRecommendedGames: [Game!]!
+  gameDiscussion(id: ID!): CommunityDiscussion
+  gameDiscussions(title: String!): [Game!]!
   games(page: Int!): GamePagination!
   genres: [GameGenre!]!
   getAllGameTags: [GameTag!]!
@@ -328,6 +354,17 @@ input Gift {
   sentiment: String!
   signature: String!
   userId: ID!
+}
+
+input PostCommunityDiscussion {
+  body: String!
+  gameId: ID!
+  title: String!
+}
+
+input PostCommunityDiscussionComment {
+  body: String!
+  communityDiscussionId: ID!
 }
 
 input UpdateGame {
