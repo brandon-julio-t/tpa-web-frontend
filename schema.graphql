@@ -179,6 +179,7 @@ type Mutation {
   downVoteReview(id: ID!): GameReview!
   giftWithCard(input: Gift!): Float!
   giftWithWallet(input: Gift!): Float!
+  ignoreFriendRequest(userId: ID!): User!
   joinStream(accountName: String!, rtcAnswer: String!): String!
   likeCreateCommunityImagesAndVideos(imageAndVideoId: ID!): CommunityImageAndVideo!
   login(accountName: String!, password: String!): User!
