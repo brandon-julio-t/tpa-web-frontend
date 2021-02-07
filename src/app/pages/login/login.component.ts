@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
     this.loginForm = fb.group({
       accountName: fb.control('', Validators.required),
       password: fb.control('', Validators.required),
+      rememberMe: [false],
     });
   }
 
@@ -49,8 +50,16 @@ export class LoginComponent implements OnInit {
     this.apollo
       .mutate<{ login: User }>({
         mutation: gql`
-          mutation login($accountName: String!, $password: String!) {
-            login(accountName: $accountName, password: $password) {
+          mutation login(
+            $accountName: String!
+            $password: String!
+            $rememberMe: Boolean!
+          ) {
+            login(
+              accountName: $accountName
+              password: $password
+              rememberMe: $rememberMe
+            ) {
               id
             }
           }

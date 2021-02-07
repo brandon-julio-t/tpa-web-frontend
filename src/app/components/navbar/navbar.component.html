@@ -5,7 +5,15 @@
     </a>
 
     <div class="navigations">
-      <a routerLink="/store">Store</a>
+      <div class="dropdown">
+        <span class="dropdown-header">
+          <a>STORE</a>
+        </span>
+
+        <div class="dropdown-list">
+          <a routerLink="/points-shop">POINTS SHOP</a>
+        </div>
+      </div>
 
       <div class="dropdown">
         <span class="dropdown-header">
@@ -17,30 +25,30 @@
             class="dropdown-list-item"
             routerLink="/community/images-and-videos"
           >
-            Images and Videos
+            IMAGES AND VIDEOS
           </a>
           <a class="dropdown-list-item" routerLink="/community/reviews">
-            Reviews
+            REVIEWS
           </a>
           <a class="dropdown-list-item" routerLink="/community/discussions">
-            Discussions
+            DISCUSSIONS
           </a>
         </div>
       </div>
 
       <div *ngIf="user" class="dropdown">
         <span class="dropdown-header">
-          <a href="#">{{ user?.displayName }}</a>
+          <a style="text-transform: uppercase">{{ user?.displayName }}</a>
         </span>
 
         <div class="dropdown-list">
-          <a routerLink="/friends">Friends</a>
+          <a routerLink="/friends">FRIENDS</a>
         </div>
       </div>
 
-      <a *ngIf="user" routerLink="/chat">Chat</a>
-      <a *ngIf="!user">About</a>
-      <a>Support</a>
+      <a *ngIf="user" routerLink="/chat">CHAT</a>
+      <a *ngIf="!user">ABOUT</a>
+      <a>SUPPORT</a>
 
       <div *ngIf="user" class="dropdown">
         <span class="dropdown-header">

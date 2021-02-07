@@ -159,7 +159,7 @@ export class GameGiftComponent implements OnInit {
               $signature: String!
               $userId: ID!
             ) {
-              giftWithCard(
+              giftWithWallet(
                 input: {
                   firstName: $firstName
                   message: $message

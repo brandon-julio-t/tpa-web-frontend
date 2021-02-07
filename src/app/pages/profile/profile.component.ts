@@ -104,6 +104,15 @@ export class ProfileComponent implements OnInit {
               id
               accountName
               email
+              friends {
+                id
+                displayName
+                level
+                profilePicture {
+                  id
+                }
+                status
+              }
               games {
                 id
                 banner {

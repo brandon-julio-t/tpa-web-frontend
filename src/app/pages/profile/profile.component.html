@@ -49,9 +49,8 @@
     </div>
   </div>
 
+  <h2>Games</h2>
   <section class="profile-games">
-    <h2>Games</h2>
-
     <div
       *ngFor="let game of profile?.games"
       [routerLink]="['/game', game.id]"
@@ -63,6 +62,73 @@
         class="profile-games-item-banner"
       />
       <h3 class="profile-games-item-title">{{ game.title }}</h3>
+    </div>
+  </section>
+
+  <h2>Friends</h2>
+  <section class="profile-friends">
+    <div
+      class="profile-friends-item-trigger"
+      *ngFor="let friend of profile?.friends"
+    >
+      <div class="profile-friends-item-mini-profile">
+        <img
+          [src]="asset(friend.profilePicture.id)"
+          alt="Profile picture"
+          class="profile-friends-item-mini-profile-profile-picture"
+        />
+
+        <span
+          class="profile-friends-item-mini-profile-display-name"
+          [ngClass]="{
+            online: friend.status === 'online',
+            offline: friend.status === 'offline',
+            playing: friend.status === 'playing'
+          }"
+        >
+          {{ friend.displayName }}
+        </span>
+        <span
+          class="profile-friends-item-mini-profile-status"
+          [ngClass]="{
+            online: friend.status === 'online',
+            offline: friend.status === 'offline',
+            playing: friend.status === 'playing'
+          }"
+        >
+          {{ friend.status | titlecase }}
+        </span>
+        <span class="profile-friends-item-mini-profile-level">
+          {{ friend.level }} Steam Level
+        </span>
+      </div>
+
+      <div
+        [ngClass]="{
+          online: friend.status === 'online',
+          offline: friend.status === 'offline',
+          playing: friend.status === 'playing'
+        }"
+        class="profile-friends-item"
+      >
+        <img
+          [ngClass]="{
+            online: friend.status === 'online',
+            offline: friend.status === 'offline',
+            playing: friend.status === 'playing'
+          }"
+          [src]="asset(friend.profilePicture.id)"
+          alt="Profile picture"
+          class="profile-friends-item-profile-picture"
+        />
+
+        <span class="profile-friends-item-display-name">
+          {{ friend.displayName }}
+        </span>
+        <span class="profile-friends-item-status">{{ friend.status }}</span>
+
+        <span class="profile-friends-item-level">{{ friend.level }}</span>
+      </div>
     </div>
   </section>
 

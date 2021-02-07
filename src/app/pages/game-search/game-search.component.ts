@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Apollo, gql } from 'apollo-angular';
 import { Game } from '../../models/game';
 import { AssetService } from '../../services/asset.service';
@@ -32,11 +32,12 @@ export class GameSearchComponent implements OnInit {
   currentPage = 1;
   keyword = '';
   price = 0;
-  category = '-';
+  category = '';
 
   constructor(
     private apollo: Apollo,
     private route: ActivatedRoute,
+    private router: Router,
     private assetService: AssetService,
     private spinner: NgxSpinnerService
   ) {}
@@ -76,9 +77,24 @@ export class GameSearchComponent implements OnInit {
   ngOnInit(): void {
     this.spinner.show();
 
-    this.route.queryParams.subscribe((value) => {
-      this.keyword = value.keyword;
-      this.onApplyFilter();
+    this.route.queryParamMap.subscribe((param) => {
+      const genres = param.get('genres');
+      if (genres) {
+        this.selectedGameTagIds = genres.split(',').map((e) => +e);
+      }
+
+      this.keyword = param.get('keyword') ?? '';
+      this.price = +(param.get('price') ?? 0);
+      this.category = param.get('category') ?? '';
+
+      this.currentPage = 1;
+      this.spinner.show();
+      this.apollo
+        .query<Output, Input>({ query, variables: this.queryVariables })
+        .subscribe((resp) => {
+          this.games = resp.data.searchGames.data;
+          this.spinner.hide();
+        });
     });
   }
 
@@ -87,18 +103,22 @@ export class GameSearchComponent implements OnInit {
     this.selectedGameTagIds = checked
       ? [...this.selectedGameTagIds, id]
       : this.selectedGameTagIds.filter((value) => value !== id);
-    console.log(this.selectedGameTagIds);
   }
 
   onApplyFilter(): void {
-    this.currentPage = 1;
-    this.spinner.show();
-    this.apollo
-      .query<Output, Input>({ query, variables: this.queryVariables })
-      .subscribe((resp) => {
-        this.games = resp.data.searchGames.data;
-        this.spinner.hide();
-      });
+    const { genres, category, keyword, price } = this.queryVariables;
+    this.router
+      .navigate([], {
+        relativeTo: this.route,
+        queryParamsHandling: 'merge',
+        queryParams: {
+          category,
+          keyword,
+          price,
+          genres: genres.join(','),
+        },
+      })
+      .then();
   }
 }
 

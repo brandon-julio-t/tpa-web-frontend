@@ -20,7 +20,7 @@ import { AdminPromosCreateComponent } from './pages/admin-promos-create/admin-pr
 import { AdminPromosUpdateComponent } from './pages/admin-promos-update/admin-promos-update.component';
 import { TopUpComponent } from './pages/top-up/top-up.component';
 import { ChatComponent } from './pages/chat/chat.component';
-import { StoreComponent } from './pages/store/store.component';
+import { PointsShopComponent } from './pages/points-shop/points-shop.component';
 import { HomeComponent } from './pages/home/home.component';
 import { GameDetailComponent } from './pages/game-detail/game-detail.component';
 import { GameSearchComponent } from './pages/game-search/game-search.component';
@@ -44,6 +44,7 @@ const routes: Routes = [
     path: '',
     children: [
       { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: 'points-shop', component: PointsShopComponent },
       {
         path: 'community',
         children: [{ path: ':tab', component: CommunityComponent }],
@@ -88,7 +89,6 @@ const routes: Routes = [
         children: [
           { path: 'top-up', component: TopUpComponent },
           { path: 'chat', component: ChatComponent },
-          { path: 'store', component: StoreComponent },
           { path: 'streaming', component: StreamingComponent },
           {
             path: 'watch-stream/:accountName',

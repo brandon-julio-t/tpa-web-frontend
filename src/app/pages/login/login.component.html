@@ -34,11 +34,16 @@
         <input formControlName="password" id="password" type="password" />
       </label>
 
+      <label for="remember-me">
+        <input formControlName="rememberMe" id="remember-me" type="checkbox" />
+        Remember Me
+      </label>
+
       <app-submit-button
-        type="submit"
-        class="btn btn-blue"
         (click)="onSubmit()"
         [loading]="isLoading"
+        class="btn btn-blue"
+        type="submit"
       >
         Sign In
       </app-submit-button>

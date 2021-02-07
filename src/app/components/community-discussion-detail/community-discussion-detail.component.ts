@@ -19,15 +19,13 @@ export class CommunityDiscussionDetailComponent implements OnInit {
   >({
     query: GQL_QUERY,
   });
-
+  id = -1;
+  page = 1;
+  maxPage = 1;
   discussion$ = this.query$.valueChanges.pipe(
     map((resp) => resp.data.gameDiscussion),
     tap((x) => (this.maxPage = x.comments.totalPages))
   );
-
-  id = -1;
-  page = 1;
-  maxPage = 1;
   comment = '';
 
   constructor(

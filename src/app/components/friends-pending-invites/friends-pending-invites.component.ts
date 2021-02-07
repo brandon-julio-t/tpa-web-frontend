@@ -58,15 +58,17 @@ export class FriendsPendingInvitesComponent implements OnInit {
   }
 
   onIgnore(id: number): void {
-    this.apollo.mutate({
-      mutation: gql`
-        mutation ignoreFriendRequest($id: ID!) {
-          ignoreFriendRequest(userId: $id) {
-            id
+    this.apollo
+      .mutate({
+        mutation: gql`
+          mutation ignoreFriendRequest($id: ID!) {
+            ignoreFriendRequest(userId: $id) {
+              id
+            }
           }
-        }
-      `,
-      variables: {id}
-    }).subscribe(() => this.refresh.emit());
+        `,
+        variables: { id },
+      })
+      .subscribe(() => this.refresh.emit());
   }
 }

@@ -1,0 +1,36 @@
+<div (click)="onPurchase()" class="item">
+  <ngx-spinner
+    [fullScreen]="false"
+    [name]="'' + item?.id || 'primary'"
+    type="line-scale-pulse-out-rapid"
+  ></ngx-spinner>
+
+  <div class="item-image">
+    <video
+      *ngIf="item?.image?.contentType?.includes('video')"
+      [src]="asset(item?.image?.id)"
+      autoplay
+      loop
+    ></video>
+    <img
+      *ngIf="item?.image?.contentType?.includes('image')"
+      [src]="asset(item?.image?.id)"
+      alt="Image"
+    />
+  </div>
+
+  <div class="item-detail">
+    <p class="item-detail-name">{{ item?.name }}</p>
+    <p class="item-detail-category">
+      {{ underscoreToSpace(item?.category) | titlecase }}
+    </p>
+    <p class="item-detail-price">
+      <img
+        alt="Steam point"
+        class="item-detail-price-icon"
+        src="assets/steam_point.png"
+      />
+      <span>{{ item?.price }}</span>
+    </p>
+  </div>
+</div>

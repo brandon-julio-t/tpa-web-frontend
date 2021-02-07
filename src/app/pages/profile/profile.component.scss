@@ -40,6 +40,10 @@
   }
 
   &-games {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: $space-md;
+
     &-item {
       @include clickable;
       text-align: left;
@@ -49,7 +53,6 @@
       grid-template-columns: auto 1fr;
       align-items: center;
       grid-gap: $space-md;
-      margin-bottom: $space-md;
 
       &-banner {
         width: 184px;
@@ -58,6 +61,144 @@
       }
 
       &-item {
+      }
+    }
+  }
+
+  &-friends {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    grid-gap: $space-md;
+
+    .offline {
+      color: #898989;
+      border-color: #898989;
+    }
+
+    .online {
+      color: #57cbde;
+      border-color: #57cbde;
+    }
+
+    .playing {
+      color: #90ba3c;
+      border-color: #90ba3c;
+    }
+
+    &-trigger {
+      position: relative;
+    }
+
+    &-item {
+      display: grid;
+      align-items: center;
+      height: 64px;
+      grid-template-columns: 64px 1fr auto;
+      grid-template-areas:
+        "picture name level"
+        "picture status level";
+
+      background-color: #171a21;
+      color: inherit;
+      cursor: pointer;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.3);
+      }
+
+      .offline {
+        color: #898989;
+        border-color: #898989;
+      }
+
+      .online {
+        color: #57cbde;
+        border-color: #57cbde;
+      }
+
+      .playing {
+        color: #90ba3c;
+        border-color: #90ba3c;
+      }
+
+      &-trigger {
+        position: relative;
+      }
+
+      &-trigger:hover &-mini-profile {
+        display: grid;
+      }
+
+      &-mini-profile {
+        display: none;
+        position: absolute;
+        left: calc(-328px - 16px);
+        width: 328px;
+        z-index: 9;
+
+        align-items: center;
+        grid-gap: $space-md;
+        grid-template-columns: auto 1fr;
+        grid-template-areas:
+          "image name"
+          "image status"
+          "level level";
+
+        padding: $space-md;
+        background: radial-gradient(
+          ellipse farthest-corner at 20% 30%,
+          rgb(76, 80, 91) 0%,
+          rgb(52, 55, 63) 50%,
+          rgb(40, 44, 50) 100%
+        );
+
+        &-profile-picture {
+          @include image-control;
+          grid-area: image;
+          height: 90px;
+          width: 90px;
+        }
+
+        &-display-name {
+          text-align: left;
+          grid-area: name;
+        }
+
+        &-status {
+          text-align: left;
+          grid-area: status;
+        }
+
+        &-level {
+          text-align: left;
+          grid-area: level;
+        }
+      }
+
+      &-profile-picture {
+        @include image-control;
+        grid-area: picture;
+        height: 64px;
+        border-width: 1px;
+        border-style: solid;
+      }
+
+      &-display-name {
+        grid-area: name;
+        color: inherit;
+        margin-left: $space-md;
+      }
+
+      &-status {
+        grid-area: status;
+        color: inherit;
+        margin-left: $space-md;
+      }
+
+      &-level {
+        grid-area: level;
+        color: inherit;
+        margin-right: $space-md;
       }
     }
   }

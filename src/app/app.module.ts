@@ -32,7 +32,7 @@ import { AdminPromosCreateComponent } from './pages/admin-promos-create/admin-pr
 import { AdminPromosUpdateComponent } from './pages/admin-promos-update/admin-promos-update.component';
 import { TopUpComponent } from './pages/top-up/top-up.component';
 import { ChatComponent } from './pages/chat/chat.component';
-import { StoreComponent } from './pages/store/store.component';
+import { PointsShopComponent } from './pages/points-shop/points-shop.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { ChatAreaComponent } from './components/chat-area/chat-area.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -74,6 +74,7 @@ import { CommunityReviewDetailComponent } from './components/community-review-de
 import { CommunityDiscussionsComponent } from './components/community-discussions/community-discussions.component';
 import { CommunityDiscussionDetailComponent } from './components/community-discussion-detail/community-discussion-detail.component';
 import { CommunityDiscussionCreateComponent } from './components/community-discussion-create/community-discussion-create.component';
+import { PointsShopItemComponent } from './components/points-shop-item/points-shop-item.component';
 
 @NgModule({
   declarations: [
@@ -100,7 +101,7 @@ import { CommunityDiscussionCreateComponent } from './components/community-discu
     AdminPromosUpdateComponent,
     TopUpComponent,
     ChatComponent,
-    StoreComponent,
+    PointsShopComponent,
     PaginationComponent,
     ChatAreaComponent,
     HomeComponent,
@@ -140,6 +141,7 @@ import { CommunityDiscussionCreateComponent } from './components/community-discu
     CommunityDiscussionsComponent,
     CommunityDiscussionDetailComponent,
     CommunityDiscussionCreateComponent,
+    PointsShopItemComponent,
   ],
   imports: [
     BrowserModule,

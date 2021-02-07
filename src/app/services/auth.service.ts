@@ -26,6 +26,7 @@ export class AuthService extends Query<Response> {
           }
         }
         level
+        points
         profilePicture {
           id
           contentType
@@ -41,6 +42,7 @@ export class AuthService extends Query<Response> {
           }
         }
         friendCode
+        status
         outgoingFriendRequests {
           id
           displayName
@@ -56,6 +58,10 @@ export class AuthService extends Query<Response> {
           }
         }
         profileTheme
+        mostViewedGenres {
+          id
+          name
+        }
         realName
         receivedGiftsCount
         receivedInvitesCount

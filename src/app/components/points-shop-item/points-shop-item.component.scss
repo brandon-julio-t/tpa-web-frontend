@@ -1,0 +1,60 @@
+@use 'src/app/styles/spacings' as *;
+@use 'src/app/styles/mixins' as *;
+
+.item {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+
+  background: rgba(76, 112, 168, 0.25);
+  cursor: pointer;
+  position: relative;
+
+  &:hover {
+    transform: scaleX(1) scaleY(1);
+    filter: brightness(1.1) contrast(0.95) saturate(1);
+    box-shadow: 3px 8px 8px 3px rgb(0 0 0 / 60%);
+  }
+
+  &-image {
+    display: flex;
+    justify-content: center;
+    padding: $space-md;
+    background: linear-gradient(
+      144.37deg,
+      rgba(130, 156, 219, 0) 68.22%,
+      rgba(82, 125, 235, 0.32) 113.95%
+    );
+
+    img,
+    video {
+      height: 138px;
+      width: 138px;
+    }
+  }
+
+  &-detail {
+    padding: $space-md;
+
+    &-name {
+      font-size: 0.9rem;
+    }
+
+    &-category {
+      margin-bottom: $space-md;
+      font-size: 0.7rem;
+    }
+
+    &-price {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      color: #d7e9f1;
+
+      &-icon {
+        height: 1rem;
+        margin-right: $space-sm;
+      }
+    }
+  }
+}

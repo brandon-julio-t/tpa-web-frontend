@@ -167,7 +167,7 @@ type Mutation {
   createCommunityImagesAndVideos(input: CreateCommunityImageAndVideo!): CommunityImageAndVideo!
   createGame(input: CreateGame!): Game!
   createProfileComment(comment: String!, profileId: ID!): ProfileComment!
-  createPromo(discount: Float!, endAt: Time!): Promo!
+  createPromo(discount: Float!, endAt: Time!, gameId: ID!): Promo!
   createReview(content: String!, gameId: ID!, isRecommended: Boolean!): GameReview!
   deleteGame(id: ID!): Game!
   deleteNotification(id: ID!): Notification!
@@ -182,13 +182,14 @@ type Mutation {
   ignoreFriendRequest(userId: ID!): User!
   joinStream(accountName: String!, rtcAnswer: String!): String!
   likeCreateCommunityImagesAndVideos(imageAndVideoId: ID!): CommunityImageAndVideo!
-  login(accountName: String!, password: String!): User!
+  login(accountName: String!, password: String!, rememberMe: Boolean!): User!
   logout: User!
   newIceCandidate(accountName: String!, candidate: String!): String!
   postCommunityDiscussion(input: PostCommunityDiscussion!): CommunityDiscussion!
   postCommunityDiscussionComment(input: PostCommunityDiscussionComment!): CommunityDiscussionComment!
   postCommunityImagesAndVideosComment(body: String!, imageAndVideoId: ID!): CommunityImageAndVideoComment!
   postGameReviewComment(input: GameReviewCommentInput!): GameReviewComment!
+  purchasePointItem(id: ID!): PointItem!
   redeemWallet(code: String!): Boolean!
   register(accountName: String!, countryId: ID!, email: String!, password: String!): User!
   rejectFriendRequest(userId: ID!): User!
@@ -212,6 +213,15 @@ type Notification {
   content: String!
   createdAt: Time!
   id: ID!
+}
+
+type PointItem {
+  category: String!
+  id: ID!
+  image: AssetFile!
+  isPurchased: Boolean!
+  name: String!
+  price: Int!
 }
 
 type PrivateMessage {
@@ -259,12 +269,18 @@ type Query {
   getReportsByUser(id: ID!): [Report!]!
   newAndTrending: [Game!]!
   notificationById(id: ID!): Notification!
+  pointItemAnimatedAvatars: [PointItem!]!
+  pointItemAvatarBorders: [PointItem!]!
+  pointItemChatStickers: [PointItem!]!
+  pointItemMiniProfileBackgrounds: [PointItem!]!
+  pointItemProfileBackgrounds: [PointItem!]!
   privateMessage(friendId: ID!): [PrivateMessage!]!
   profileComments(profileId: ID!): [ProfileComment!]!
   promo(id: ID!): Promo!
   promos(page: Int!): PromoPagination!
   refreshToken: Boolean!
   searchGames(category: String!, genres: [ID!]!, keyword: String!, page: Int!, price: Int!): GamePagination!
+  sidebarGameTags: [GameTag!]!
   specialOffersGame: [Game!]!
   specials: [Game!]!
   streams: [String!]!
@@ -302,8 +318,10 @@ type User {
   id: ID!
   ingoingFriendRequests: [User!]!
   level: Int!
+  mostViewedGenres: [GameTag!]!
   notifications: [Notification!]!
   outgoingFriendRequests: [User!]!
+  points: Int!
   profilePicture: AssetFile!
   profileTheme: String!
   realName: String!
@@ -392,6 +410,6 @@ input UpdateUser {
 }
 
 
-scalar Upload
-
 scalar Time
+
+scalar Upload

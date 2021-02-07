@@ -6,34 +6,37 @@
   </section>
   <section>
     <h2>Browse Categories</h2>
-    <a>Top Sellers</a>
-    <a>New Releases</a>
-    <a>Upcoming</a>
-    <a>Specials</a>
-    <a>Virtual Reality</a>
-    <a>Controller Friendly</a>
-  </section>
-  <section>
-    <h2>Browse Categories</h2>
-    <a>Top Sellers</a>
-    <a>New Releases</a>
-    <a>Upcoming</a>
-    <a>Specials</a>
-    <a>Virtual Reality</a>
-    <a>Controller Friendly</a>
+    <a [queryParams]="{ category: 'top_sellers' }" [routerLink]="['/search']">
+      Top Sellers
+    </a>
+    <a [queryParams]="{ category: 'new_releases' }" [routerLink]="['/search']">
+      New Releases
+    </a>
+    <a
+      [queryParams]="{ category: 'special_offers' }"
+      [routerLink]="['/search']"
+    >
+      Specials
+    </a>
   </section>
   <section>
     <h2>Browse by Genre</h2>
-    <a>Free to Play</a>
-    <a>Early Access</a>
-    <a>Action</a>
-    <a>Adventure</a>
-    <a>Casual</a>
-    <a>Casual</a>
+    <a
+      *ngFor="let genre of genres$ | async"
+      [queryParams]="{ genres: genre.id }"
+      routerLink="/search"
+    >
+      {{ genre.name }}
+    </a>
   </section>
   <section>
     <h2>Your Tags</h2>
-    <a>Utilities</a>
-    <a>Medieval</a>
+    <a
+      *ngFor="let genre of userGenres$ | async"
+      [queryParams]="{ genres: genre.id }"
+      routerLink="/search"
+    >
+      {{ genre.name }}
+    </a>
   </section>
 </aside>

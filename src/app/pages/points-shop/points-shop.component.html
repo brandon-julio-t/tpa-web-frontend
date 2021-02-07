@@ -1,0 +1,81 @@
+<div class="container">
+  <h2 *ngIf="user$ | async as user" class="header">
+    <span class="header-label">THE POINTS SHOP</span>
+    <span class="header-balance">
+      <span class="header-balance-label">YOUR BALANCE</span>
+      <span class="header-balance-value">
+        <img
+          alt="Steam point"
+          class="header-balance-value-icon"
+          src="assets/steam_point.png"
+        />
+        <span>{{ user.points }}</span>
+      </span>
+    </span>
+  </h2>
+
+  <section>
+    <h2>Profile Backgrounds</h2>
+
+    <hr />
+
+    <div>
+      <app-points-shop-item
+        *ngFor="let profileBackground of profileBackgrounds$ | async"
+        [item]="profileBackground"
+      ></app-points-shop-item>
+    </div>
+  </section>
+
+  <section>
+    <h2>Avatar Borders</h2>
+
+    <hr />
+
+    <div>
+      <app-points-shop-item
+        *ngFor="let avatarBorder of avatarBorders$ | async"
+        [item]="avatarBorder"
+      ></app-points-shop-item>
+    </div>
+  </section>
+
+  <section>
+    <h2>Animated Avatars</h2>
+
+    <hr />
+
+    <div>
+      <app-points-shop-item
+        *ngFor="let animatedAvatar of animatedAvatars$ | async"
+        [item]="animatedAvatar"
+      ></app-points-shop-item>
+    </div>
+  </section>
+
+  <section>
+    <h2>Chat Stickers</h2>
+
+    <hr />
+
+    <div>
+      <app-points-shop-item
+        *ngFor="let chatSticker of chatStickers$ | async"
+        [item]="chatSticker"
+      ></app-points-shop-item>
+    </div>
+  </section>
+
+  <section>
+    <h2>Mini Profile Backgrounds</h2>
+
+    <hr />
+
+    <div>
+      <app-points-shop-item
+        *ngFor="let miniProfileBackground of miniProfileBackgrounds$ | async"
+        [item]="miniProfileBackground"
+      ></app-points-shop-item>
+    </div>
+  </section>
+</div>
