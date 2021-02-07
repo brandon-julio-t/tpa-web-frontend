@@ -75,6 +75,10 @@ import { CommunityDiscussionsComponent } from './components/community-discussion
 import { CommunityDiscussionDetailComponent } from './components/community-discussion-detail/community-discussion-detail.component';
 import { CommunityDiscussionCreateComponent } from './components/community-discussion-create/community-discussion-create.component';
 import { PointsShopItemComponent } from './components/points-shop-item/points-shop-item.component';
+import { ProfileEditProfileBackgroundComponent } from './components/profile-edit-profile-background/profile-edit-profile-background.component';
+import { ProfileEditMiniProfileBackgroundComponent } from './components/profile-edit-mini-profile-background/profile-edit-mini-profile-background.component';
+import { ProfileEditAvatarBorderComponent } from './components/profile-edit-avatar-border/profile-edit-avatar-border.component';
+import { ProfileEditFeaturedBadgeComponent } from './components/profile-edit-featured-badge/profile-edit-featured-badge.component';
 
 @NgModule({
   declarations: [
@@ -142,6 +146,10 @@ import { PointsShopItemComponent } from './components/points-shop-item/points-sh
     CommunityDiscussionDetailComponent,
     CommunityDiscussionCreateComponent,
     PointsShopItemComponent,
+    ProfileEditProfileBackgroundComponent,
+    ProfileEditMiniProfileBackgroundComponent,
+    ProfileEditAvatarBorderComponent,
+    ProfileEditFeaturedBadgeComponent,
   ],
   imports: [
     BrowserModule,

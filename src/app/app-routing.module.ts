@@ -38,6 +38,10 @@ import { CommunityImageAndVideoDetailComponent } from './components/community-im
 import { CommunityReviewDetailComponent } from './components/community-review-detail/community-review-detail.component';
 import { CommunityDiscussionDetailComponent } from './components/community-discussion-detail/community-discussion-detail.component';
 import { CommunityDiscussionCreateComponent } from './components/community-discussion-create/community-discussion-create.component';
+import { ProfileEditAvatarBorderComponent } from './components/profile-edit-avatar-border/profile-edit-avatar-border.component';
+import { ProfileEditFeaturedBadgeComponent } from './components/profile-edit-featured-badge/profile-edit-featured-badge.component';
+import { ProfileEditMiniProfileBackgroundComponent } from './components/profile-edit-mini-profile-background/profile-edit-mini-profile-background.component';
+import { ProfileEditProfileBackgroundComponent } from './components/profile-edit-profile-background/profile-edit-profile-background.component';
 
 const routes: Routes = [
   {
@@ -118,6 +122,26 @@ const routes: Routes = [
       {
         path: 'edit/:customUrl',
         component: ProfileEditComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'edit-profile-background/:customUrl',
+        component: ProfileEditProfileBackgroundComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'edit-mini-profile-background/:customUrl',
+        component: ProfileEditMiniProfileBackgroundComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'edit-featured-badge/:customUrl',
+        component: ProfileEditFeaturedBadgeComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'edit-avatar-border/:customUrl',
+        component: ProfileEditAvatarBorderComponent,
         canActivate: [AuthGuard],
       },
     ],

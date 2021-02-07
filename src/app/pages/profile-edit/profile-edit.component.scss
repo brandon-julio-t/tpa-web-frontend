@@ -1,0 +1,11 @@
+@use 'src/app/styles/spacings' as *;
+
+.edit-others {
+  display: grid;
+  grid-gap: $space-md;
+  grid-template-columns: repeat(4, auto);
+
+  a {
+    width: 100%;
+  }
+}

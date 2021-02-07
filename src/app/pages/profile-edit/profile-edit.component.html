@@ -87,6 +87,38 @@
       type="file"
     />
   </label>
+
+  <div class="edit-others">
+    <a
+      [routerLink]="['/profile', 'edit-profile-background', user?.customUrl]"
+      class="btn btn-black"
+    >
+      Edit Profile Background
+    </a>
+    <a
+      [routerLink]="[
+        '/profile',
+        'edit-mini-profile-background',
+        user?.customUrl
+      ]"
+      class="btn btn-black"
+    >
+      Edit Mini Profile Background
+    </a>
+    <a
+      [routerLink]="['/profile', 'edit-featured-badge', user?.customUrl]"
+      class="btn btn-black"
+    >
+      Edit Featured Badge
+    </a>
+    <a
+      [routerLink]="['/profile', 'edit-avatar-border', user?.customUrl]"
+      class="btn btn-black"
+    >
+      Edit Avatar Border
+    </a>
+  </div>
+
   <app-submit-button (click)="onSubmit()" class="btn btn-blue" type="submit">
     Submit
   </app-submit-button>

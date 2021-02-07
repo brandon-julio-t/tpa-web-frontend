@@ -8,6 +8,7 @@
 
   &-information {
     display: grid;
+    margin-bottom: $space-lg;
     grid-template-columns: auto 2fr 1fr;
     grid-gap: $space-md;
     grid-template-areas:
@@ -41,6 +42,7 @@
 
   &-games {
     display: grid;
+    margin-bottom: $space-lg;
     grid-template-columns: auto auto;
     grid-gap: $space-md;
 
@@ -67,6 +69,7 @@
 
   &-friends {
     display: grid;
+    margin-bottom: $space-lg;
     grid-template-columns: repeat(3, auto);
     grid-gap: $space-md;
 
