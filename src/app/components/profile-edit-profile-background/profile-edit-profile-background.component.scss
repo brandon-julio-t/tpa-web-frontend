@@ -1,0 +1,19 @@
+@use 'src/app/styles/spacings' as *;
+
+.form {
+  margin: $space-md auto;
+
+  &-options {
+    display: grid;
+    grid-gap: $space-md;
+    justify-content: center;
+    grid-template-columns: repeat(5, auto);
+
+    &-item {
+    }
+  }
+
+  &-submit {
+    width: 100%;
+  }
+}

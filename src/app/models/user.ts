@@ -2,10 +2,12 @@ import { Country } from './country';
 import { AssetFile } from './asset-file';
 import { Game } from './game';
 import { GameGenre } from './game-genre';
+import { PointItem } from './point-item';
 
 export interface User {
   id: number;
   accountName: string;
+  avatarBorder: PointItem | null;
   cart: Game[];
   cartCount: number;
   country: Country;
@@ -18,7 +20,12 @@ export interface User {
   friends: User[];
   games: Game[];
   ingoingFriendRequests: User[];
+  miniProfileBackground: PointItem | null;
   outgoingFriendRequests: User[];
+  ownedAvatarBorders: PointItem[];
+  ownedMiniProfileBackgrounds: PointItem[];
+  ownedProfileBackgrounds: PointItem[];
+  profileBackground: PointItem | null;
   mostViewedGenres: GameGenre[];
   points: number;
   profilePicture: AssetFile;

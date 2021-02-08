@@ -2,13 +2,37 @@
   [ngStyle]="{ backgroundColor: profile?.profileTheme }"
   class="profile container"
 >
-  <div class="profile-information">
+  <div class="profile-background">
+    <video
+      *ngIf="profile?.profileBackground?.image?.contentType?.includes('video')"
+      [src]="asset(profile?.profileBackground?.image?.id)"
+      autoplay
+      loop
+    ></video>
     <img
-      [src]="profilePicture"
-      alt="Profile Picture"
-      class="profile-information-picture-image"
-      width="auto"
+      *ngIf="profile?.profileBackground?.image?.contentType?.includes('image')"
+      [src]="asset(profile?.profileBackground?.image?.id)"
+      alt="profile background"
     />
+  </div>
+
+  <div class="profile-information">
+    <div class="profile-information-avatar">
+      <img
+        [src]="profilePicture"
+        alt="Profile Picture"
+        class="profile-information-avatar-image"
+        width="auto"
+      />
+      <img
+        *ngIf="profile?.avatarBorder"
+        [src]="asset(profile?.avatarBorder?.image?.id)"
+        alt="Profile Picture"
+        class="profile-information-avatar-border"
+        width="auto"
+      />
+    </div>
+
     <h2 class="profile-information-display-name">{{ profile?.displayName }}</h2>
     <p class="profile-information-summary">{{ profile?.summary }}</p>
     <p class="profile-information-level">Level {{ profile?.level }}</p>
@@ -68,33 +92,59 @@
   <h2>Friends</h2>
   <section class="profile-friends">
     <div
-      class="profile-friends-item-trigger"
       *ngFor="let friend of profile?.friends"
+      class="profile-friends-item-trigger"
     >
       <div class="profile-friends-item-mini-profile">
+        <video
+          *ngIf="
+            friend?.miniProfileBackground?.image?.contentType?.includes('video')
+          "
+          [src]="asset(friend?.miniProfileBackground?.image?.id)"
+          autoplay
+          class="profile-friends-item-mini-profile-background"
+          loop
+        ></video>
         <img
-          [src]="asset(friend.profilePicture.id)"
-          alt="Profile picture"
-          class="profile-friends-item-mini-profile-profile-picture"
+          *ngIf="
+            friend?.miniProfileBackground?.image?.contentType?.includes('image')
+          "
+          [src]="asset(friend?.miniProfileBackground?.image?.id)"
+          alt="mini profile background"
+          class="profile-friends-item-mini-profile-background"
         />
 
+        <div class="profile-friends-item-mini-profile-picture">
+          <img
+            [src]="asset(friend.profilePicture.id)"
+            alt="Profile picture"
+            class="profile-friends-item-mini-profile-picture-image"
+          />
+          <img
+            *ngIf="friend?.avatarBorder"
+            [src]="asset(friend?.avatarBorder?.image?.id)"
+            alt="Profile picture border"
+            class="profile-friends-item-mini-profile-picture-border"
+          />
+        </div>
+
         <span
-          class="profile-friends-item-mini-profile-display-name"
           [ngClass]="{
             online: friend.status === 'online',
             offline: friend.status === 'offline',
             playing: friend.status === 'playing'
           }"
+          class="profile-friends-item-mini-profile-display-name"
         >
           {{ friend.displayName }}
         </span>
         <span
-          class="profile-friends-item-mini-profile-status"
           [ngClass]="{
             online: friend.status === 'online',
             offline: friend.status === 'offline',
             playing: friend.status === 'playing'
           }"
+          class="profile-friends-item-mini-profile-status"
         >
           {{ friend.status | titlecase }}
         </span>

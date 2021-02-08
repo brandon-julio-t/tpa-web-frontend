@@ -1,1 +1,17 @@
-<p>profile-edit-avatar-frame works!</p>
+<ngx-spinner></ngx-spinner>
+
+<form [formGroup]="form" class="form container">
+  <section class="form-options">
+    <label
+      *ngFor="let avatarBorder of avatarBorders$ | async"
+      class="form-options-item"
+    >
+      <input [value]="avatarBorder.id" formControlName="id" type="radio" />
+      <app-points-shop-item [item]="avatarBorder"></app-points-shop-item>
+    </label>
+  </section>
+
+  <button (click)="onSubmit()" class="btn btn-blue form-submit" type="submit">
+    Submit
+  </button>
+</form>

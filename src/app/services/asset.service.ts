@@ -17,7 +17,7 @@ export class AssetService {
     return file.contentType.includes('image');
   }
 
-  get(id: number | undefined): SafeUrl {
+  get(id: number | undefined | null): SafeUrl {
     return this.sanitizer.bypassSecurityTrustUrl(
       `${environment.apiUrl}/assets/${id}`
     );

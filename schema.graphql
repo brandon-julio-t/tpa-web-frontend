@@ -177,6 +177,9 @@ type Mutation {
   denyUnsuspendRequests(id: ID!): User!
   dislikeCreateCommunityImagesAndVideos(imageAndVideoId: ID!): CommunityImageAndVideo!
   downVoteReview(id: ID!): GameReview!
+  editAvatarBorder(id: ID!): PointItem!
+  editMiniProfileBackground(id: ID!): PointItem!
+  editProfileBackground(id: ID!): PointItem!
   giftWithCard(input: Gift!): Float!
   giftWithWallet(input: Gift!): Float!
   ignoreFriendRequest(userId: ID!): User!
@@ -219,7 +222,6 @@ type PointItem {
   category: String!
   id: ID!
   image: AssetFile!
-  isPurchased: Boolean!
   name: String!
   price: Int!
 }
@@ -306,6 +308,7 @@ type Subscription {
 
 type User {
   accountName: String!
+  avatarBorder: PointItem!
   cart: [Game!]!
   cartCount: Int!
   country: Country!
@@ -318,10 +321,15 @@ type User {
   id: ID!
   ingoingFriendRequests: [User!]!
   level: Int!
+  miniProfileBackground: PointItem!
   mostViewedGenres: [GameTag!]!
   notifications: [Notification!]!
   outgoingFriendRequests: [User!]!
+  ownedAvatarBorders: [PointItem!]!
+  ownedMiniProfileBackgrounds: [PointItem!]!
+  ownedProfileBackgrounds: [PointItem!]!
   points: Int!
+  profileBackground: PointItem!
   profilePicture: AssetFile!
   profileTheme: String!
   realName: String!

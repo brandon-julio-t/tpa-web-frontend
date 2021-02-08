@@ -11,6 +11,12 @@ export class AuthService extends Query<Response> {
       auth {
         id
         accountName
+        avatarBorder {
+          image {
+            id
+            contentType
+          }
+        }
         country {
           id
           name
@@ -42,6 +48,42 @@ export class AuthService extends Query<Response> {
           }
         }
         friendCode
+        miniProfileBackground {
+          image {
+            id
+            contentType
+          }
+        }
+        profileBackground {
+          image {
+            id
+            contentType
+          }
+        }
+        ownedAvatarBorders {
+          id
+          name
+          image {
+            id
+            contentType
+          }
+        }
+        ownedMiniProfileBackgrounds {
+          id
+          name
+          image {
+            id
+            contentType
+          }
+        }
+        ownedProfileBackgrounds {
+          id
+          name
+          image {
+            id
+            contentType
+          }
+        }
         status
         outgoingFriendRequests {
           id

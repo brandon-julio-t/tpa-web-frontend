@@ -1,1 +1,23 @@
-<p>profile-edit-mini-profile-background works!</p>
+<ngx-spinner></ngx-spinner>
+
+<form [formGroup]="form" class="form container">
+  <section class="form-options">
+    <label
+      *ngFor="let miniProfileBackground of miniProfileBackgrounds$ | async"
+      class="form-options-item"
+    >
+      <input
+        [value]="miniProfileBackground.id"
+        formControlName="id"
+        type="radio"
+      />
+      <app-points-shop-item
+        [item]="miniProfileBackground"
+      ></app-points-shop-item>
+    </label>
+  </section>
+
+  <button (click)="onSubmit()" class="btn btn-blue form-submit" type="submit">
+    Submit
+  </button>
+</form>

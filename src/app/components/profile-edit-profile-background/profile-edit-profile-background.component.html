@@ -1,1 +1,17 @@
-<p>profile-edit-profile-background works!</p>
+<ngx-spinner></ngx-spinner>
+
+<form [formGroup]="form" class="form container">
+  <section class="form-options">
+    <label
+      *ngFor="let profileBackground of profileBackgrounds$ | async"
+      class="form-options-item"
+    >
+      <input [value]="profileBackground.id" formControlName="id" type="radio" />
+      <app-points-shop-item [item]="profileBackground"></app-points-shop-item>
+    </label>
+  </section>
+
+  <button (click)="onSubmit()" class="btn btn-blue form-submit" type="submit">
+    Submit
+  </button>
+</form>

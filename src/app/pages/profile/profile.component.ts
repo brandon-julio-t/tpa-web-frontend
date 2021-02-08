@@ -86,7 +86,7 @@ export class ProfileComponent implements OnInit {
     );
   }
 
-  asset(id: number): SafeUrl {
+  asset(id: number | undefined | null): SafeUrl {
     return this.assetService.get(id);
   }
 
@@ -103,11 +103,29 @@ export class ProfileComponent implements OnInit {
             getProfile(customUrl: $customUrl) {
               id
               accountName
+              avatarBorder {
+                image {
+                  id
+                  contentType
+                }
+              }
               email
               friends {
                 id
                 displayName
+                avatarBorder {
+                  image {
+                    id
+                    contentType
+                  }
+                }
                 level
+                miniProfileBackground {
+                  image {
+                    id
+                    contentType
+                  }
+                }
                 profilePicture {
                   id
                 }
@@ -119,6 +137,12 @@ export class ProfileComponent implements OnInit {
                   id
                 }
                 title
+              }
+              profileBackground {
+                image {
+                  id
+                  contentType
+                }
               }
               walletBalance
               displayName
