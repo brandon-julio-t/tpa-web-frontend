@@ -1,13 +1,55 @@
-<section class="friends">
-  <div *ngFor="let friend of friends" class="friends-item">
-    <img
-      [src]="asset(friend.profilePicture.id)"
-      alt="Profile picture"
-      class="friends-item-profile-picture"
+<section *ngIf="friends" class="friends">
+  <label>
+    Filter friend
+    <input
+      [(ngModel)]="filter"
+      (ngModelChange)="onFilterChange()"
+      type="text"
     />
+  </label>
 
-    <span class="friends-item-display-name">
-      {{ friend.displayName }}
-    </span>
-  </div>
+  <h2>Playing</h2>
+  <section class="friends-playing">
+    <div *ngFor="let friend of playingFriends$ | async" class="friends-item">
+      <img
+        [src]="asset(friend.profilePicture.id)"
+        alt="Profile picture"
+        class="friends-item-profile-picture"
+      />
+
+      <span class="friends-item-display-name playing">
+        {{ friend.displayName }}
+      </span>
+    </div>
+  </section>
+
+  <h2>Online</h2>
+  <section class="friends-online">
+    <div *ngFor="let friend of onlineFriends$ | async" class="friends-item">
+      <img
+        [src]="asset(friend.profilePicture.id)"
+        alt="Profile picture"
+        class="friends-item-profile-picture"
+      />
+
+      <span class="friends-item-display-name online">
+        {{ friend.displayName }}
+      </span>
+    </div>
+  </section>
+
+  <h2>Offline</h2>
+  <section class="friends-offline">
+    <div *ngFor="let friend of offlineFriends$ | async" class="friends-item">
+      <img
+        [src]="asset(friend.profilePicture.id)"
+        alt="Profile picture"
+        class="friends-item-profile-picture"
+      />
+
+      <span class="friends-item-display-name offline">
+        {{ friend.displayName }}
+      </span>
+    </div>
+  </section>
 </section>

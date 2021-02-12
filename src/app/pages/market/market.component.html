@@ -1,0 +1,43 @@
+<section class="container">
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let marketItem of marketItems$ | async" class="item">
+        <td class="item-info">
+          <img
+            [src]="asset(marketItem.image.id)"
+            alt="Item image"
+            class="item-info-image"
+          />
+          <span class="item-info-name">{{ marketItem.name }}</span>
+          <span class="item-info-game-title">{{ marketItem.game.title }}</span>
+        </td>
+
+        <td class="item-quantity">
+          {{ marketItem.transactionsCount }}
+        </td>
+
+        <td class="item-price">
+          <span class="item-price-label">Starting at:</span>
+          <br />
+          <span class="item-price-value">
+            {{ marketItem.startingPrice | currency: "$" }}
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="pagination">
+    <button (click)="prev()" class="btn btn-black"><</button>
+    <span>{{ page }} / {{ totalPages$ | async }}</span>
+    <button (click)="next()" class="btn btn-black">></button>
+  </div>
+</section>

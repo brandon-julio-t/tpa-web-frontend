@@ -3,6 +3,7 @@ import { AssetFile } from './asset-file';
 import { Game } from './game';
 import { GameGenre } from './game-genre';
 import { PointItem } from './point-item';
+import { MarketItem } from './market-item';
 
 export interface User {
   id: number;
@@ -19,7 +20,9 @@ export interface User {
   friendCode: string;
   friends: User[];
   games: Game[];
+  gamesByOwnedMarketItems: Game[];
   ingoingFriendRequests: User[];
+  marketItemsByGame: { data: MarketItem[]; totalPages: number };
   miniProfileBackground: PointItem | null;
   outgoingFriendRequests: User[];
   ownedAvatarBorders: PointItem[];

@@ -2,10 +2,15 @@
 @use 'src/app/styles/mixins' as *;
 
 .friends {
-  grid-area: contents;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: $space-md;
+  &-online,
+  &-offline,
+  &-playing {
+    grid-area: contents;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: $space-md;
+    margin-bottom: $space-lg;
+  }
 
   &-item {
     background-color: rgba(29, 31, 36, 0.8);
@@ -28,4 +33,19 @@
     &-display-name {
     }
   }
+}
+
+.offline {
+  color: #898989;
+  border-color: #898989;
+}
+
+.online {
+  color: #57cbde;
+  border-color: #57cbde;
+}
+
+.playing {
+  color: #90ba3c;
+  border-color: #90ba3c;
 }

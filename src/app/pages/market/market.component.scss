@@ -1,0 +1,72 @@
+@use 'src/app/styles/spacings' as *;
+@use 'src/app/styles/mixins' as *;
+
+.container {
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    thead {
+      tr {
+        th {
+          background-color: rgba(0, 0, 0, 0.2);
+          border: 1px solid rgba(0, 0, 0, 0);
+          color: #afafaf;
+          padding: $space-sm;
+        }
+      }
+    }
+
+    .item {
+      margin-bottom: $space-md;
+      background-color: rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(0, 0, 0, 0);
+
+      &:hover {
+        border: 1px solid #324965;
+      }
+
+      &-info {
+        display: grid;
+        grid-gap: $space-md;
+        grid-template-columns: 64px 1fr;
+        grid-template-areas:
+          "image name"
+          "image game-title";
+
+        padding: $space-md;
+
+        &-image {
+          @include image-control;
+          grid-area: image;
+        }
+
+        &-name {
+          grid-area: name;
+        }
+
+        &-game-title {
+          grid-area: game-title;
+        }
+      }
+
+      &-quantity {
+        text-align: center;
+      }
+
+      &-price {
+        text-align: center;
+      }
+    }
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    span {
+      margin: 0 $space-lg;
+    }
+  }
+}

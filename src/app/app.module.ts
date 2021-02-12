@@ -79,6 +79,8 @@ import { ProfileEditProfileBackgroundComponent } from './components/profile-edit
 import { ProfileEditMiniProfileBackgroundComponent } from './components/profile-edit-mini-profile-background/profile-edit-mini-profile-background.component';
 import { ProfileEditAvatarBorderComponent } from './components/profile-edit-avatar-border/profile-edit-avatar-border.component';
 import { ProfileEditFeaturedBadgeComponent } from './components/profile-edit-featured-badge/profile-edit-featured-badge.component';
+import { MarketComponent } from './pages/market/market.component';
+import { InventoryComponent } from './pages/inventory/inventory.component';
 
 @NgModule({
   declarations: [
@@ -150,6 +152,8 @@ import { ProfileEditFeaturedBadgeComponent } from './components/profile-edit-fea
     ProfileEditMiniProfileBackgroundComponent,
     ProfileEditAvatarBorderComponent,
     ProfileEditFeaturedBadgeComponent,
+    MarketComponent,
+    InventoryComponent,
   ],
   imports: [
     BrowserModule,

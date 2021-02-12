@@ -42,16 +42,22 @@ import { ProfileEditAvatarBorderComponent } from './components/profile-edit-avat
 import { ProfileEditFeaturedBadgeComponent } from './components/profile-edit-featured-badge/profile-edit-featured-badge.component';
 import { ProfileEditMiniProfileBackgroundComponent } from './components/profile-edit-mini-profile-background/profile-edit-mini-profile-background.component';
 import { ProfileEditProfileBackgroundComponent } from './components/profile-edit-profile-background/profile-edit-profile-background.component';
+import { MarketComponent } from './pages/market/market.component';
+import { InventoryComponent } from './pages/inventory/inventory.component';
 
 const routes: Routes = [
   {
     path: '',
     children: [
       { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: 'inventory', component: InventoryComponent },
       { path: 'points-shop', component: PointsShopComponent },
       {
         path: 'community',
-        children: [{ path: ':tab', component: CommunityComponent }],
+        children: [
+          { path: 'market', component: MarketComponent },
+          { path: ':tab', component: CommunityComponent },
+        ],
       },
       {
         path: 'create-community-images-and-videos',

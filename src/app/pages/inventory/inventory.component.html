@@ -1,0 +1,35 @@
+<section class="inventory container">
+  <section class="inventory-tabs">
+    <button
+      (click)="onSelectGame(game.id)"
+      *ngFor="let game of games$ | async"
+      class="inventory-tabs-item btn btn-black"
+    >
+      {{ game.title }}
+    </button>
+  </section>
+
+  <section class="inventory-items">
+    <div
+      (click)="onSelectItem(item)"
+      *ngFor="let item of marketItems$ | async"
+      class="inventory-items-cell"
+    >
+      <img [src]="asset(item.image.id)" alt="Item image" />
+    </div>
+  </section>
+
+  <section *ngIf="selectedItem$ | async as item" class="inventory-item-detail">
+    <img [src]="asset(item.image.id)" alt="Item image" />
+    <p class="inventory-item-detail-name">{{ item.name }}</p>
+    <p class="inventory-item-detail-description">
+      {{ item.description }}
+    </p>
+  </section>
+
+  <section class="inventory-pagination">
+    <button (click)="onPrev()" class="btn btn-black"><</button>
+    <span>{{ page }} / {{ totalPages }}</span>
+    <button (click)="onNext()" class="btn btn-black">></button>
+  </section>
+</section>

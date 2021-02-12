@@ -31,6 +31,13 @@ export class AuthService extends Query<Response> {
             id
           }
         }
+        gamesByOwnedMarketItems {
+          id
+          title
+          banner {
+            id
+          }
+        }
         level
         points
         profilePicture {
@@ -42,6 +49,8 @@ export class AuthService extends Query<Response> {
           accountName
           customUrl
           displayName
+          realName
+          status
           profilePicture {
             id
             contentType
@@ -88,6 +97,7 @@ export class AuthService extends Query<Response> {
         outgoingFriendRequests {
           id
           displayName
+          level
           profilePicture {
             id
           }
@@ -95,6 +105,7 @@ export class AuthService extends Query<Response> {
         ingoingFriendRequests {
           id
           displayName
+          level
           profilePicture {
             id
           }
