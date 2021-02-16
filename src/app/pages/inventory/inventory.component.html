@@ -1,12 +1,20 @@
 <section class="inventory container">
   <section class="inventory-tabs">
-    <button
+    <div
       (click)="onSelectGame(game.id)"
       *ngFor="let game of games$ | async"
-      class="inventory-tabs-item btn btn-black"
+      class="inventory-tabs-item"
+      [class.inventory-tabs-item-active]="game.id === selectedGameId"
     >
       {{ game.title }}
-    </button>
+    </div>
+  </section>
+
+  <section class="inventory-filter">
+    <label>
+      Looking for specific item?
+      <input (ngModelChange)="onFilter()" [(ngModel)]="filter" type="text" />
+    </label>
   </section>
 
   <section class="inventory-items">
@@ -21,9 +29,12 @@
 
   <section *ngIf="selectedItem$ | async as item" class="inventory-item-detail">
     <img [src]="asset(item.image.id)" alt="Item image" />
-    <p class="inventory-item-detail-name">{{ item.name }}</p>
+    <h2 class="inventory-item-detail-name">{{ item.name }}</h2>
     <p class="inventory-item-detail-description">
       {{ item.description }}
+    </p>
+    <p class="inventory-item-detail-tags">
+      Tags: {{ commaSpaceCategory(item) }}
     </p>
   </section>
 

@@ -81,6 +81,7 @@ import { ProfileEditAvatarBorderComponent } from './components/profile-edit-avat
 import { ProfileEditFeaturedBadgeComponent } from './components/profile-edit-featured-badge/profile-edit-featured-badge.component';
 import { MarketComponent } from './pages/market/market.component';
 import { InventoryComponent } from './pages/inventory/inventory.component';
+import { MarketDetailComponent } from './pages/market-detail/market-detail.component';
 
 @NgModule({
   declarations: [
@@ -154,6 +155,7 @@ import { InventoryComponent } from './pages/inventory/inventory.component';
     ProfileEditFeaturedBadgeComponent,
     MarketComponent,
     InventoryComponent,
+    MarketDetailComponent,
   ],
   imports: [
     BrowserModule,

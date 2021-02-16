@@ -156,13 +156,23 @@ type GameTag {
 }
 
 type MarketItem {
+  buyPrices: [MarketItemPrice!]!
+  category: String!
   description: String!
   game: Game!
   id: ID!
   image: AssetFile!
   name: String!
+  salePrices: [MarketItemPrice!]!
   startingPrice: Float!
   transactionsCount: Int!
+}
+
+type MarketItemOffer {
+  id: ID!
+  marketItem: MarketItem!
+  price: Float!
+  quantity: Int!
 }
 
 type MarketItemPagination {
@@ -170,12 +180,19 @@ type MarketItemPagination {
   totalPages: Int!
 }
 
+type MarketItemPrice {
+  price: Float!
+  quantity: Int!
+}
+
 type Mutation {
   acceptFriendRequest(userId: ID!): User!
+  addMarketItemOffer(input: AddMarketItemOffer!): MarketItemOffer!
   addPrivateMessage(friendId: ID!, text: String!): PrivateMessage!
   addToCart(gameId: ID!): Game!
   addToWishlist(gameId: ID!): Game!
   approveUnsuspendRequests(id: ID!): User!
+  cancelMarketItemOffer(id: ID!): MarketItemOffer!
   checkoutWithCard: Float!
   checkoutWithWallet: Float!
   clearCart: Boolean!
@@ -284,6 +301,7 @@ type Query {
   getGameById(id: ID!): Game!
   getProfile(customUrl: String!): User!
   getReportsByUser(id: ID!): [Report!]!
+  marketItem(id: ID!): MarketItem!
   marketItems(page: Int!): MarketItemPagination!
   newAndTrending: [Game!]!
   notificationById(id: ID!): Notification!
@@ -338,7 +356,9 @@ type User {
   id: ID!
   ingoingFriendRequests: [User!]!
   level: Int!
-  marketItemsByGame(gameId: ID!, page: Int!): MarketItemPagination!
+  marketItemsBuyListing: [MarketItemOffer!]!
+  marketItemsByGame(filter: String!, gameId: ID!, page: Int!): MarketItemPagination!
+  marketItemsSellListing: [MarketItemOffer!]!
   miniProfileBackground: PointItem
   mostViewedGenres: [GameTag!]!
   notifications: [Notification!]!
@@ -368,6 +388,13 @@ type User {
 type UserPagination {
   data: [User!]!
   totalPages: Int!
+}
+
+input AddMarketItemOffer {
+  category: String!
+  marketItemId: ID!
+  price: Float!
+  quantity: Int!
 }
 
 input CreateCommunityImageAndVideo {

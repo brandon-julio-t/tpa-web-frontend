@@ -18,9 +18,10 @@
     }
 
     .item {
-      margin-bottom: $space-md;
       background-color: rgba(0, 0, 0, 0.2);
       border: 1px solid rgba(0, 0, 0, 0);
+      cursor: pointer;
+      margin-bottom: $space-md;
 
       &:hover {
         border: 1px solid #324965;
@@ -43,6 +44,8 @@
 
         &-name {
           grid-area: name;
+          color: #ffffff;
+          font-weight: bold;
         }
 
         &-game-title {

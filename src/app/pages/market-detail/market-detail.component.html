@@ -1,0 +1,173 @@
+<section *ngIf="marketItem$ | async as item" class="item container">
+  <section class="item-info">
+    <img
+      [src]="asset(item.image.id)"
+      alt="Item image"
+      class="item-info-image"
+    />
+    <h2 class="item-info-name">
+      {{ item.name }}
+      <br />
+      <small>{{ item.game.title }}</small>
+    </h2>
+    <p class="item-info-description">{{ item.description }}</p>
+  </section>
+
+  <section class="item-prices">
+    <section class="item-prices-buy">
+      <button (click)="promptBuy(buyDialog)" class="btn btn-blue">
+        Buy...
+      </button>
+      <hr />
+      <table>
+        <thead>
+          <tr>
+            <th>Price</th>
+            <th>Quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let price of item.buyPrices">
+            <td>{{ price.price | currency: "$" }}</td>
+            <td>{{ price.quantity }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="item-prices-sell">
+      <button (click)="onSell()" class="btn btn-blue">Sell...</button>
+      <hr />
+      <table>
+        <thead>
+          <tr>
+            <th>Price</th>
+            <th>Quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let price of item.salePrices">
+            <td>{{ price.price | currency: "$" }}</td>
+            <td>{{ price.quantity }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </section>
+
+  <section class="item-recent-activity">
+    <h2>Recent Activity</h2>
+  </section>
+
+  <section class="item-listing-sell">
+    <h2>My Sell Listing</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>NAME</th>
+          <th>QUANTITY</th>
+          <th>PRICE</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let item of sellListing$ | async; trackBy: offerTrackBy"
+          class="listing-item"
+        >
+          <td class="name">
+            <img
+              [src]="asset(item.marketItem.image.id)"
+              alt="Image"
+              class="image"
+            />
+            <span class="item-name">{{ item.marketItem.name }}</span>
+            <span class="game-title">{{ item.marketItem.game.title }}</span>
+          </td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.price | currency: "$" }}</td>
+          <td>
+            <button (click)="onCancel(item.id, 'sell')" class="btn-cancel">
+              Cancel
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="item-listing-buy">
+    <h2>My Buy Listing</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>NAME</th>
+          <th>QUANTITY</th>
+          <th>PRICE</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of buyListing$ | async" class="listing-item">
+          <td class="name">
+            <img
+              [src]="asset(item.marketItem.image.id)"
+              alt="Image"
+              class="image"
+            />
+            <span class="item-name">{{ item.marketItem.name }}</span>
+            <span class="game-title">{{ item.marketItem.game.title }}</span>
+          </td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.price | currency: "$" }}</td>
+          <td>
+            <button (click)="onCancel(item.id, 'buy')" class="btn-cancel">
+              Cancel
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</section>
+
+<section #buyDialog class="buy-dialog-container">
+  <section *ngIf="marketItem$ | async as item" class="dialog">
+    <h2>BUY - {{ item.name }}</h2>
+
+    <form [formGroup]="buyForm">
+      <label>
+        What price do you want to pay:
+        <input formControlName="price" type="number" />
+      </label>
+
+      <label>
+        How many do you want to buy:
+        <input formControlName="quantity" type="number" />
+      </label>
+
+      <p>
+        Maximum Price:
+        {{ buyForm.value.price * buyForm.value.quantity | currency: "$" }}
+      </p>
+
+      <div class="actions">
+        <button
+          (click)="onBuy(buyDialog, item.id)"
+          class="btn btn-blue"
+          type="submit"
+        >
+          Buy
+        </button>
+        <button
+          (click)="buyDialog.style.display = 'none'"
+          class="btn btn-black"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+  </section>
+</section>

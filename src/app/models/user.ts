@@ -4,6 +4,7 @@ import { Game } from './game';
 import { GameGenre } from './game-genre';
 import { PointItem } from './point-item';
 import { MarketItem } from './market-item';
+import { MarketItemOffer } from './market-item-offer';
 
 export interface User {
   id: number;
@@ -22,7 +23,9 @@ export interface User {
   games: Game[];
   gamesByOwnedMarketItems: Game[];
   ingoingFriendRequests: User[];
+  marketItemsBuyListing: MarketItemOffer[];
   marketItemsByGame: { data: MarketItem[]; totalPages: number };
+  marketItemsSellListing: MarketItemOffer[];
   miniProfileBackground: PointItem | null;
   outgoingFriendRequests: User[];
   ownedAvatarBorders: PointItem[];

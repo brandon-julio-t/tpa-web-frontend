@@ -57,6 +57,36 @@ export class AuthService extends Query<Response> {
           }
         }
         friendCode
+        marketItemsBuyListing {
+          id
+          marketItem {
+            id
+            game {
+              title
+            }
+            image {
+              id
+            }
+            name
+          }
+          price
+          quantity
+        }
+        marketItemsSellListing {
+          id
+          marketItem {
+            id
+            game {
+              title
+            }
+            image {
+              id
+            }
+            name
+          }
+          price
+          quantity
+        }
         miniProfileBackground {
           image {
             id

@@ -9,7 +9,11 @@
     </thead>
 
     <tbody>
-      <tr *ngFor="let marketItem of marketItems$ | async" class="item">
+      <tr
+        *ngFor="let marketItem of marketItems$ | async"
+        [routerLink]="['.', marketItem.id]"
+        class="item"
+      >
         <td class="item-info">
           <img
             [src]="asset(marketItem.image.id)"

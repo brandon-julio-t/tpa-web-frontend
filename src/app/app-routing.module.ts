@@ -44,6 +44,7 @@ import { ProfileEditMiniProfileBackgroundComponent } from './components/profile-
 import { ProfileEditProfileBackgroundComponent } from './components/profile-edit-profile-background/profile-edit-profile-background.component';
 import { MarketComponent } from './pages/market/market.component';
 import { InventoryComponent } from './pages/inventory/inventory.component';
+import { MarketDetailComponent } from './pages/market-detail/market-detail.component';
 
 const routes: Routes = [
   {
@@ -55,7 +56,19 @@ const routes: Routes = [
       {
         path: 'community',
         children: [
-          { path: 'market', component: MarketComponent },
+          {
+            path: 'market',
+            children: [
+              {
+                path: '',
+                component: MarketComponent,
+              },
+              {
+                path: ':id',
+                component: MarketDetailComponent,
+              },
+            ],
+          },
           { path: ':tab', component: CommunityComponent },
         ],
       },

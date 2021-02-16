@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { AuthService } from '../../services/auth.service';
-import { map, tap } from 'rxjs/operators';
+import { debounceTime, map, tap } from 'rxjs/operators';
 import { User } from '../../models/user';
 import { AssetService } from '../../services/asset.service';
 import { SafeUrl } from '@angular/platform-browser';
@@ -14,6 +14,8 @@ import { MarketItem } from '../../models/market-item';
   styleUrls: ['./inventory.component.scss'],
 })
 export class InventoryComponent implements OnInit {
+  filter = '';
+  filterChange = new EventEmitter<void>();
   selectItem = new EventEmitter<MarketItem>();
   selectedGameId = 0;
   totalPages = 0;
@@ -21,14 +23,15 @@ export class InventoryComponent implements OnInit {
 
   marketItemsQuery$ = this.apollo.watchQuery<
     { auth: User },
-    { page: number; gameId: number }
+    { page: number; gameId: number; filter: string }
   >({
     query: gql`
-      query marketItemsByGame($page: Int!, $gameId: ID!) {
+      query marketItemsByGame($page: Int!, $gameId: ID!, $filter: String!) {
         auth {
           id
-          marketItemsByGame(page: $page, gameId: $gameId) {
+          marketItemsByGame(page: $page, gameId: $gameId, filter: $filter) {
             data {
+              category
               description
               image {
                 id
@@ -40,17 +43,18 @@ export class InventoryComponent implements OnInit {
         }
       }
     `,
-    variables: { page: this.page, gameId: this.selectedGameId },
+    variables: {
+      page: this.page,
+      gameId: this.selectedGameId,
+      filter: this.filter,
+    },
   });
 
   games$ = this.authService.watch().valueChanges.pipe(
     map((x) => x.data.auth.gamesByOwnedMarketItems),
     tap(async (x) => {
       this.selectedGameId = x[0].id;
-      await this.marketItemsQuery$.refetch({
-        page: this.page,
-        gameId: this.selectedGameId,
-      });
+      await this.refetchMarketItems();
     })
   );
 
@@ -74,6 +78,10 @@ export class InventoryComponent implements OnInit {
     this.selectItem.subscribe((item: MarketItem) => {
       this.selectedItemSubject.next(item);
     });
+
+    this.filterChange.pipe(debounceTime(500)).subscribe(async () => {
+      await this.refetchMarketItems();
+    });
   }
 
   asset(id: number): SafeUrl {
@@ -84,13 +92,18 @@ export class InventoryComponent implements OnInit {
     this.selectItem.emit(item);
   }
 
-  async onSelectGame(id: number): Promise<void> {
-    this.page = 1;
-    this.selectedGameId = id;
+  async refetchMarketItems(): Promise<void> {
     await this.marketItemsQuery$.refetch({
       page: this.page,
       gameId: this.selectedGameId,
+      filter: this.filter,
     });
+  }
+
+  async onSelectGame(id: number): Promise<void> {
+    this.page = 1;
+    this.selectedGameId = id;
+    await this.refetchMarketItems();
   }
 
   async onPrev(): Promise<void> {
@@ -99,10 +112,7 @@ export class InventoryComponent implements OnInit {
     }
 
     this.page--;
-    await this.marketItemsQuery$.refetch({
-      page: this.page,
-      gameId: this.selectedGameId,
-    });
+    await this.refetchMarketItems();
   }
 
   async onNext(): Promise<void> {
@@ -111,9 +121,14 @@ export class InventoryComponent implements OnInit {
     }
 
     this.page++;
-    await this.marketItemsQuery$.refetch({
-      page: this.page,
-      gameId: this.selectedGameId,
-    });
+    await this.refetchMarketItems();
+  }
+
+  onFilter(): void {
+    this.filterChange.emit();
+  }
+
+  commaSpaceCategory(item: MarketItem): string {
+    return item.category.replace(/,/gi, ', ');
   }
 }
