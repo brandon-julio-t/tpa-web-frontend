@@ -72,7 +72,14 @@ type CommunityImageAndVideoCommentPagination {
 
 type Country {
   id: ID!
+  latitude: Float!
+  longitude: Float!
   name: String!
+}
+
+type CountryUsersCount {
+  count: Int!
+  country: Country!
 }
 
 type DiscoveryQueue {
@@ -107,6 +114,7 @@ type Game {
   tags: [GameTag!]!
   title: String!
   topDiscussions: [CommunityDiscussion!]!
+  topFiveCountriesUsersCount: [CountryUsersCount!]!
 }
 
 type GameGenre {
@@ -163,6 +171,7 @@ type MarketItem {
   id: ID!
   image: AssetFile!
   name: String!
+  pastMonthSales: [MarketItemTransaction!]!
   salePrices: [MarketItemPrice!]!
   startingPrice: Float!
   transactionsCount: Int!
@@ -183,6 +192,11 @@ type MarketItemPagination {
 type MarketItemPrice {
   price: Float!
   quantity: Int!
+}
+
+type MarketItemTransaction {
+  createdAt: Time!
+  price: Float!
 }
 
 type Mutation {
@@ -335,6 +349,7 @@ type Report {
 }
 
 type Subscription {
+  onMarketItemOfferAdded(marketItemId: ID!): String!
   onNewIceCandidate(accountName: String!): String!
   onStreamJoin: String!
   privateMessageAdded: PrivateMessage!
@@ -463,6 +478,6 @@ input UpdateUser {
 }
 
 
-scalar Time
-
 scalar Upload
+
+scalar Time

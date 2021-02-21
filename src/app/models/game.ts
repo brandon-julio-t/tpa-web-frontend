@@ -4,6 +4,7 @@ import { AssetFile } from './asset-file';
 import { GameGenre } from './game-genre';
 import { GameReview } from './game-review';
 import { GameDiscussion } from './game-discussion';
+import { Country } from './country';
 
 export interface Game {
   id: number;
@@ -26,4 +27,5 @@ export interface Game {
   tags: GameTag[];
   title: string;
   topDiscussions: GameDiscussion[];
+  topFiveCountriesUsersCount: { country: Country; count: number }[];
 }

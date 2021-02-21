@@ -6,6 +6,9 @@
 @use 'src/app/styles/sizes' as *;
 @use 'src/app/styles/spacings' as *;
 
+@import "~mapbox-gl/dist/mapbox-gl.css";
+@import "~@mapbox/mapbox-gl-geocoder/lib/mapbox-gl-geocoder.css";
+
 *,
 *:before,
 *:after {

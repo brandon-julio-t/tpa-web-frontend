@@ -221,6 +221,15 @@ const gameQueryGql = gql`
         name
       }
       title
+      topFiveCountriesUsersCount {
+        country {
+          id
+          latitude
+          longitude
+          name
+        }
+        count
+      }
       isInCart
       isInWishlist
     }

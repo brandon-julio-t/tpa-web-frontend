@@ -110,6 +110,23 @@
       </div>
     </section>
 
+    <section class="map">
+      <mgl-map
+        [interactive]="false"
+        [style]="'mapbox://styles/mapbox/streets-v9'"
+      >
+        <ng-container *ngFor="let stat of game?.topFiveCountriesUsersCount">
+          <mgl-marker
+            #marker
+            [lngLat]="[stat.country.longitude, stat.country.latitude]"
+          ></mgl-marker>
+          <mgl-popup [marker]="marker">
+            <h2>{{ stat.country.name }}: {{ stat.count }}</h2>
+          </mgl-popup>
+        </ng-container>
+      </mgl-map>
+    </section>
+
     <section class="detail-system-requirements">
       <h2>System Requirements</h2>
       <p class="detail-system-requirements-container">

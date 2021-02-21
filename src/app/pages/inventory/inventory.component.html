@@ -3,8 +3,8 @@
     <div
       (click)="onSelectGame(game.id)"
       *ngFor="let game of games$ | async"
-      class="inventory-tabs-item"
       [class.inventory-tabs-item-active]="game.id === selectedGameId"
+      class="inventory-tabs-item"
     >
       {{ game.title }}
     </div>
@@ -36,6 +36,10 @@
     <p class="inventory-item-detail-tags">
       Tags: {{ commaSpaceCategory(item) }}
     </p>
+
+    <button (click)="onPromptSell(sellContainer)" class="btn btn-blue">
+      Sell
+    </button>
   </section>
 
   <section class="inventory-pagination">
@@ -43,4 +47,48 @@
     <span>{{ page }} / {{ totalPages }}</span>
     <button (click)="onNext()" class="btn btn-black">></button>
   </section>
+</section>
+
+<section #sellContainer class="sell">
+  <form
+    *ngIf="selectedItem$ | async as item"
+    [formGroup]="sellForm"
+    class="sell-dialog"
+  >
+    <img [src]="asset(item.image.id)" alt="Item image" />
+
+    <h2>{{ item.name }}</h2>
+    <h3>{{ item?.game?.title }}</h3>
+
+    <canvas
+      [datasets]="chartData"
+      [labels]="chartLabel"
+      [legend]="true"
+      baseChart
+      chartType="line"
+    ></canvas>
+
+    <label>
+      You receive:
+      <input
+        (ngModelChange)="onReceivePriceChange()"
+        formControlName="receivePrice"
+        type="number"
+      />
+    </label>
+
+    <label>
+      Buyer pays:
+      <input formControlName="buyerPrice" type="number" />
+    </label>
+
+    <div class="actions">
+      <button (click)="onSell(item, sellContainer)" class="btn btn-blue">
+        Sell
+      </button>
+      <button (click)="onCloseSell(sellContainer)" class="btn btn-black">
+        Cancel
+      </button>
+    </div>
+  </form>
 </section>

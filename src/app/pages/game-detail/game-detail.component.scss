@@ -96,6 +96,17 @@
     }
   }
 
+  .map {
+    mgl-map {
+      height: 750px;
+      width: 100%;
+
+      h2 {
+        color: #000000;
+      }
+    }
+  }
+
   &-system-requirements {
     &-container {
       white-space: pre-line;

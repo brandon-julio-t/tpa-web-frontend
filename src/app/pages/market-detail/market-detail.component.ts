@@ -1,14 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { ActivatedRoute } from '@angular/router';
-import { of } from 'rxjs';
+import { of, Subject } from 'rxjs';
 import { MarketItem } from '../../models/market-item';
-import { map } from 'rxjs/operators';
+import { debounceTime, map, tap } from 'rxjs/operators';
 import { AssetService } from '../../services/asset.service';
 import { SafeUrl } from '@angular/platform-browser';
 import { AuthService } from '../../services/auth.service';
 import { MarketItemOffer } from '../../models/market-item-offer';
 import { FormBuilder, Validators } from '@angular/forms';
+import { User } from '../../models/user';
+import { ChartDataSets } from 'chart.js';
+import { Label } from 'ng2-charts';
 
 @Component({
   selector: 'app-market-detail',
@@ -16,6 +19,7 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./market-detail.component.scss'],
 })
 export class MarketDetailComponent implements OnInit {
+  subscribed = false;
   sellListing = [];
   buyListing = [];
 
@@ -24,7 +28,13 @@ export class MarketDetailComponent implements OnInit {
     quantity: [1, Validators.required],
   });
 
+  sellForm = this.fb.group({
+    receivePrice: [0, Validators.required],
+    buyerPrice: [{ value: 1, disabled: true }, Validators.required],
+  });
+
   marketItem$ = of<MarketItem>();
+  recentActivities$ = of<string[]>([]);
 
   sellListing$ = this.authService
     .watch()
@@ -33,6 +43,59 @@ export class MarketDetailComponent implements OnInit {
   buyListing$ = this.authService
     .watch()
     .valueChanges.pipe(map((x) => x.data.auth.marketItemsBuyListing));
+  filter = '';
+  filterChange = new EventEmitter<void>();
+  selectItem = new EventEmitter<MarketItem>();
+  selectedGameId = 0;
+  totalPages = 0;
+  page = 1;
+  marketItemsQuery$ = this.apollo.watchQuery<
+    { auth: User },
+    { page: number; gameId: number; filter: string }
+  >({
+    query: gql`
+      query marketItemsByGame($page: Int!, $gameId: ID!, $filter: String!) {
+        auth {
+          id
+          marketItemsByGame(page: $page, gameId: $gameId, filter: $filter) {
+            data {
+              id
+              category
+              description
+              image {
+                id
+              }
+              name
+            }
+            totalPages
+          }
+        }
+      }
+    `,
+    variables: {
+      page: this.page,
+      gameId: this.selectedGameId,
+      filter: this.filter,
+    },
+  });
+  games$ = this.authService.watch().valueChanges.pipe(
+    map((x) => x.data.auth.gamesByOwnedMarketItems),
+    tap(async (x) => {
+      this.selectedGameId = x[0].id;
+      await this.refetchMarketItems();
+    })
+  );
+  selectedItemSubject = new Subject<MarketItem>();
+  selectedItem$ = this.selectedItemSubject.asObservable();
+  inventoryMarketItems$ = this.marketItemsQuery$.valueChanges.pipe(
+    map((x) => x.data.auth.marketItemsByGame),
+    tap((x) => (this.totalPages = x.totalPages)),
+    map((x) => x.data),
+    tap((x) => this.selectedItemSubject.next(x[0]))
+  );
+
+  chartData: ChartDataSets[] = [];
+  chartLabel: Label[] = [];
 
   constructor(
     private apollo: Apollo,
@@ -53,10 +116,56 @@ export class MarketDetailComponent implements OnInit {
         .watchQuery<{ marketItem: MarketItem }>({
           query: GQL_QUERY_MARKET_ITEM,
           variables: { id },
-          returnPartialData: true,
           pollInterval: 5000,
         })
-        .valueChanges.pipe(map((x) => x.data.marketItem));
+        .valueChanges.pipe(
+          map((x) => x.data.marketItem),
+          tap((item) => {
+            this.chartData = [
+              {
+                data: item.pastMonthSales.map((x) => x.price),
+                label: 'Price',
+              },
+            ];
+
+            this.chartLabel = item.pastMonthSales.map((x) =>
+              new Date(x.createdAt).toLocaleString()
+            );
+          }),
+          tap((item) => {
+            if (this.subscribed) {
+              return;
+            }
+
+            this.subscribed = true;
+
+            this.apollo
+              .subscribe<{ onMarketItemOfferAdded: string }>({
+                query: gql`
+                  subscription onMarketItemOfferAdded($marketItemId: ID!) {
+                    onMarketItemOfferAdded(marketItemId: $marketItemId)
+                  }
+                `,
+                variables: { marketItemId: item.id },
+              })
+              .subscribe((resp) => {
+                const msg = resp.data?.onMarketItemOfferAdded;
+                if (msg) {
+                  this.recentActivities$ = this.recentActivities$.pipe(
+                    map((x) => [...x, msg])
+                  );
+                }
+              });
+          })
+        );
+    });
+
+    this.selectItem.subscribe((item: MarketItem) => {
+      this.selectedItemSubject.next(item);
+    });
+
+    this.filterChange.pipe(debounceTime(500)).subscribe(async () => {
+      await this.refetchMarketItems();
     });
   }
 
@@ -90,11 +199,37 @@ export class MarketDetailComponent implements OnInit {
       .subscribe((resp) => {
         if (resp.data) {
           buyDialog.style.display = 'none';
+          this.authService.watch().refetch().then();
         }
       });
   }
 
-  onSell(): void {}
+  promptSell(sellDialog: HTMLElement): void {
+    sellDialog.style.display = 'flex';
+  }
+
+  onSell(sellDialog: HTMLElement, item: MarketItem): void {
+    if (this.sellForm.invalid) {
+      return;
+    }
+
+    this.apollo
+      .mutate<{ addMarketItemOffer: MarketItemOffer }>({
+        mutation: GQL_MUTATION_ADD,
+        variables: {
+          price: this.sellForm.controls.buyerPrice.value,
+          category: 'sell',
+          marketItemId: item.id,
+          quantity: 1,
+        },
+      })
+      .subscribe((resp) => {
+        if (resp.data) {
+          sellDialog.style.display = 'none';
+          this.authService.watch().refetch().then();
+        }
+      });
+  }
 
   onCancel(id: number, category: string): void {
     if (!confirm('Are you sure you want to cancel this offer?')) {
@@ -121,6 +256,55 @@ export class MarketDetailComponent implements OnInit {
         }
       });
   }
+
+  onSelectItem(item: MarketItem): void {
+    this.selectItem.emit(item);
+  }
+
+  async refetchMarketItems(): Promise<void> {
+    await this.marketItemsQuery$.refetch({
+      page: this.page,
+      gameId: this.selectedGameId,
+      filter: this.filter,
+    });
+  }
+
+  async onSelectGame(id: number): Promise<void> {
+    this.page = 1;
+    this.selectedGameId = id;
+    await this.refetchMarketItems();
+  }
+
+  async onPrev(): Promise<void> {
+    if (this.page <= 1) {
+      return;
+    }
+
+    this.page--;
+    await this.refetchMarketItems();
+  }
+
+  async onNext(): Promise<void> {
+    if (this.page >= this.totalPages) {
+      return;
+    }
+
+    this.page++;
+    await this.refetchMarketItems();
+  }
+
+  onFilter(): void {
+    this.filterChange.emit();
+  }
+
+  commaSpaceCategory(item: MarketItem): string {
+    return item.category.replace(/,/gi, ', ');
+  }
+
+  onReceivePriceChange(): void {
+    const price = this.sellForm.value.receivePrice * 1.1;
+    this.sellForm.controls.buyerPrice.setValue(price);
+  }
 }
 
 const GQL_QUERY_MARKET_ITEM = gql`
@@ -139,6 +323,10 @@ const GQL_QUERY_MARKET_ITEM = gql`
         id
       }
       name
+      pastMonthSales {
+        createdAt
+        price
+      }
       salePrices {
         price
         quantity

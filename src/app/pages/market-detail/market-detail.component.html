@@ -36,7 +36,9 @@
     </section>
 
     <section class="item-prices-sell">
-      <button (click)="onSell()" class="btn btn-blue">Sell...</button>
+      <button (click)="promptSell(sellDialog)" class="btn btn-blue">
+        Sell...
+      </button>
       <hr />
       <table>
         <thead>
@@ -57,6 +59,8 @@
 
   <section class="item-recent-activity">
     <h2>Recent Activity</h2>
+
+    <p *ngFor="let a of recentActivities$ | async">{{ a }}</p>
   </section>
 
   <section class="item-listing-sell">
@@ -131,6 +135,17 @@
       </tbody>
     </table>
   </section>
+
+  <section class="sales-visualization">
+    <h2>Sales Visualization</h2>
+    <canvas
+      [datasets]="chartData"
+      [labels]="chartLabel"
+      [legend]="true"
+      baseChart
+      chartType="line"
+    ></canvas>
+  </section>
 </section>
 
 <section #buyDialog class="buy-dialog-container">
@@ -169,5 +184,84 @@
         </button>
       </div>
     </form>
+  </section>
+</section>
+
+<section #sellDialog class="inventory-container">
+  <section class="inventory container">
+    <section class="inventory-tabs">
+      <div
+        (click)="onSelectGame(game.id)"
+        *ngFor="let game of games$ | async"
+        [class.inventory-tabs-item-active]="game.id === selectedGameId"
+        class="inventory-tabs-item"
+      >
+        {{ game.title }}
+      </div>
+    </section>
+
+    <section class="inventory-filter">
+      <label>
+        Looking for specific item?
+        <input (ngModelChange)="onFilter()" [(ngModel)]="filter" type="text" />
+      </label>
+    </section>
+
+    <section class="inventory-items">
+      <div
+        (click)="onSelectItem(item)"
+        *ngFor="let item of inventoryMarketItems$ | async"
+        class="inventory-items-cell"
+      >
+        <img [src]="asset(item.image.id)" alt="Item image" />
+      </div>
+    </section>
+
+    <section
+      *ngIf="selectedItem$ | async as item"
+      class="inventory-item-detail"
+    >
+      <img [src]="asset(item.image.id)" alt="Item image" />
+      <h2 class="inventory-item-detail-name">{{ item.name }}</h2>
+      <p class="inventory-item-detail-description">
+        {{ item.description }}
+      </p>
+      <p class="inventory-item-detail-tags">
+        Tags: {{ commaSpaceCategory(item) }}
+      </p>
+    </section>
+
+    <section class="inventory-pagination">
+      <button (click)="onPrev()" class="btn btn-black"><</button>
+      <span>{{ page }} / {{ totalPages }}</span>
+      <button (click)="onNext()" class="btn btn-black">></button>
+    </section>
+
+    <section class="sell-form">
+      <form [formGroup]="sellForm">
+        <label>
+          You receive:
+          <input
+            (ngModelChange)="onReceivePriceChange()"
+            formControlName="receivePrice"
+            type="number"
+          />
+        </label>
+
+        <label>
+          Buyer pays:
+          <input formControlName="buyerPrice" type="number" />
+        </label>
+      </form>
+    </section>
+
+    <section *ngIf="selectedItem$ | async as item" class="inventory-action">
+      <button (click)="onSell(sellDialog, item)" class="btn btn-blue">
+        Sell
+      </button>
+      <button (click)="sellDialog.style.display = 'none'" class="btn btn-blue">
+        Cancel
+      </button>
+    </section>
   </section>
 </section>

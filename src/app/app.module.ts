@@ -82,6 +82,9 @@ import { ProfileEditFeaturedBadgeComponent } from './components/profile-edit-fea
 import { MarketComponent } from './pages/market/market.component';
 import { InventoryComponent } from './pages/inventory/inventory.component';
 import { MarketDetailComponent } from './pages/market-detail/market-detail.component';
+import { ChartsModule } from 'ng2-charts';
+import { MapboxModule } from './mapbox.module';
+import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 
 @NgModule({
   declarations: [
@@ -171,6 +174,12 @@ import { MarketDetailComponent } from './pages/market-detail/market-detail.compo
     FormsModule,
     NgxSpinnerModule,
     BrowserAnimationsModule,
+    ChartsModule,
+    MapboxModule.forRoot({
+      mapboxToken:
+        'pk.eyJ1IjoiYnIyMC0yIiwiYSI6ImNrbGU2YzF1bzB4bjUycG1qZWFmaHg3ZWQifQ.wv87Tezo_svKw-sCNuPgJg',
+    }),
+    NgxMapboxGLModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -10,6 +10,7 @@ export interface MarketItem {
   game: Game;
   image: AssetFile;
   name: string;
+  pastMonthSales: { createdAt: Date; price: number }[];
   salePrices: MarketItemPrice[];
   startingPrice: number;
   transactionsCount: number;
