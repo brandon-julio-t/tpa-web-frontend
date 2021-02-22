@@ -1,0 +1,9 @@
+<section class="streams container">
+  <h2 class="letter-space">GAMES STREAMING NOW</h2>
+
+  <section class="streams-list">
+    <div *ngFor="let stream of streams$ | async" class="streams-list-item">
+      <a [routerLink]="['/watch-stream', stream]">{{ stream }}</a>
+    </div>
+  </section>
+</section>

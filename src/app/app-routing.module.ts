@@ -45,6 +45,7 @@ import { ProfileEditProfileBackgroundComponent } from './components/profile-edit
 import { MarketComponent } from './pages/market/market.component';
 import { InventoryComponent } from './pages/inventory/inventory.component';
 import { MarketDetailComponent } from './pages/market-detail/market-detail.component';
+import { BroadcastComponent } from './pages/broadcast/broadcast.component';
 
 const routes: Routes = [
   {
@@ -53,6 +54,7 @@ const routes: Routes = [
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'inventory', component: InventoryComponent },
       { path: 'points-shop', component: PointsShopComponent },
+      { path: 'broadcast', component: BroadcastComponent },
       {
         path: 'community',
         children: [

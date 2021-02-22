@@ -85,6 +85,8 @@ import { MarketDetailComponent } from './pages/market-detail/market-detail.compo
 import { ChartsModule } from 'ng2-charts';
 import { MapboxModule } from './mapbox.module';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
+import { BroadcastComponent } from './pages/broadcast/broadcast.component';
+import { BadgeComponent } from './pages/badge/badge.component';
 
 @NgModule({
   declarations: [
@@ -159,6 +161,8 @@ import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
     MarketComponent,
     InventoryComponent,
     MarketDetailComponent,
+    BroadcastComponent,
+    BadgeComponent,
   ],
   imports: [
     BrowserModule,
